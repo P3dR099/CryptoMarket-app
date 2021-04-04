@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Trade from '../services/trade.service'
 import Container from '@material-ui/core/Container';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { LineChart, Line, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 const tradeService = new Trade()
 // import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -51,8 +51,6 @@ const CardCrypto = (props) => {
 
     useEffect(() => {
 
-        console.log(props)
-        console.log(id)
         tradeService.getCoinInfo(`id=${id}`)
             .then(res => {
                 setInfo(res.data[id])
@@ -68,18 +66,14 @@ const CardCrypto = (props) => {
                             const hours = convertToDate(element.time)
                             return element.time = hours
                         });
-
-                        convertToDate(res.data.Data.Data[0].time)
                         setHistoDay(res.data.Data)
-
                     })
                     .catch(err => console.log(err))
             })
             .catch(error => console.log(error))
 
-
         return () => {
-            setHistoDay({}); // This worked for me
+            setHistoDay({});
         };
 
     }, [id])

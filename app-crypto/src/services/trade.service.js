@@ -11,10 +11,9 @@ export default class tradeService {
     }
 
 
-    getCoins = () => this.api.get('/getCoins')
+    getCoins = (params) => this.api.get(`/getCoins?currency=${params}`)
     getPrices = () => this.api.get('/getPrices')
     getCoinInfo = (params) => this.api.get(`/coin/info?${params}`)
     getHistoDay = (symbol) => this.api.get(`coin/histoday/${symbol}`)
     getCoin = (coin_id) => this.api.get(`/coin/${coin_id}`)
-
 }

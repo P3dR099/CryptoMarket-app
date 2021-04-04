@@ -28,32 +28,48 @@ let arrCoins = []
 
 //Get 100 cripto-coins
 router.get('/getCoins', (req, res) => {
+
+
+    const { currency } = req.query
     requestOptions.uri = `${baseURL}cryptocurrency/listings/latest`
     requestOptions.qs = {
         'start': '1',
         'limit': '100',
-        'convert': 'USD'
+        'convert': currency
     }
+    let respuesta
     rp(requestOptions)
         .then(response => {
             arrCoins.push(response.data)
             res.json(response.data)
-
         }).then(res => {
 
             const data = arrCoins[0].map(element => {
-                return { id: element.id, name: element.name, price: element.quote.USD.price, change: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
+
+                // console.log({ id: element.id, name: element.name, price: element.quote.currency.price, change: element.quote.currency.percent_change_7d, symbol: element.symbol, marketCap: element.quote.currency.market_cap })
+                return { id: element.id, name: element.name, price: element.quote.currency.price, change: element.quote.currency.percent_change_7d, symbol: element.symbol, marketCap: element.quote.currency.market_cap }
+
+                // if (element.quote.USD !== undefined) {
+                //     // console.log(element.quote.EUR.percent_change_7d)
+                // }
+                // if (element.quote.USD === undefined) {
+                //     return { id: element.id, name: element.name, price: element.quote.EUR.price, change: element.quote.EUR.percent_change_7d, symbol: element.symbol, marketCap: element.quote.EUR.market_cap }
+                // }
             })
             // console.log(data)
             Coin.collection.drop('coins')
                 .then(el => {
                     console.log('Se borró', el)
                     Coin.create(data)
-                        .then(coins => console.log(coins))
+                        .then(coins => {
+
+                            return coins
+                        })
                         .catch(err => res.json(err))
                 })
                 .catch(err => console.log('err de method bbdd', err))
-                .catch(err => console.log(err))
+
+
         })
         .catch((err) => {
             console.log('API call error:', err.message);

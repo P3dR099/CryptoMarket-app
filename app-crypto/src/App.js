@@ -11,27 +11,39 @@ const tradeService = new Trade()
 function App() {
 
     const [infoCoin, setCoinInfo] = useState([]);
-    const [priceChange, setPriceChange] = useState([]);
     const [data, setData] = useState([]);
+    const [Currency, setCurrency] = useState('USD')
 
+    console.log(Currency)
     let firstCriptos = []
     let arrCripts
     const getCoins = () => {
-        tradeService.getCoins()
+        tradeService.getCoins(Currency)
             .then(response => {
                 firstCriptos = response.data
                 let arrLogoCoin = []
                 arrCripts = firstCriptos.map(element => {
-                    return { id: element.id, name: element.name, price: element.quote.USD.price, change: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
+                    switch (element.quote.USD) {
+                        case undefined:
+                            // console.log(element.quote.EUR)
+                            return { id: element.id, name: element.name, price: element.quote.EUR.price, change: element.quote.EUR.percent_change_7d, symbol: element.symbol, marketCap: element.quote.EUR.market_cap }
+
+                        case element.quote.USD:
+                            // console.log(element.quote.USD)
+                            return { id: element.id, name: element.name, price: element.quote.USD.price, change: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
+
+                    }
+                    // console.log(typeof element.quote.EUR)
+                    // return { id: element.id, name: element.name, price: element.quote.USD.price, change: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
                 });
                 setData(arrCripts)
-                console.log(arrCripts)
                 firstCriptos.forEach(element => {
                     arrLogoCoin.push(element.id)
                 })
             })
-            .catch(error => alert(error))
+            .catch(error => console.log(error))
     }
+
 
     useEffect(() => {
 
@@ -39,12 +51,11 @@ function App() {
 
     }, [])
 
-    console.log(data)
     return (
         <div className="App">
-            <SearchAppBar data={data} />
+            <SearchAppBar data={data} Currency={Currency} setCurrency={setCurrency} />
             <Route path="/coin" render={(props) => <Crypto infoCoin={infoCoin} setCoinInfo={setCoinInfo} {...props} />} />
-            <Route exact path="/tableCriptos" render={(props) => <TableCriptos infoCoin={infoCoin} setCoinInfo={setCoinInfo} {...props} />} />
+            <Route exact path="/" render={(props) => <TableCriptos Currency={Currency} setCurrency={setCurrency} infoCoin={infoCoin} setCoinInfo={setCoinInfo} {...props} />} />
         </div>
     );
 }

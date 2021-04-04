@@ -3,16 +3,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField'
+import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -69,6 +69,40 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+function SimpleMenu(props) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = (event) => {
+        setAnchorEl(null);
+        console.log(event.target.innerText)
+        if (event.target.innerText === 'EUR') {
+            props.setCurrency('EUR')
+        }
+    };
+
+    return (
+        <div>
+            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                Open Menu
+      </Button>
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+                <MenuItem onClick={handleClose}>EUR</MenuItem>
+                <MenuItem onClick={handleClose}>GBP</MenuItem>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
+        </div>
+    );
+}
 
 
 export default function SearchAppBar(props) {
@@ -79,23 +113,19 @@ export default function SearchAppBar(props) {
     let history = useHistory();
 
     const handleClick = (event) => {
-        console.log(event.target.innerText)
-
         data.map(el => {
             if (el.name === event.target.innerText) {
-                console.log(el.id)
-                console.log(history)
-                history.push('/coin/' + el.id)
-
+                return history.push('/coin/' + el.id)
             }
+            return 0;
         })
-        setVal(event.target.innerText);//you pass any value from the array of top100Films
-
+        setVal(event.target.innerText)
     };
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            {/* {console.log(props)} */}
+            <AppBar backgroundcolor="#04048ded" position="static">
                 <Toolbar>
                     <IconButton
                         edge="start"
@@ -105,20 +135,18 @@ export default function SearchAppBar(props) {
                     >
                         <MenuIcon />
                     </IconButton>
+                    <SimpleMenu {...props} />
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Material-UI
+                        CryptoMarket
                     </Typography>
                     <div className={classes.search}>
-
                         <Autocomplete
-                            // value={val}
                             freeSolo
                             onChange={(event) => handleClick(event)}
-                            id="free-solo-2-demo"
+                            id="free-solo-2"
                             disableClearable
                             options={data === undefined ? [] : data.map((option) => option.name)}
                             renderInput={(params) => (
-                                // <Link to={"/coin/" + params.row.id}>
                                 <Grid container spacing={1} alignItems="flex-end">
                                     <Grid item>
                                         <div style={{ marginBottom: 10 }}>
@@ -138,7 +166,6 @@ export default function SearchAppBar(props) {
                                 </Grid>
                             )}
                         />
-
                     </div>
                 </Toolbar>
             </AppBar>

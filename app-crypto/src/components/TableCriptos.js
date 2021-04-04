@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { Container } from '@material-ui/core';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import { DataGrid } from '@material-ui/data-grid';
+import { DataGrid, isObject } from '@material-ui/data-grid';
 import { Link } from "react-router-dom";
 import Trade from '../services/trade.service'
 const tradeService = new Trade()
@@ -43,31 +43,43 @@ export default function DataTable(props) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
+        console.log(props.Currency)
+        let firstCriptos = []
+        let arrCripts
+        const getCoins = () => {
+            tradeService.getCoins(props.Currency)
+                .then(response => {
+                    firstCriptos = response.data
+                    let arrLogoCoin = []
+                    arrCripts = firstCriptos.map(element => {
+                        // console.log(typeof element.quote.EUR)
+                        switch (element.quote.USD) {
+                            case undefined:
+                                // console.log(element.quote.EUR)
+                                return { id: element.id, name: element.name, price: element.quote.EUR.price, change: element.quote.EUR.percent_change_7d, symbol: element.symbol, marketCap: element.quote.EUR.market_cap }
+
+                            case element.quote.USD:
+                                // console.log(element.quote.USD)
+                                return { id: element.id, name: element.name, price: element.quote.USD.price, change: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
+                        }
+                        // console.log(typeof element.quote.EUR)
+                        // return { id: element.id, name: element.name, price: element.quote.USD.price, change: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
+                    });
+                    setData(arrCripts)
+                    firstCriptos.forEach(element => {
+                        arrLogoCoin.push(element.id)
+                    })
+                })
+                .catch(error => console.log(error))
+        }
 
         getCoins()
     }, [])
 
-    let firstCriptos = []
-    let arrCripts
-    const getCoins = () => {
-        tradeService.getCoins()
-            .then(response => {
-                firstCriptos = response.data
-                let arrLogoCoin = []
-                arrCripts = firstCriptos.map(element => {
-                    return { id: element.id, name: element.name, price: element.quote.USD.price, change: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
-                });
-                setData(arrCripts)
-                firstCriptos.forEach(element => {
-                    arrLogoCoin.push(element.id)
-                })
-            })
-            .catch(error => alert(error))
-    }
 
 
     const rows = data
-    let columns = [
+    const columns = [
         {
             field: 'id', renderCell: (params) => <strong> {params.row.id}</strong>, headerName: 'ID', width: 150
         },
