@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Trade from '../services/trade.service'
 import Container from '@material-ui/core/Container';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import CustomizedBreadcrumbs from '../components/layout/BreadCump'
+import { Grid } from '@material-ui/core';
 const tradeService = new Trade()
-// import LinearProgress from '@material-ui/core/LinearProgress';
 
 const useStyles = makeStyles({
 
@@ -27,9 +30,21 @@ const useStyles = makeStyles({
 
 });
 
+const useStyles2 = makeStyles((width) => ({
+    root: {
+        [width.breakpoints.up('sm')]: {
+            width: '70%',
+        },
+        [width.breakpoints.down('sm')]: {
+            width: '100%'
+        },
+    }
+}))
+
 const CardCrypto = (props) => {
 
-    const classes = useStyles();
+    const classes = useStyles()
+    const classesGraph = useStyles2()
     const [price, setPrice] = useState([])
     const [info, setInfo] = useState([])
     const [histoDay, setHistoDay] = useState([])
@@ -51,40 +66,41 @@ const CardCrypto = (props) => {
 
     useEffect(() => {
 
-        tradeService.getCoinInfo(`id=${id}`)
-            .then(res => {
-                setInfo(res.data[id])
-            })
-            .catch(err => console.log(err))
-
         tradeService.getCoin(id)
             .then(res => {
-                setPrice(res.data[0].price > 10 ? res.data[0].price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : res.data[0].price.toFixed(2))
-                tradeService.getHistoDay(res.data[0].symbol)
+                tradeService.getHistoDay(res.data[0].symbol, props.Currency)
                     .then(res => {
+                        console.log(res)
                         res.data.Data.Data.map(element => {
                             const hours = convertToDate(element.time)
                             return element.time = hours
                         });
                         setHistoDay(res.data.Data)
+                        setPrice(res.data.Data.Data[res.data.Data.Data.length - 1])
                     })
                     .catch(err => console.log(err))
             })
             .catch(error => console.log(error))
 
-        return () => {
-            setHistoDay({});
-        };
-
+        tradeService.getCoinInfo(`id=${id}`)
+            .then(res => {
+                setInfo(res.data[id])
+            })
+            .catch(err => console.log(err))
     }, [id])
 
     let arrTimes = []
-    let numMax
     if (histoDay.Data !== undefined) {
         histoDay.Data.map(el => {
             return arrTimes.push(el.high)
         })
-        numMax = (arrTimes[0] / 100) * 130
+    }
+
+    const getMax = () => {
+        const max = Math.max(...arrTimes);
+        const index = arrTimes.indexOf(max)
+        const filterMax = arrTimes.filter((_, i) => i === index);
+        return parseFloat(filterMax)
     }
 
     const getMin = () => {
@@ -96,35 +112,41 @@ const CardCrypto = (props) => {
         return parseFloat(result)
     }
 
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up('sm'));
+
     return (
         <>
-            <Container className={classes.boxPriceCoin}>
-                <Container className={classes.boxCoin} >
-                    <img alt="coin logo" className={classes.logoCoin} src={info.logo} />
-                    <h1 style={{ fontSize: 35 }} >{info.name}</h1>
-                </Container>
-                <Container>
-                    <h1>${price}</h1>
-                </Container>
-            </Container>
-            <Container maxWidth="sm" style={{ display: 'inline' }}>
-                <LineChart
-                    width={950}
-                    height={500}
-                    data={histoDay.Data}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 100,
-                        bottom: 5,
-                    }}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="time" />
-                    <YAxis type="number" domain={[getMin(), numMax]} />
-                    <Tooltip />
-                    <Legend />
-                    <Line dot={false} type="monotone" dataKey="open" stroke={arrTimes[0] > arrTimes[arrTimes.length - 1] ? 'red' : 'green'} activeDot={{ r: 5 }} />
-                </LineChart>
+            <CustomizedBreadcrumbs />
+            <Container >
+                <Grid style={{ display: "flex" }} item xs={12}>
+                    <img style={{ marginTop: "25px" }} alt="coin logo" className={classes.logoCoin} src={info.logo} />
+                    <h1>{info.name}</h1>
+                </Grid>
+                <Grid style={{ display: "flex" }} item spacing={3}>
+                    <h1>${price.open}</h1>
+                </Grid>
+            </Container >
+            <Container>
+                <div style={{ height: 500, margin: "0px 0px 0px" }} className={classesGraph.root}>
+                    <ResponsiveContainer width="100%">
+                        <LineChart
+                            data={histoDay.Data}
+                            margin={{
+                                top: 20,
+                                right: 5,
+                                left: 4,
+                                bottom: 5,
+                            }}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="time" />
+                            <YAxis type="number" domain={[getMin(), getMax()]} />
+                            <Tooltip />
+                            <Legend />
+                            <Line dot={false} type="monotone" dataKey="open" stroke={arrTimes[0] > arrTimes[arrTimes.length - 1] ? 'red' : 'green'} activeDot={{ r: 5 }} />
+                        </LineChart>
+                    </ResponsiveContainer>
+                </div>
             </Container>
         </>
     )

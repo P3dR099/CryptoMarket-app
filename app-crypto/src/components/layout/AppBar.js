@@ -8,10 +8,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField'
-import Menu from '@material-ui/core/Menu';
-import Button from '@material-ui/core/Button';
-import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -69,42 +67,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function SimpleMenu(props) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = (event) => {
-        setAnchorEl(null);
-        console.log(event.target.innerText)
-        if (event.target.innerText === 'EUR') {
-            props.setCurrency('EUR')
-        }
-    };
-
-    return (
-        <div>
-            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                Open Menu
-      </Button>
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                <MenuItem onClick={handleClose}>EUR</MenuItem>
-                <MenuItem onClick={handleClose}>GBP</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Menu>
-        </div>
-    );
-}
-
-
 export default function SearchAppBar(props) {
 
     const [val, setVal] = useState({})
@@ -122,6 +84,8 @@ export default function SearchAppBar(props) {
         setVal(event.target.innerText)
     };
 
+    const matches = useMediaQuery('(min-width:600px)');
+
     return (
         <div className={classes.root}>
             {/* {console.log(props)} */}
@@ -135,7 +99,6 @@ export default function SearchAppBar(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <SimpleMenu {...props} />
                     <Typography className={classes.title} variant="h6" noWrap>
                         CryptoMarket
                     </Typography>
@@ -145,15 +108,11 @@ export default function SearchAppBar(props) {
                             onChange={(event) => handleClick(event)}
                             id="free-solo-2"
                             disableClearable
-                            options={data === undefined ? [] : data.map((option) => option.name)}
+                            options={data && data.map((option) => option.name)}
                             renderInput={(params) => (
                                 <Grid container spacing={1} alignItems="flex-end">
                                     <Grid item>
-                                        <div style={{ marginBottom: 10 }}>
-                                            <SearchIcon />
-                                        </div>
-                                    </Grid>
-                                    <Grid item>
+                                        {matches ? <SearchIcon /> : ''}
                                         <TextField
                                             style={{ margin: 0, width: 180 }}
                                             {...params}
