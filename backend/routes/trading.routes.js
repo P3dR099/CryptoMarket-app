@@ -4,7 +4,7 @@ const router = express.Router()
 const rp = require('request-promise');
 const { json } = require('body-parser');
 const Coin = require('../models/coin.model')
-
+const connectEnsureLogin = require('connect-ensure-login');
 const baseURL = 'https://pro-api.coinmarketcap.com/v1/'
 const baseURLv2 = 'https://pro-api.coinmarketcap.com/v2/'
 const baseURLCryptCompare = 'https://min-api.cryptocompare.com/data/v2/'
@@ -106,10 +106,14 @@ router.get('/coin/histoday/:coin_symbol/:currency', (req, res) => {
 
 router.get('/coin/:coin_symbol', (req, res) => {
 
-    console.log(req)
     Coin.find({ id: req.params.coin_symbol })
         .then(response => res.json(response))
         .catch(err => console.log(err))
+})
+
+router.get('/user', connectEnsureLogin.ensureLoggedIn('auth/loggedin'), (req, res) => {
+
+    res.send('Hola')
 })
 
 

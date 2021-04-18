@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
+import ModalAuth from '../pages/ModalAuth.js'
+import { Button } from '@material-ui/core';
+import AccountCircle from './AccountCircle.js'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -88,18 +89,11 @@ export default function SearchAppBar(props) {
 
     return (
         <div className={classes.root}>
-            {/* {console.log(props)} */}
             <AppBar backgroundcolor="#04048ded" position="static">
                 <Toolbar>
-                    <IconButton
-                        edge="start"
-                        className={classes.menuButton}
-                        color="inherit"
-                        aria-label="open drawer"
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography className={classes.title} variant="h6" noWrap>
+                    {props.loggedInUser && <AccountCircle {...props} />}
+                    <ModalAuth {...props} />
+                    <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
                         CryptoMarket
                     </Typography>
                     <div className={classes.search}>

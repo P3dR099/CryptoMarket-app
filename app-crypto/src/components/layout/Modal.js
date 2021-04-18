@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import FormModal from './FormModal'
+import { Button } from '@material-ui/core';
+
 function rand() {
     return Math.round(Math.random() * 20) - 10;
 }
@@ -17,7 +19,7 @@ function getModalStyle() {
 }
 
 export default function SimpleModal(props) {
-    // getModalStyle is not a pure function, we roll the style only on the first render
+
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
 
@@ -31,10 +33,8 @@ export default function SimpleModal(props) {
 
     return (
         <div>
-            <button type="button" onClick={handleOpen}>
-                Open Modal
+            <Button variant="outlined" onClick={handleOpen}>Open modal</Button>
 
-      </button>
             <Modal
                 open={open}
                 onClose={handleClose}

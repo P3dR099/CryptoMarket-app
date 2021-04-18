@@ -5,6 +5,7 @@ import Crypto from './components/Crypto.js'
 import TableCriptos from './components/TableCriptos.js'
 import { Route } from 'react-router-dom'
 import SearchAppBar from './components/layout/AppBar'
+import UserProfile from './components/pages/User'
 import Trade from './services/trade.service'
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -12,6 +13,7 @@ const tradeService = new Trade()
 
 function App() {
 
+    const [loggedInUser, setLoggedInUser] = useState(null)
     const [prices, setAllPrices] = useState([]);
     const [data, setData] = useState([]);
     const [Currency, setCurrency] = useState('USD')
@@ -19,6 +21,20 @@ function App() {
     let firstCriptos = []
     let arrCripts
 
+    const setTheUser = (user) => {
+
+        setLoggedInUser(user)
+        console.log(loggedInUser)
+    }
+
+    const handleLogOut = () => {
+        tradeService.logout()
+            .then(res => {
+                setTheUser(null)
+                console.log(res.data)
+            })
+            .catch(err => console.log(err))
+    }
 
     const getCoins = (Currency) => {
         tradeService.getCoins(Currency)
@@ -48,12 +64,11 @@ function App() {
 
     }, [])
 
-    // console.log(prices)
-
     return (
         <div className="App">
-            <SearchAppBar data={data} Currency={Currency} setCurrency={setCurrency} />
+            <SearchAppBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
             {!data ? <LinearProgress /> : ''}
+            <Route path="/user" render={(props) => <UserProfile />} />
             <Route path="/coin" render={(props) => <Crypto Currency={Currency} setCurrency={setCurrency} {...props} />} />
             <Route exact path="/" render={(props) => <TableCriptos data={data} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
         </div>

@@ -11,7 +11,12 @@ import {
     GridFilterToolbarButton,
 } from '@material-ui/data-grid'; import { Link } from "react-router-dom";
 import Modal from './layout/Modal'
-import SimpleMenu from './layout/SimpleMenu'
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import logoEUR from '../logos/euro.png'
+import logoUSD from '../logos/dollar.png'
 
 const useStyles = makeStyles({
 
@@ -35,9 +40,8 @@ const useStyles = makeStyles({
     imageCoin: {
         width: "22px", height: "50%", marginTop: "14%"
 
-    }
+    },
 });
-
 
 export default function DataTable(props) {
 
@@ -48,11 +52,6 @@ export default function DataTable(props) {
 
     const [allColumns, setColumns] = React.useState([])
     const classes = useStyles();
-
-    const handleClick = (event) => {
-        props.getCoins(event.target.innerText)
-        props.setCurrency(event.target.innerText)
-    }
 
     const rows = props.data
 
@@ -92,7 +91,7 @@ export default function DataTable(props) {
         },
         {
             renderCell: (params) => (
-                params.row.price > 1 ? <strong> {params.row.price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {props.Currency == "EUR" ? '€' : '$'} </strong> : (
+                params.row.price > 1 ? <strong> {params.row.price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {props.Currency === "EUR" ? '€' : '$'} </strong> : (
                     <strong>
                         {params.row.price.toFixed(2)}
                     </strong>
@@ -112,11 +111,9 @@ export default function DataTable(props) {
         { field: 'symbol', headerName: 'Symbol', width: 150 },
         { field: 'marketCap', renderCell: (params) => <strong> {params.row.marketCap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong>, headerName: 'Market Cap', width: 150 }
     ];
+
     const handleRows = event => {
-        // if (event.target.name === 'change_1h') {
         setStateCols({ ...stateCols, [event.target.name]: event.target.checked })
-
-
     }
 
     const addColumns = () => {
@@ -137,10 +134,15 @@ export default function DataTable(props) {
         setColumns(columns)
     }, [])
 
+    const handleClickUser = () => {
+
+    }
+
     return (
         <>
-            <Container style={{ display: "flex", justifyContent: "flex-end", margin: "30px 0px 12px 0px" }}>
-                <SimpleMenu handleClick={handleClick} {...props} />
+            <Container style={{ display: "flex", justifyContent: "flex-end", margin: "30px 0px 13px 0px" }}>
+                <Button onClick={handleClickUser} />
+                <ControlledOpenSelect {...props} />
                 <Modal allColumns={columns} setColumns={setColumns} handleRows={handleRows} stateCols={stateCols} setStateCols={setStateCols} {...props} />
             </Container>
             <div style={{ height: 750, width: '100%' }} className={classes.root} >
@@ -156,5 +158,51 @@ function CustomToolbar() {
             <GridDensitySelector />
             <GridFilterToolbarButton />
         </GridToolbarContainer>
+    );
+}
+
+function ControlledOpenSelect(props) {
+    const [Currency, setCurrency] = React.useState(2);
+    const [open, setOpen] = React.useState(false);
+
+    const handleChange = (event) => {
+        if (event.target.value === 1) {
+            setCurrency(1)
+            props.setCurrency('EUR')
+            props.getCoins('EUR')
+        }
+        if (event.target.value === 2) {
+            setCurrency(2)
+            props.setCurrency('USD')
+            props.getCoins('USD')
+        }
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+
+    };
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    return (
+        <FormControl style={{ width: "65px", marginRight: 10 }}>
+            <InputLabel style={{ top: "-10px", left: "16px" }} >{props.Currency === 'EUR' ? <img alt="logo EUR" style={{ width: "16px" }} src={logoEUR} /> : <img alt="log USD" style={{ width: "16px" }} src={logoUSD} />}</InputLabel>
+            <Select
+                style={{ margin: "0px" }}
+                labelId="demo-controlled-open-select-label"
+                id="demo-controlled-open-select"
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                value={Currency}
+                onChange={handleChange}
+            >
+                <MenuItem value={1} name={"EUR"}>EUR</MenuItem>
+                <MenuItem value={2} name={"USD"}>USD</MenuItem>
+            </Select>
+        </FormControl>
     );
 }

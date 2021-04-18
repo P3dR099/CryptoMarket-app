@@ -2,6 +2,7 @@ import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
+import logoEUR from '../../logos/euro.png'
 
 export default function SimpleMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -24,8 +25,9 @@ export default function SimpleMenu(props) {
     return (
         <div>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                Open Menu
-      </Button>
+                <img style={{ width: 20, margin: "0px 4px" }} src={logoEUR}></img>
+                EUR
+            </Button>
             <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}

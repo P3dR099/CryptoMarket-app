@@ -56,11 +56,6 @@ export default React.forwardRef(props => {
                             control={<Switch checked={props.stateCols.change_1d} onChange={props.handleRows} name="change_1d" />}
                             label="Add 1d change"
                         />
-                        {/*
-                <FormControlLabel
-                    control={<Switch checked={state.antoine} onChange={handleChange} name="antoine" />}
-                    label="Antoine Llorca"
-                /> */}
                     </FormGroup>
                     <FormHelperText>Be careful</FormHelperText>
                 </FormControl>

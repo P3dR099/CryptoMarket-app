@@ -5,7 +5,15 @@ const express = require('express')
 const cors = require('cors')
 const { join } = require('path')
 
+const expressSession = require('express-session')({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+});
+
+
 module.exports = app => {
+    app.use(expressSession);
     app.use(cors())
     app.use(express.static(join(__dirname, '..', 'public')))
     app.use(logger('dev'))
