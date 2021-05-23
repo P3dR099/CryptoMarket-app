@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const coinSchema = new Schema({
 
-    change: {
+    change_1h: {
         type: Number,
         default: 0,
         required: true
@@ -32,6 +32,10 @@ const coinSchema = new Schema({
         type: String,
         default: 0,
         required: true
+    },
+    logoCoin: {
+        type: String,
+        required: false
     }
 }, {
     timestamps: true

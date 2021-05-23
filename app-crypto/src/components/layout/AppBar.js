@@ -10,7 +10,6 @@ import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
 import ModalAuth from '../pages/ModalAuth.js'
-import { Button } from '@material-ui/core';
 import AccountCircle from './AccountCircle.js'
 
 const useStyles = makeStyles((theme) => ({
@@ -106,7 +105,7 @@ export default function SearchAppBar(props) {
                             renderInput={(params) => (
                                 <Grid container spacing={1} alignItems="flex-end">
                                     <Grid item>
-                                        {matches ? <SearchIcon /> : ''}
+                                        {matches ? <SearchIcon style={{ marginTop: "15px" }} /> : ''}
                                         <TextField
                                             style={{ margin: 0, width: 180 }}
                                             {...params}

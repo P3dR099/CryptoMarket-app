@@ -25,7 +25,7 @@ function getModalStyle() {
     };
 }
 
-export default React.forwardRef(props => {
+export default React.forwardRef((props, ref) => {
 
 
     const useStyles = makeStyles((theme) => ({

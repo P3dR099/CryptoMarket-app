@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import Trade from '../../services/trade.service';
 const tradeService = new Trade()
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,13 +26,14 @@ export default function LoginForm(props) {
     const handleSign = () => {
         tradeService.login({ username, password })
             .then(res => {
-                console.log(res.data)
                 props.setTheUser(res.data)
+                localStorage.setItem('login', JSON.stringify({ username, password }))
 
             })
             .then(() => props.setOpen(false))
             .catch(err => console.log(err))
     }
+
 
     return (
         <div className={classes.root}>

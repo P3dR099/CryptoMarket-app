@@ -19,9 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-
-export default function MenuAccontBar(props) {
+export default function MenuAccountBar(props) {
 
     let history = useHistory();
     const classes = useStyles();
@@ -41,6 +39,12 @@ export default function MenuAccontBar(props) {
         if (event.target.innerText === 'Profile') {
             history.push('/user/')
         }
+        if (event.target.innerText === 'Market') {
+            history.push('/')
+        }
+
+
+
         setAnchorEl(null);
     };
 
@@ -72,7 +76,7 @@ export default function MenuAccontBar(props) {
                         open={open}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={(event) => handleClose(event)}>Profile</MenuItem>
+                        <MenuItem onClick={(event) => handleClose(event)}>{history.location.pathname == '/user/' ? 'Market' : 'Profile'}</MenuItem>
                         <MenuItem onClick={() => props.handleLogOut()}>Logout</MenuItem>
                     </Menu>
                 </div>

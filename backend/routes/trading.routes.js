@@ -7,7 +7,8 @@ const Coin = require('../models/coin.model')
 const connectEnsureLogin = require('connect-ensure-login');
 const baseURL = 'https://pro-api.coinmarketcap.com/v1/'
 const baseURLv2 = 'https://pro-api.coinmarketcap.com/v2/'
-const baseURLCryptCompare = 'https://min-api.cryptocompare.com/data/v2/'
+const baseURLCryptCompare = 'https://min-api.cryptocompare.com/data/'
+const baseURLCryptCompareV2 = 'https://min-api.cryptocompare.com/data/v2/'
 
 const requestOptions = {
     method: 'GET',
@@ -76,6 +77,18 @@ router.get('/getCoins', (req, res) => {
         .catch(err => console.log(err))
 })
 
+router.get('/allCoins/info/:symbol/:currency', (req, res) => {
+    requestOptions.uri = `${baseURLCryptCompare}pricemultifull?fsyms=${req.params.symbol}&tsyms=${req.params.currency}`
+    rp(requestOptions)
+        .then(response => {
+            res.json(response)
+        })
+        .catch((err) => {
+            console.log('eRRAPI call error:', err.message);
+        });
+
+})
+
 // Get coin info by Id
 router.get('/coin/info', (req, res) => {
     requestOptions.uri = `${baseURLv2}cryptocurrency/info`
@@ -93,9 +106,9 @@ router.get('/coin/info', (req, res) => {
         });
 })
 
-router.get('/coin/histoday/:coin_symbol/:currency', (req, res) => {
+router.get('/coin/histominute/:coin_symbol/:currency/:limit', (req, res) => {
 
-    rp(`${baseURLCryptCompare}histohour?fsym=${req.params.coin_symbol}&tsym=${req.params.currency}&limit=168`)
+    rp(`${baseURLCryptCompareV2}histominute?fsym=${req.params.coin_symbol}&tsym=${req.params.currency}&limit=${req.params.limit}`)
         .then(response => {
             res.send(response);
         })
@@ -104,17 +117,22 @@ router.get('/coin/histoday/:coin_symbol/:currency', (req, res) => {
         });
 })
 
-router.get('/coin/:coin_symbol', (req, res) => {
+router.get('/coin/histohour/:coin_symbol/:currency/:limit', (req, res) => {
 
-    Coin.find({ id: req.params.coin_symbol })
+    rp(`${baseURLCryptCompareV2}histohour?fsym=${req.params.coin_symbol}&tsym=${req.params.currency}&limit=${req.params.limit}`)
+        .then(response => {
+            res.send(response);
+        })
+        .catch((err) => {
+            console.log('API call error:', err.message);
+        });
+})
+
+router.get('/coin/:id', (req, res) => {
+
+    Coin.find({ id: req.params.id })
         .then(response => res.json(response))
         .catch(err => console.log(err))
 })
-
-router.get('/user', connectEnsureLogin.ensureLoggedIn('auth/loggedin'), (req, res) => {
-
-    res.send('Hola')
-})
-
 
 module.exports = router

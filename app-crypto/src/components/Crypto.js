@@ -4,151 +4,239 @@ import Container from '@material-ui/core/Container';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import CustomizedBreadcrumbs from '../components/layout/BreadCump'
 import { Grid } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
+import TabPanel from './TabPanel'
 const tradeService = new Trade()
 
 const useStyles = makeStyles({
 
     boxCoin: {
-        // backgroundColor: 'rgba(224, 183, 60, 0.55)',
         display: 'flex',
         alignItems: 'center'
     },
     root: {},
-
     logoCoin: {
         width: 35,
         height: 35,
-        marginRight: 10
+        marginRight: 10,
+        marginTop: 30
+    },
+    logoCoinMin: {
+        width: 28,
+        height: 28,
+        marginRight: 10,
+        marginTop: 12
     },
 
     boxPriceCoin: {
         display: 'inline-flex'
-    }
+    },
 
 });
 
-const useStyles2 = makeStyles((width) => ({
-    root: {
-        [width.breakpoints.up('sm')]: {
-            width: '70%',
-        },
-        [width.breakpoints.down('sm')]: {
-            width: '100%'
-        },
+const convertToDate = (unixTime) => {
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const date = new Date(unixTime * 1000)
+    var year = date.getFullYear();
+    var month = months[date.getMonth()];
+    const dayOfWeek = date.getDate()
+    const hours = date.getHours()
+    const minutes = "0" + date.getMinutes();
+    const seconds = "0" + date.getSeconds();
+    const formattedTime = year + ':' + month + ':' + dayOfWeek + ':' + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime;
+}
+
+const useStyles3 = makeStyles(() => ({
+    green: {
+        display: "flex", marginBlock: 27, borderRadius: 10, width: 71, height: 30, padding: "4px 2px 2px 2px", marginLeft: "13px",
+        placeContent: 'center', padding: '2px 0px 0px 0px', color: 'white', backgroundColor: 'green'
+    },
+    red: {
+        display: "flex", marginBlock: 27, borderRadius: 10, width: 71, height: 30, padding: "4px 2px 2px 2px", marginLeft: "13px",
+        placeContent: 'center', padding: '2px 0px 0px 0px', color: 'white', backgroundColor: 'red'
+    },
+    fontText: {
+        fontSize: 35
+    },
+    fontTextMin: {
+        fontSize: 20
     }
+
 }))
 
 const CardCrypto = (props) => {
 
     const classes = useStyles()
-    const classesGraph = useStyles2()
+    const classBottom = useStyles3()
     const [price, setPrice] = useState([])
     const [info, setInfo] = useState([])
-    const [histoDay, setHistoDay] = useState([])
+    const [coinInfo, setCoinInfo] = useState([])
+    const [coinSymbol, setCoinSymbol] = useState([])
+    const [histoHour, setHistoHour] = useState([])
+    const [histoMinute, sethistoMinute] = useState([])
+    const [idCoin, setIdCoin] = useState([])
+    const theme = useTheme();
+    const matchesDown = useMediaQuery(theme.breakpoints.down('sm'));
+    const matches = useMediaQuery('(min-width:400px)');
+    const matchesMax = useMediaQuery('(max-width:1300px)');
+
     let lastSlash = props.location.pathname.lastIndexOf('/')
     let id = props.location.pathname.slice(lastSlash + 1, props.location.pathname.length)
 
-    const convertToDate = (unixTime) => {
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const date = new Date(unixTime * 1000)
-        var year = date.getFullYear();
-        var month = months[date.getMonth()];
-        const dayOfWeek = date.getDate()
-        const hours = date.getHours()
-        const minutes = "0" + date.getMinutes();
-        const seconds = "0" + date.getSeconds();
-        const formattedTime = year + ':' + month + ':' + dayOfWeek + ':' + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-        return formattedTime;
-    }
 
     useEffect(() => {
 
         tradeService.getCoin(id)
             .then(res => {
-                tradeService.getHistoDay(res.data[0].symbol, props.Currency)
+
+                props.allInfoCoin.length !== 0 && localStorage.setItem('info', JSON.stringify(props.allInfoCoin))
+                if (props.allInfoCoin.length === 0) {
+                    localInfo.filter((item) => {
+                        if (item.FROMSYMBOL == res.data[0].symbol) {
+                            setPrice(item.PRICE)
+                            setCoinInfo(item)
+                        }
+                    })
+                }
+                props.allInfoCoin.filter((item) => {
+                    if (item.FROMSYMBOL == res.data[0].symbol) {
+                        setPrice(item.PRICE)
+                        setCoinInfo(item)
+                    }
+                })
+
+                setCoinSymbol(res.data[0].symbol)
+                tradeService.getHistoByMin(res.data[0].symbol, props.Currency, 1440)
                     .then(res => {
-                        console.log(res)
                         res.data.Data.Data.map(element => {
                             const hours = convertToDate(element.time)
                             return element.time = hours
                         });
-                        setHistoDay(res.data.Data)
-                        setPrice(res.data.Data.Data[res.data.Data.Data.length - 1])
+                        sethistoMinute(res.data.Data)
                     })
                     .catch(err => console.log(err))
             })
             .catch(error => console.log(error))
 
         tradeService.getCoinInfo(`id=${id}`)
-            .then(res => {
-                setInfo(res.data[id])
-            })
+            .then(res => setInfo(res.data[id]))
             .catch(err => console.log(err))
+
+        const localInfo = JSON.parse(localStorage.getItem('info'))
     }, [id])
 
-    let arrTimes = []
-    if (histoDay.Data !== undefined) {
-        histoDay.Data.map(el => {
-            return arrTimes.push(el.high)
-        })
-    }
+    let arrTimes, arrTimesMinutes = []
+    histoHour.Data !== undefined && histoHour.Data.map(el => { return arrTimes.push(el.high) })
+    histoMinute.Data !== undefined && histoMinute.Data.map(el => { return arrTimesMinutes.push(el.high) })
 
-    const getMax = () => {
-        const max = Math.max(...arrTimes);
-        const index = arrTimes.indexOf(max)
-        const filterMax = arrTimes.filter((_, i) => i === index);
-        return parseFloat(filterMax)
-    }
+    const showPrices = () => {
 
-    const getMin = () => {
-        const smallest = Math.min(...arrTimes);
-        const index = arrTimes.indexOf(smallest)
-        const filterMin = arrTimes.filter((_, i) => i === index);
-        const restPercent = (filterMin / 100) * 95
-        const result = restPercent.toFixed(2)
-        return parseFloat(result)
+        if (!matchesDown) {
+            return (
+                <Grid item spacing={3}>
+                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green}>
+                        {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
+                    </span>
+                </Grid>
+            )
+        }
     }
-
-    const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
     return (
-        <>
+        <Container style={{ padding: 1, margin: 0 }}>
             <CustomizedBreadcrumbs />
-            <Container >
-                <Grid style={{ display: "flex" }} item xs={12}>
-                    <img style={{ marginTop: "25px" }} alt="coin logo" className={classes.logoCoin} src={info.logo} />
-                    <h1>{info.name}</h1>
+            <Grid style={{ width: '100%', margin: !matchesMax ? '0px 0px 0px 102px' : 0 }} container spacing={2}>
+                <Grid item xs={matchesDown ? 12 : 8}>
+                    <Paper style={{ margin: 0 }} elevation={0}>
+                        <Container>
+                            <Container style={{ display: "flex", padding: 0 }}>
+                                <Grid style={{ display: "inherit", marginInlineStart: !matchesMax && -105 }} item xs={12}>
+                                    <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={info.logo} />
+                                    <h1 className={!matches ? classBottom.fontTextMin : classBottom.fontText}>{info.name}</h1>
+                                </Grid>
+                                <h1 style={{ fontSize: !matches ? 20 : 30 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price} </h1>
+                                {showPrices()}
+                            </Container>
+
+                            {histoMinute.Data !== undefined && <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} />}
+                        </Container>
+                    </Paper>
                 </Grid>
-                <Grid style={{ display: "flex" }} item spacing={3}>
-                    <h1>${price.open}</h1>
+                <Grid item xs={matchesDown ? 8 : 4}>
+                    <Paper style={{ margin: 0 }} elevation={1}>
+                        <Container>
+                            <h2>{info.name} Price Today</h2>
+                        </Container>
+                        <TableContainer>
+                            <Table className={classes.table} size="small" aria-label="a dense table">
+                                {/* <TableHead>
+                                <TableRow>
+                                    <TableCell>
+                                        <h2>{info.name} Price Today</h2>
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead> */}
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>
+                                            {info.name} Price
+                                    </TableCell>
+                                        <TableCell>
+                                            {coinInfo.PRICE}
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>
+                                            24h Low/24h High
+                                    </TableCell>
+                                        <TableCell>
+                                            {coinInfo.HIGH24HOUR} / {coinInfo.LOW24HOUR}
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>
+                                            Market Cap 24h
+                                    </TableCell>
+                                        <TableCell>
+                                            {props.Currency == 'USD' ? '$' + coinInfo.MKTCAP : '€' + coinInfo.MKTCAP}
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>
+                                            Change 24h
+                                       </TableCell>
+                                        <TableCell>
+                                            {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}%
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableCell>
+                                        Volume 24 hour
+                                       </TableCell>
+                                    <TableCell>
+                                        {coinInfo.TOTALVOLUME24H !== undefined && coinInfo.TOTALVOLUME24H}
+                                    </TableCell>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Paper>
                 </Grid>
-            </Container >
-            <Container>
-                <div style={{ height: 500, margin: "0px 0px 0px" }} className={classesGraph.root}>
-                    <ResponsiveContainer width="100%">
-                        <LineChart
-                            data={histoDay.Data}
-                            margin={{
-                                top: 20,
-                                right: 5,
-                                left: 4,
-                                bottom: 5,
-                            }}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="time" />
-                            <YAxis type="number" domain={[getMin(), getMax()]} />
-                            <Tooltip />
-                            <Legend />
-                            <Line dot={false} type="monotone" dataKey="open" stroke={arrTimes[0] > arrTimes[arrTimes.length - 1] ? 'red' : 'green'} activeDot={{ r: 5 }} />
-                        </LineChart>
-                    </ResponsiveContainer>
-                </div>
-            </Container>
-        </>
+            </Grid>
+        </Container>
     )
 }
 

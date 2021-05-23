@@ -14,6 +14,7 @@ const tradeService = new Trade()
 function App() {
 
     const [loggedInUser, setLoggedInUser] = useState(null)
+    const [allInfoCoin, setAllInfoCoin] = useState([])
     const [prices, setAllPrices] = useState([]);
     const [data, setData] = useState([]);
     const [Currency, setCurrency] = useState('USD')
@@ -21,47 +22,68 @@ function App() {
     let firstCriptos = []
     let arrCripts
 
-    const setTheUser = (user) => {
-
-        setLoggedInUser(user)
-        console.log(loggedInUser)
-    }
+    const setTheUser = (user) => { setLoggedInUser(user) }
 
     const handleLogOut = () => {
         tradeService.logout()
             .then(res => {
                 setTheUser(null)
-                console.log(res.data)
+                localStorage.setItem('login', null)
             })
             .catch(err => console.log(err))
     }
 
+    let arrSymbols = []
     const getCoins = (Currency) => {
         tradeService.getCoins(Currency)
             .then(response => {
                 firstCriptos = response.data
-                let arrLogoCoin = []
+                let arrIdCoins = []
                 setAllPrices(response.data[0].quote.USD)
                 arrCripts = firstCriptos.map(element => {
                     if (element.quote.USD) {
+                        arrSymbols.push(element.symbol)
                         return { id: element.id, name: element.name, price: element.quote.USD.price, change_1h: element.quote.USD.percent_change_1h, change_1d: element.quote.USD.percent_change_24h, change_7d: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
                     }
                     else {
+                        arrSymbols.push(element.symbol)
                         return { id: element.id, name: element.name, price: element.quote.EUR.price, change_1h: element.quote.EUR.percent_change_1h, change_1d: element.quote.EUR.percent_change_24h, change_7d: element.quote.EUR.percent_change_7d, symbol: element.symbol, marketCap: element.quote.EUR.market_cap }
                     }
                 });
+
                 setData(arrCripts)
-                firstCriptos.forEach(element => {
-                    arrLogoCoin.push(element.id)
-                })
+                getAllInfo(arrSymbols, Currency)
+                setAllInfoCoin(arrInfo)
+                console.log(arrInfo)
             })
             .catch(error => console.log(error))
     }
 
+    let arrInfo = []
+    const getAllInfo = (arrSymbols, Currency) => {
+
+        tradeService.getAllCoinsInfo(arrSymbols.toString(), Currency)
+            .then(res => {
+
+                for (let key in res.data.RAW) {
+                    if (res.data.RAW[key].USD) {
+                        arrInfo.push(res.data.RAW[key].USD)
+                    }
+                    if (res.data.RAW[key].EUR) {
+                        arrInfo.push(res.data.RAW[key].EUR)
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     useEffect(() => {
 
-        setData(getCoins('USD'))
-
+        parseInt(localStorage.getItem('value')) === 1 ? setData(getCoins('EUR')) : setData(getCoins('USD'))
+        const login = JSON.parse(localStorage.getItem('login'))
+        setTheUser(login)
     }, [])
 
     return (
@@ -69,8 +91,8 @@ function App() {
             <SearchAppBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
             {!data ? <LinearProgress /> : ''}
             <Route path="/user" render={(props) => <UserProfile />} />
-            <Route path="/coin" render={(props) => <Crypto Currency={Currency} setCurrency={setCurrency} {...props} />} />
-            <Route exact path="/" render={(props) => <TableCriptos data={data} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
+            <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} {...props} />} />
+            <Route exact path="/" render={(props) => <TableCriptos data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
         </div>
     );
 }

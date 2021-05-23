@@ -23,18 +23,15 @@ const StyledBreadcrumb = withStyles((theme) => ({
     },
 }))(Chip); // TypeScript only: need a type cast here because https://github.com/Microsoft/TypeScript/issues/26591
 
-
 export default function CustomizedBreadcrumbs() {
 
     let history = useHistory();
     function handleClick(event) {
         event.preventDefault();
-        console.info('You clicked a breadcrumb.');
-        history.push('/')
-
+        history.push('/');
     }
     return (
-        <Breadcrumbs aria-label="breadcrumb">
+        <Breadcrumbs aria-label="breadcrumb" style={{ padding: "5px 28px", marginTop: 10 }}>
             <StyledBreadcrumb
                 component="a"
                 href="/"
@@ -42,13 +39,8 @@ export default function CustomizedBreadcrumbs() {
                 icon={<HomeIcon fontSize="small" />}
                 onClick={handleClick}
             />
-            <StyledBreadcrumb component="a" href="#" label="Catalog" onClick={handleClick} />
-            <StyledBreadcrumb
-                label="Accessories"
-                deleteIcon={<ExpandMoreIcon />}
-                onClick={handleClick}
-                onDelete={handleClick}
-            />
+            <StyledBreadcrumb component="a" href="#" label="Coins" onClick={handleClick} />
+
         </Breadcrumbs>
     );
 }

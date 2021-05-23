@@ -9,7 +9,8 @@ import {
     GridToolbarContainer,
     GridDensitySelector,
     GridFilterToolbarButton,
-} from '@material-ui/data-grid'; import { Link } from "react-router-dom";
+} from '@material-ui/data-grid';
+import { Link } from "react-router-dom";
 import Modal from './layout/Modal'
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -38,7 +39,7 @@ const useStyles = makeStyles({
         },
     },
     imageCoin: {
-        width: "22px", height: "50%", marginTop: "14%"
+        width: "24px", marginRight: 5
 
     },
 });
@@ -54,6 +55,7 @@ export default function DataTable(props) {
     const classes = useStyles();
 
     const rows = props.data
+    const rows2 = props.allInfoCoin.DISPLAY
 
     const colChange_1h = {
 
@@ -80,20 +82,23 @@ export default function DataTable(props) {
         {
             renderCell: (params) => (
                 <Container className="hidden">
-                    <Container style={{ paddingLeft: '4px' }}>
-                        <Link to={"/coin/" + params.row.id}>
+                    <Link to={"/coin/" + params.row.id} style={{ textDecoration: 'none', color: 'inherit' }} >
+                        <Container style={{
+                            paddingLeft: '4px', padding: 5,
+                            boxSizing: 'content-box', display: 'flex', alignItems: 'center'
+                        }}>
                             <img alt="imageCrypto" src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${params.row.id}.png`} className={classes.imageCoin}></img>
-                            <strong className={'NameCripto'} >{params.row.name} </strong>
-                        </Link>
-                    </Container>
+                            <p>{params.row.name} </p>
+                        </Container>
+                    </Link>
                 </Container>
             ), field: 'name', headerName: 'Token', width: 190, cellClassName: 'super-app-theme--cell'
         },
         {
             renderCell: (params) => (
-                params.row.price > 1 ? <strong> {params.row.price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {props.Currency === "EUR" ? '€' : '$'} </strong> : (
+                params.row.price > 1 ? <strong> {params.row.price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{parseInt(localStorage.getItem('value')) === 1 ? '€' : '$'} </strong> : (
                     <strong>
-                        {params.row.price.toFixed(2)}
+                        {parseInt(localStorage.getItem('value')) === 1 ? params.row.price.toFixed(7) + '€' : params.row.price.toFixed(7) + '$'}
                     </strong>
                 )
             ),
@@ -119,12 +124,10 @@ export default function DataTable(props) {
     const addColumns = () => {
 
         if (stateCols.change_1d) {
-            columns.push(colChange_1d)
-        } else {
-            columns.splice(-1, 0)
+            columns.splice(3, 0, colChange_1d)
         }
         if (stateCols.change_1h) {
-            columns.push(colChange_1h)
+            columns.splice(3, 0, colChange_1h)
         }
     }
 
@@ -134,14 +137,9 @@ export default function DataTable(props) {
         setColumns(columns)
     }, [])
 
-    const handleClickUser = () => {
-
-    }
-
     return (
         <>
             <Container style={{ display: "flex", justifyContent: "flex-end", margin: "30px 0px 13px 0px" }}>
-                <Button onClick={handleClickUser} />
                 <ControlledOpenSelect {...props} />
                 <Modal allColumns={columns} setColumns={setColumns} handleRows={handleRows} stateCols={stateCols} setStateCols={setStateCols} {...props} />
             </Container>
@@ -152,6 +150,7 @@ export default function DataTable(props) {
     );
 }
 
+
 function CustomToolbar() {
     return (
         <GridToolbarContainer>
@@ -160,21 +159,24 @@ function CustomToolbar() {
         </GridToolbarContainer>
     );
 }
+const item = localStorage.getItem('value') !== null && parseInt(localStorage.getItem('value'))
 
 function ControlledOpenSelect(props) {
-    const [Currency, setCurrency] = React.useState(2);
+    const [CurrencyIndex, setCurrencyIndex] = React.useState(item ? item : 2)
     const [open, setOpen] = React.useState(false);
 
     const handleChange = (event) => {
         if (event.target.value === 1) {
-            setCurrency(1)
+            setCurrencyIndex(1)
             props.setCurrency('EUR')
             props.getCoins('EUR')
+            localStorage.setItem('value', event.target.value)
         }
         if (event.target.value === 2) {
-            setCurrency(2)
+            setCurrencyIndex(2)
             props.setCurrency('USD')
             props.getCoins('USD')
+            localStorage.setItem('value', event.target.value)
         }
     };
 
@@ -189,7 +191,7 @@ function ControlledOpenSelect(props) {
 
     return (
         <FormControl style={{ width: "65px", marginRight: 10 }}>
-            <InputLabel style={{ top: "-10px", left: "16px" }} >{props.Currency === 'EUR' ? <img alt="logo EUR" style={{ width: "16px" }} src={logoEUR} /> : <img alt="log USD" style={{ width: "16px" }} src={logoUSD} />}</InputLabel>
+            <InputLabel style={{ top: "-10px", left: "16px" }} >{item === 1 ? <img alt="logo EUR" style={{ width: "16px" }} src={logoEUR} /> : <img alt="logo USD" style={{ width: "16px" }} src={logoUSD} />}</InputLabel>
             <Select
                 style={{ margin: "0px" }}
                 labelId="demo-controlled-open-select-label"
@@ -197,7 +199,7 @@ function ControlledOpenSelect(props) {
                 open={open}
                 onClose={handleClose}
                 onOpen={handleOpen}
-                value={Currency}
+                value={CurrencyIndex}
                 onChange={handleChange}
             >
                 <MenuItem value={1} name={"EUR"}>EUR</MenuItem>

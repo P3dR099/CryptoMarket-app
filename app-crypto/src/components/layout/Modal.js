@@ -20,7 +20,6 @@ function getModalStyle() {
 
 export default function SimpleModal(props) {
 
-    const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
