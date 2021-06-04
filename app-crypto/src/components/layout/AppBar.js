@@ -107,7 +107,7 @@ export default function SearchAppBar(props) {
                                     <Grid item>
                                         {matches ? <SearchIcon style={{ marginTop: "15px" }} /> : ''}
                                         <TextField
-                                            style={{ margin: 0, width: 180 }}
+                                            style={{ margin: 0, width: 175 }}
                                             {...params}
                                             label="Search"
                                             margin="normal"

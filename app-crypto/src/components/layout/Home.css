@@ -4,10 +4,14 @@
 }
 #kid {
     position: absolute;
-    width: 70%;
+    width: 99%;
     margin: 10px auto;
     border: 2px solid #f00;
     top: 189px;
-    right: 203px;
     position: absolute;
+}
+
+.title {
+    font-weight: 700;
+    color: #fff
 }

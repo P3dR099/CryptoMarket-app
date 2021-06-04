@@ -5,27 +5,24 @@ import CarouselSlide from '../layout/CarouselSlide'
 
 const Home = (props) => {
 
-    const SLIDE_INFO = [
-        { backgroundColor: '#ff7c7c', title: 'Slide 1' },
-        { backgroundColor: '#ffb6b9', title: 'Slide 2' },
-        { backgroundColor: '#8deaff', title: 'Slide 3' },
-        { backgroundColor: '#ffe084', title: 'Slide 4' },
-
-    ];
-
 
     return (
         <>
-            <Container style={{ maxWidth: 1600, padding: 0 }}>
-                <Container style={{ background: '#044e97', height: 470, padding: 'inherit', maxWidth: 'inherit', marginTop: -70 }}>
+            <Container style={{ maxWidth: 2850, padding: 0 }}>
+                <Container style={{ background: '#044e97', height: 580, padding: 'inherit', maxWidth: 'inherit', marginTop: -100 }}>
                     <div id="kid">
-                        <h1>Mercado de Criptomonedas</h1>
+                        <h1 className="title" >Mercado de Criptomonedas</h1>
+                        <Container style={{ padding: 0 }}>
+                            hola
+                 <a href="/table">
+                                Go to table
+                    </a>
+                        </Container>
                     </div>
-                </Container>
-                <Container>
-                    <CarouselSlide {...props} />
+
                 </Container>
             </Container>
+            <CarouselSlide {...props} />
         </>
     )
 }
