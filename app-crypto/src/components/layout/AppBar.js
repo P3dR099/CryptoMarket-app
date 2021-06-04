@@ -88,7 +88,7 @@ export default function SearchAppBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar backgroundcolor="#04048ded" position="static">
+            <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none' }}>
                 <Toolbar>
                     {props.loggedInUser && <AccountCircle {...props} />}
                     <ModalAuth {...props} />

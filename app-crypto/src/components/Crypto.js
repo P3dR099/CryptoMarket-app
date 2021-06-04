@@ -8,7 +8,6 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CustomizedBreadcrumbs from '../components/layout/BreadCump'
 import { Grid } from '@material-ui/core';
@@ -65,10 +64,19 @@ const useStyles3 = makeStyles(() => ({
         placeContent: 'center', padding: '2px 0px 0px 0px', color: 'white', backgroundColor: 'red'
     },
     fontText: {
-        fontSize: 35
+        fontSize: 33
     },
     fontTextMin: {
         fontSize: 20
+    },
+
+    listStatsCoin: {
+        // fontFamily: 'Inter, - apple - system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans - serif', fontSize: 14,
+        fontWeight: 500, color: '#58667e'
+    },
+
+    valueStatsCoin: {
+        fontWeight: 600, color: '#000', lineHeight: 3, textAlign: 'end'
     }
 
 }))
@@ -101,14 +109,14 @@ const CardCrypto = (props) => {
                 props.allInfoCoin.length !== 0 && localStorage.setItem('info', JSON.stringify(props.allInfoCoin))
                 if (props.allInfoCoin.length === 0) {
                     localInfo.filter((item) => {
-                        if (item.FROMSYMBOL == res.data[0].symbol) {
+                        if (item.FROMSYMBOL === res.data[0].symbol) {
                             setPrice(item.PRICE)
                             setCoinInfo(item)
                         }
                     })
                 }
                 props.allInfoCoin.filter((item) => {
-                    if (item.FROMSYMBOL == res.data[0].symbol) {
+                    if (item.FROMSYMBOL === res.data[0].symbol) {
                         setPrice(item.PRICE)
                         setCoinInfo(item)
                     }
@@ -163,7 +171,7 @@ const CardCrypto = (props) => {
                                     <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={info.logo} />
                                     <h1 className={!matches ? classBottom.fontTextMin : classBottom.fontText}>{info.name}</h1>
                                 </Grid>
-                                <h1 style={{ fontSize: !matches ? 20 : 30 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price} </h1>
+                                <h1 style={{ fontSize: !matches ? 20 : 33 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price} </h1>
                                 {showPrices()}
                             </Container>
 
@@ -172,63 +180,59 @@ const CardCrypto = (props) => {
                     </Paper>
                 </Grid>
                 <Grid item xs={matchesDown ? 8 : 4}>
-                    <Paper style={{ margin: 0 }} elevation={1}>
-                        <Container>
+                    <Paper style={{ margin: !matchesDown && '190px 0px 0px 16px', background: '#f8fafd', borderRadius: 16 }} elevation={1}>
+                        <Container style={{ padding: 1 }}>
                             <h2>{info.name} Price Today</h2>
                         </Container>
                         <TableContainer>
                             <Table className={classes.table} size="small" aria-label="a dense table">
                                 {/* <TableHead>
-                                <TableRow>
-                                    <TableCell>
-                                        <h2>{info.name} Price Today</h2>
-                                    </TableCell>
-                                </TableRow>
-                            </TableHead> */}
+
+                                </TableHead> */}
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell>
+                                        <TableCell className={classBottom.listStatsCoin}>
                                             {info.name} Price
-                                    </TableCell>
-                                        <TableCell>
-                                            {coinInfo.PRICE}
+                                        </TableCell>
+                                        <TableCell className={classBottom.valueStatsCoin}>
+                                            €{coinInfo.PRICE}
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell>
-                                            24h Low/24h High
+                                        <TableCell className={classBottom.listStatsCoin}>
+                                            24h Low / 24h High
                                     </TableCell>
-                                        <TableCell>
-                                            {coinInfo.HIGH24HOUR} / {coinInfo.LOW24HOUR}
+                                        <TableCell className={classBottom.valueStatsCoin}>
+                                            {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.LOW24HOUR + ' / ' + coinInfo.HIGH24HOUR : '€' + coinInfo.LOW24HOUR + ' / ' + coinInfo.HIGH24HOUR}
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell>
+                                        <TableCell className={classBottom.listStatsCoin}>
                                             Market Cap 24h
                                     </TableCell>
-                                        <TableCell>
-                                            {props.Currency == 'USD' ? '$' + coinInfo.MKTCAP : '€' + coinInfo.MKTCAP}
+                                        <TableCell className={classBottom.valueStatsCoin}>
+                                            {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.MKTCAP : '€' + coinInfo.MKTCAP}
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell>
+                                        <TableCell className={classBottom.listStatsCoin}>
                                             Change 24h
                                        </TableCell>
-                                        <TableCell>
+                                        <TableCell className={classBottom.valueStatsCoin}>
                                             {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}%
                                         </TableCell>
                                     </TableRow>
-                                    <TableCell>
+                                    <TableCell className={classBottom.listStatsCoin}>
                                         Volume 24 hour
                                        </TableCell>
-                                    <TableCell>
-                                        {coinInfo.TOTALVOLUME24H !== undefined && coinInfo.TOTALVOLUME24H}
+                                    <TableCell className={classBottom.valueStatsCoin}>
+                                        {coinInfo.TOTALVOLUME24H !== undefined && parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.TOTALVOLUME24H : '€' + coinInfo.TOTALVOLUME24H}
                                     </TableCell>
                                 </TableBody>
                             </Table>

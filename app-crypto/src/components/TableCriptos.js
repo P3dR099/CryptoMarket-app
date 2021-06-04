@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -55,7 +55,7 @@ export default function DataTable(props) {
     const classes = useStyles();
 
     const rows = props.data
-    const rows2 = props.allInfoCoin.DISPLAY
+    // const rows2 = props.allInfoCoin.DISPLAY
 
     const colChange_1h = {
 
@@ -159,9 +159,10 @@ function CustomToolbar() {
         </GridToolbarContainer>
     );
 }
-const item = localStorage.getItem('value') !== null && parseInt(localStorage.getItem('value'))
 
 function ControlledOpenSelect(props) {
+
+    const item = localStorage.getItem('value') !== null && parseInt(localStorage.getItem('value'))
     const [CurrencyIndex, setCurrencyIndex] = React.useState(item ? item : 2)
     const [open, setOpen] = React.useState(false);
 
@@ -191,7 +192,7 @@ function ControlledOpenSelect(props) {
 
     return (
         <FormControl style={{ width: "65px", marginRight: 10 }}>
-            <InputLabel style={{ top: "-10px", left: "16px" }} >{item === 1 ? <img alt="logo EUR" style={{ width: "16px" }} src={logoEUR} /> : <img alt="logo USD" style={{ width: "16px" }} src={logoUSD} />}</InputLabel>
+            <InputLabel style={{ top: "-10px", left: "16px" }} >{parseInt(localStorage.getItem('value')) === 1 ? <img alt="logo EUR" style={{ width: "16px" }} src={logoEUR} /> : <img alt="logo USD" style={{ width: "16px" }} src={logoUSD} />}</InputLabel>
             <Select
                 style={{ margin: "0px" }}
                 labelId="demo-controlled-open-select-label"

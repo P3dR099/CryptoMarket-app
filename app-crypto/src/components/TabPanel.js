@@ -2,14 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import GraphCoin from './GraphCoin'
 
 function TabPanel(props) {
@@ -64,8 +59,6 @@ export default function FullWidthTabs(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    const matchesMax = useMediaQuery('(max-width:1254px)');
 
     return (
         <div className={classes.root}>

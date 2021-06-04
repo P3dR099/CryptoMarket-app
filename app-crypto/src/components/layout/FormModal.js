@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import clsx from 'clsx';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
