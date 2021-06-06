@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Trade from '../services/trade.service'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+
 const tradeService = new Trade()
 
 const GraphCoin = (props) => {
@@ -78,18 +79,18 @@ const GraphCoin = (props) => {
     }
 
     const scaleGraph = () => {
-        if (matches && !matchesMax) {
+        if (!matchesMax) {
             return '180%'
         }
-        else {
-            return '117%'
+        if (!matches) {
+            return '113%'
         }
     }
 
     return (
         <>
 
-            <div style={{ height: 500, margin: "0px 0px 0px", padding: 0, fontSize: matches ? 15 : 12, marginInlineStart: !matchesMax ? -135 : -45, marginInlineEnd: !matchesMax ? 120 : 0 }}>
+            <div style={{ height: 500, margin: "0px 0px 0px", padding: 0, fontSize: matches ? 15 : 12, marginInlineStart: !matchesMax ? -30 : -45, marginInlineEnd: !matchesMax ? 120 : 0 }}>
                 <ResponsiveContainer width={scaleGraph()} style={{ marginInlineStart: -35 }} >
                     <LineChart
                         data={props.value === 2 ? props.histoHour : getHistoryData()}

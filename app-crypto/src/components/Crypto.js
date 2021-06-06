@@ -13,6 +13,7 @@ import CustomizedBreadcrumbs from '../components/layout/BreadCump'
 import { Grid } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
 import TabPanel from './TabPanel'
+import backgroundImage from '../logos/lightsBlue.jpg'
 const tradeService = new Trade()
 
 const useStyles = makeStyles({
@@ -42,10 +43,10 @@ const useStyles = makeStyles({
 });
 
 const convertToDate = (unixTime) => {
-    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const date = new Date(unixTime * 1000)
-    var year = date.getFullYear();
-    var month = months[date.getMonth()];
+    const year = date.getFullYear();
+    const month = months[date.getMonth()];
     const dayOfWeek = date.getDate()
     const hours = date.getHours()
     const minutes = "0" + date.getMinutes();
@@ -71,7 +72,6 @@ const useStyles3 = makeStyles(() => ({
     },
 
     listStatsCoin: {
-        // fontFamily: 'Inter, - apple - system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans - serif', fontSize: 14,
         fontWeight: 500, color: '#58667e'
     },
 
@@ -91,12 +91,9 @@ const CardCrypto = (props) => {
     const [coinSymbol, setCoinSymbol] = useState([])
     const [histoHour, setHistoHour] = useState([])
     const [histoMinute, sethistoMinute] = useState([])
-    const [idCoin, setIdCoin] = useState([])
     const theme = useTheme();
     const matchesDown = useMediaQuery(theme.breakpoints.down('sm'));
     const matches = useMediaQuery('(min-width:400px)');
-    const matchesMax = useMediaQuery('(max-width:1300px)');
-
     let lastSlash = props.location.pathname.lastIndexOf('/')
     let id = props.location.pathname.slice(lastSlash + 1, props.location.pathname.length)
 
@@ -105,7 +102,6 @@ const CardCrypto = (props) => {
 
         tradeService.getCoin(id)
             .then(res => {
-
                 props.allInfoCoin.length !== 0 && localStorage.setItem('info', JSON.stringify(props.allInfoCoin))
                 if (props.allInfoCoin.length === 0) {
                     localInfo.filter((item) => {
@@ -121,7 +117,6 @@ const CardCrypto = (props) => {
                         setCoinInfo(item)
                     }
                 })
-
                 setCoinSymbol(res.data[0].symbol)
                 tradeService.getHistoByMin(res.data[0].symbol, props.Currency, 1440)
                     .then(res => {
@@ -147,7 +142,6 @@ const CardCrypto = (props) => {
     histoMinute.Data !== undefined && histoMinute.Data.map(el => { return arrTimesMinutes.push(el.high) })
 
     const showPrices = () => {
-
         if (!matchesDown) {
             return (
                 <Grid item spacing={3}>
@@ -160,14 +154,18 @@ const CardCrypto = (props) => {
     }
 
     return (
-        <Container style={{ padding: 1, margin: 0 }}>
+
+        <Container style={{
+            padding: 0, marginTop: -100, maxWidth: '100%', backgroundImage: 'linear-gradient(166deg, rgb(24 61 200) 58%, rgb(244, 244, 244) calc(84% + -7px))', height: '100%', position: 'inherit'
+        }}>
             <CustomizedBreadcrumbs />
-            <Grid style={{ width: '100%', margin: !matchesMax ? '0px 0px 0px 102px' : 0 }} container spacing={2}>
+
+            <Grid style={{ width: '99%', margin: 0 }} container spacing={2}>
                 <Grid item xs={matchesDown ? 12 : 8}>
-                    <Paper style={{ margin: 0 }} elevation={0}>
-                        <Container>
+                    <Paper style={{ margin: 0 }} elevation={3}>
+                        <Container style={{ padding: 10 }}>
                             <Container style={{ display: "flex", padding: 0 }}>
-                                <Grid style={{ display: "inherit", marginInlineStart: !matchesMax && -105 }} item xs={12}>
+                                <Grid style={{ display: "inherit" }} item xs={12}>
                                     <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={info.logo} />
                                     <h1 className={!matches ? classBottom.fontTextMin : classBottom.fontText}>{info.name}</h1>
                                 </Grid>
@@ -179,8 +177,8 @@ const CardCrypto = (props) => {
                         </Container>
                     </Paper>
                 </Grid>
-                <Grid item xs={matchesDown ? 8 : 4}>
-                    <Paper style={{ margin: !matchesDown && '190px 0px 0px 16px', background: '#f8fafd', borderRadius: 16 }} elevation={1}>
+                <Grid item xs={matchesDown ? 12 : 4}>
+                    <Paper style={{ margin: !matchesDown && '190px 0px 0px 16px', background: '#f8fafd', borderRadius: 16 }} elevation={3}>
                         <Container style={{ padding: 1 }}>
                             <h2>{info.name} Price Today</h2>
                         </Container>
@@ -188,7 +186,7 @@ const CardCrypto = (props) => {
                             <Table className={classes.table} size="small" aria-label="a dense table">
                                 {/* <TableHead>
 
-                                </TableHead> */}
+</TableHead> */}
                                 <TableBody>
                                     <TableRow>
                                         <TableCell className={classBottom.listStatsCoin}>
@@ -240,6 +238,7 @@ const CardCrypto = (props) => {
                     </Paper>
                 </Grid>
             </Grid>
+
         </Container>
     )
 }

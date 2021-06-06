@@ -16,6 +16,11 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
+    navbar: {
+        background: 'transparent',
+        boxShadow: 'none',
+        position: 'absolute'
+    },
     menuButton: {
         marginRight: theme.spacing(2),
     },
@@ -88,7 +93,7 @@ export default function SearchAppBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none' }}>
+            <AppBar position="static" className={classes.navbar}>
                 <Toolbar>
                     {props.loggedInUser && <AccountCircle {...props} />}
                     <ModalAuth {...props} />

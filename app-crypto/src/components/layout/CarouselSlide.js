@@ -12,7 +12,7 @@ function SampleNextArrow(props) {
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "red", right: -30 }}
+            style={{ ...style, display: "block", background: "red", right: -20 }}
             onClick={onClick}
         />
     );
@@ -23,7 +23,7 @@ function SamplePrevArrow(props) {
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "green", left: -22 }}
+            style={{ ...style, display: "block", background: "green", left: -19 }}
             onClick={onClick}
         />
     );
@@ -35,14 +35,18 @@ const useStyles = makeStyles({
         margin: 10
     },
     cardCoin: {
-        margin: '0px 70px 1px 20px', width: 245, height: 170, borderRadius: 8, background: '#fff'
+        margin: '0px 0px 1px 0px', width: 245, height: 170, borderRadius: 8, background: '#fff'
     },
     cardCoinMin: {
-        margin: '0px 70px 1px 20px', width: 155, height: 170, borderRadius: 8, background: '#fff'
+        margin: '0px 0px 1px 0px', width: 155, height: 170, borderRadius: 8, background: '#fff'
     },
     logoCoin: {
         padding: 10,
         width: 50,
+    },
+    logoCoinMin: {
+        padding: 10,
+        width: 35,
     },
     priceCoin: {
         fontSize: '1.3rem',
@@ -54,22 +58,25 @@ const useStyles = makeStyles({
 export default function CustomArrows(props) {
 
     const classes = useStyles();
-    const matches = useMediaQuery('(min-width:1150px)');
-    const matchesMed = useMediaQuery('(min-width:860px)');
-    const matchesMin = useMediaQuery('(min-width:560px)');
-    const matchesMax = useMediaQuery('(max-width:1150px)');
-
+    const matchesMin = useMediaQuery('(min-width:460px)');
+    const matchesMin2 = useMediaQuery('(min-width:740px)');
+    const matchesMed = useMediaQuery('(min-width:1090px)');
+    const matchesMax = useMediaQuery('(max-width:1100px)');
+    const matchesMax2 = useMediaQuery('(max-width:1350px)');
 
     const showSlides = () => {
 
         if (!matchesMin) {
             return 1;
         }
-        if (!matchesMed) {
+        if (!matchesMin2) {
             return 2;
         }
-        if (!matches) {
-            return 3
+        if (!matchesMed) {
+            return 3;
+        }
+        if (!matchesMax) {
+            return 4
         }
 
     }
@@ -77,7 +84,7 @@ export default function CustomArrows(props) {
     const settings = {
         dots: false,
         infinite: true,
-        slidesToShow: !matchesMax ? 4 : showSlides(),
+        slidesToShow: !matchesMax2 ? 5 : showSlides(),
         slidesToScroll: 1,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />
@@ -88,15 +95,15 @@ export default function CustomArrows(props) {
         <>
             {props.data !== undefined &&
 
-                <Slider {...settings} style={{ margin: '-80px 70px' }} >
+                <Slider {...settings} style={{ margin: '29px 0px 0px 62px', transform: 'translateX(-34px) translateY(335px)' }} >
                     {props.data.map(function (slide, index) {
                         return (
-                            <div key={index}>
+                            <Container key={index}>
                                 <Box boxShadow={4} className={matchesMin ? classes.cardCoin : classes.cardCoinMin}>
-                                    <Container style={{ display: 'flex', justifyContent: 'space-between', padding: 13 }}>
+                                    <Container style={{ display: 'flex', justifyContent: 'space-between', padding: !matchesMin ? '3px 13px' : 13 }}>
                                         <h3>{slide.name}</h3>
                                         <Link to={"/coin/" + slide.id} style={{ textDecoration: 'none', color: 'inherit' }} >
-                                            <img className={classes.logoCoin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
+                                            <img className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
                                         </Link>
                                     </Container>
                                     <Typography className={classes.priceCoin}>
@@ -110,15 +117,13 @@ export default function CustomArrows(props) {
                                         <Typography>
                                             <ArrowDownwardIcon style={{ width: 15, verticalAlign: 'top', color: 'red' }} />{slide.change_1d.toFixed(2)}
                                         </Typography>
-
                                     }
                                 </Box>
-                            </div>
+                            </Container>
                         )
                     })}
                 </Slider>
             }
         </>
     );
-
 }

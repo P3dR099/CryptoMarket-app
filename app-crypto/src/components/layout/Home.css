@@ -4,11 +4,11 @@
 }
 #kid {
     position: absolute;
-    width: 99%;
-    margin: 10px auto;
-    border: 2px solid #f00;
-    top: 189px;
+    width: 98%;
+    margin: 10px 37;
+    top: 165px;
     position: absolute;
+    transform: translateY(80px);
 }
 
 .title {

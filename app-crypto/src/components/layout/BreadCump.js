@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 const StyledBreadcrumb = withStyles((theme) => ({
     root: {
-        margin: '10px 0px',
+        margin: '100px 0px',
         backgroundColor: theme.palette.grey[100],
         height: theme.spacing(3),
         color: theme.palette.grey[800],
@@ -30,7 +30,7 @@ export default function CustomizedBreadcrumbs() {
         history.push('/');
     }
     return (
-        <Breadcrumbs aria-label="breadcrumb" style={{ padding: "5px 28px", marginTop: 10 }}>
+        <Breadcrumbs aria-label="breadcrumb" style={{ padding: "5px 28px", marginTop: 25 }}>
             <StyledBreadcrumb
                 component="a"
                 href="/"
@@ -39,7 +39,6 @@ export default function CustomizedBreadcrumbs() {
                 onClick={handleClick}
             />
             <StyledBreadcrumb component="a" href="#" label="Coins" onClick={handleClick} />
-
         </Breadcrumbs>
     );
 }
