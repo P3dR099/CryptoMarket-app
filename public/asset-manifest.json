@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/CryptoMarket-app/static/css/main.33e7078a.chunk.css",
+    "main.js": "/CryptoMarket-app/static/js/main.fd45ed6f.chunk.js",
+    "main.js.map": "/CryptoMarket-app/static/js/main.fd45ed6f.chunk.js.map",
+    "runtime-main.js": "/CryptoMarket-app/static/js/runtime-main.1ab90ccc.js",
+    "runtime-main.js.map": "/CryptoMarket-app/static/js/runtime-main.1ab90ccc.js.map",
+    "static/css/2.cc81f84d.chunk.css": "/CryptoMarket-app/static/css/2.cc81f84d.chunk.css",
+    "static/js/2.364f98b7.chunk.js": "/CryptoMarket-app/static/js/2.364f98b7.chunk.js",
+    "static/js/2.364f98b7.chunk.js.map": "/CryptoMarket-app/static/js/2.364f98b7.chunk.js.map",
+    "static/js/3.d1eea63e.chunk.js": "/CryptoMarket-app/static/js/3.d1eea63e.chunk.js",
+    "static/js/3.d1eea63e.chunk.js.map": "/CryptoMarket-app/static/js/3.d1eea63e.chunk.js.map",
+    "index.html": "/CryptoMarket-app/index.html",
+    "static/css/2.cc81f84d.chunk.css.map": "/CryptoMarket-app/static/css/2.cc81f84d.chunk.css.map",
+    "static/css/main.33e7078a.chunk.css.map": "/CryptoMarket-app/static/css/main.33e7078a.chunk.css.map",
+    "static/js/2.364f98b7.chunk.js.LICENSE.txt": "/CryptoMarket-app/static/js/2.364f98b7.chunk.js.LICENSE.txt",
+    "static/media/dollar.5924ced9.png": "/CryptoMarket-app/static/media/dollar.5924ced9.png",
+    "static/media/euro.b5ee3c24.png": "/CryptoMarket-app/static/media/euro.b5ee3c24.png",
+    "static/media/lightsBlue.77dd3437.jpg": "/CryptoMarket-app/static/media/lightsBlue.77dd3437.jpg",
+    "static/media/slick-theme.css": "/CryptoMarket-app/static/media/slick.c94f7671.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1ab90ccc.js",
+    "static/css/2.cc81f84d.chunk.css",
+    "static/js/2.364f98b7.chunk.js",
+    "static/css/main.33e7078a.chunk.css",
+    "static/js/main.fd45ed6f.chunk.js"
+  ]
+}
