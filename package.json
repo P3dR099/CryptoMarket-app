@@ -1,0 +1,62 @@
+{
+    "homepage": "http://P3dR099.github.io/CryptoMarket-app",
+    "name": "bot-crypto",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@bit/recharts.recharts.cartesian-grid": "^1.6.2",
+        "@bit/recharts.recharts.line-chart": "^1.6.2",
+        "@bit/recharts.recharts.x-axis": "^1.6.2",
+        "@bit/recharts.recharts.y-axis": "^1.6.2",
+        "@material-ui/core": "^4.11.3",
+        "@material-ui/data-grid": "^4.0.0-alpha.22",
+        "@material-ui/icons": "^4.11.2",
+        "@material-ui/lab": "^4.0.0-alpha.57",
+        "@material-ui/x-grid-data-generator": "^4.0.0-alpha.22",
+        "@testing-library/jest-dom": "^5.11.9",
+        "@testing-library/react": "^11.2.5",
+        "@testing-library/user-event": "^12.7.3",
+        "axios": "^0.21.1",
+        "binance-node-api": "^0.2.0",
+        "clsx": "^1.1.1",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "react-icons": "^4.2.0",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "4.0.3",
+        "react-slick": "^0.28.1",
+        "react-swipeable-views": "^0.13.9",
+        "recharts": "^2.0.8",
+        "slick-carousel": "^1.8.1",
+        "web-vitals": "^1.1.0"
+    },
+    "scripts": {
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build",
+        "start": "REACT_APP_BASE_URL=http://localhost:5000/api react-scripts start",
+        "build": "REACT_APP_BASE_URL=https://backend-cripto.herokuapp.com/api react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "gh-pages": "^3.2.0"
+    }
+}

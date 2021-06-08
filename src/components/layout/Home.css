@@ -1,0 +1,17 @@
+.parent {
+
+    border: 2px solid #000;
+}
+#kid {
+    position: absolute;
+    height: 25%;
+    width: 98%;
+    top: 165px;
+    position: absolute;
+    transform: translateY(15px);
+}
+
+.title {
+    font-weight: 700;
+    color: #fff
+}
