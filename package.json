@@ -3,10 +3,6 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@bit/recharts.recharts.cartesian-grid": "^1.6.2",
-        "@bit/recharts.recharts.line-chart": "^1.6.2",
-        "@bit/recharts.recharts.x-axis": "^1.6.2",
-        "@bit/recharts.recharts.y-axis": "^1.6.2",
         "@material-ui/core": "^4.11.3",
         "@material-ui/data-grid": "^4.0.0-alpha.22",
         "@material-ui/icons": "^4.11.2",
