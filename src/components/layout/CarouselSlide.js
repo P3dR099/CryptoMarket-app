@@ -38,7 +38,7 @@ const useStyles = makeStyles({
         margin: '0px 0px 1px 0px', width: 245, height: 170, borderRadius: 8, background: '#fff'
     },
     cardCoinMin: {
-        margin: '0px 0px 1px 0px', width: 155, height: 170, borderRadius: 8, background: '#fff'
+        margin: '0px 0px 1px 0px', height: 170, borderRadius: 8, background: '#fff'
     },
     logoCoin: {
         padding: 10,

@@ -15,6 +15,7 @@ import AccountCircle from './AccountCircle.js'
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        textAlignLast: 'center'
     },
     navbar: {
         background: 'transparent',
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: fade(theme.palette.common.white, 0.25),
         },
         marginLeft: 0,
-        width: '100%',
+        width: '99%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(1),
             width: 'auto',

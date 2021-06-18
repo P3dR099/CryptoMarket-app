@@ -9,6 +9,7 @@ import UserProfile from './components/pages/User'
 import Trade from './services/trade.service'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Home from './components/layout/Home'
+import Footer from './components/layout/Footer'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 const tradeService = new Trade()
@@ -95,14 +96,19 @@ function App() {
     }, [])
 
     return (
-        <div className="App" style={{ backgroundImage: 'linear-gradient(166deg, rgb(77, 168, 218) 58%, rgb(244, 244, 244) calc(84% + -7px))' }}>
+        <>
             <SearchAppBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
-            {!data ? <LinearProgress /> : ''}
-            <Route path="/user" render={(props) => <UserProfile />} />
-            <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} {...props} />} />
-            <Route exact path="/table" render={(props) => <TableCriptos data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
-            <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
-        </div>
+            <div className="App" style={{ backgroundImage: 'linear-gradient(166deg, rgb(77, 168, 218) 58%, rgb(244, 244, 244) calc(84% + -7px))' }}>
+                {!data ? <LinearProgress /> : ''}
+                <Route path="/user" render={(props) => <UserProfile />} />
+                <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} {...props} />} />
+                <Route exact path="/table" render={(props) => <TableCriptos data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
+                <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
+            </div>
+            <Footer />
+
+        </>
+
     );
 }
 
