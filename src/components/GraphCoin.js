@@ -2,13 +2,28 @@ import React, { useEffect } from 'react';
 import Trade from '../services/trade.service'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-
+import makeStyles from '@material-ui/core/styles/makeStyles';
 const tradeService = new Trade()
 
 const GraphCoin = (props) => {
 
     const matches = useMediaQuery('(min-width:700px)');
     const matchesMax = useMediaQuery('(max-width:1256px)');
+
+    const useStyles = makeStyles({
+        graphCoin: {
+
+            height: 500,
+            margin: "0px 0px 0px",
+            padding: 0,
+            fontSize: matches ? 15 : 12,
+            marginInlineStart: !matchesMax ? -40 : -42,
+            marginInlineEnd: !matchesMax ? 130 : 0
+        }
+
+    })
+
+    const classes = useStyles()
 
     const getMax = () => {
         const max = Math.max(...props.arrTimesMinutes);
@@ -45,17 +60,15 @@ const GraphCoin = (props) => {
         }
     }
 
-    const value = props.value
+    const { value } = props
 
     useEffect(() => {
+        value === 2 && tradeService.getHistoByHour(props.coinSymbol, props.Currency, 730)
+            .then(resp => {
+                props.setHistoHour(resp.data.Data.Data)
+            })
+            .catch(err => console.log(err))
 
-        if (value === 2) {
-            tradeService.getHistoByHour(props.coinSymbol, props.Currency, 730)
-                .then(resp => {
-                    props.setHistoHour(resp.data.Data.Data)
-                })
-                .catch(err => console.log(err))
-        }
     }, [])
 
 
@@ -80,7 +93,7 @@ const GraphCoin = (props) => {
 
     const scaleGraph = () => {
         if (!matchesMax) {
-            return '180%'
+            return '169%'
         }
         if (!matches) {
             return '113%'
@@ -89,8 +102,7 @@ const GraphCoin = (props) => {
 
     return (
         <>
-
-            <div style={{ height: 500, margin: "0px 0px 0px", padding: 0, fontSize: matches ? 15 : 12, marginInlineStart: !matchesMax ? -30 : -45, marginInlineEnd: !matchesMax ? 120 : 0 }}>
+            <div className={classes.graphCoin}>
                 <ResponsiveContainer width={scaleGraph()} style={{ marginInlineStart: -35 }} >
                     <LineChart
                         data={props.value === 2 ? props.histoHour : getHistoryData()}
@@ -102,7 +114,7 @@ const GraphCoin = (props) => {
                         }}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="time" />
-                        <YAxis type="number" domain={[getMin(), getMax()]} />
+                        <YAxis tick={!matches ? false : true} domain={[getMin(), getMax()]} />
                         {/* <Legend /> */}
                         <Line dot={false} type="monotone" dataKey="open" stroke={getColorHistoValues()} />
                         <Tooltip />

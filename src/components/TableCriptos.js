@@ -16,6 +16,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import logoEUR from '../logos/euro.png'
 import logoUSD from '../logos/dollar.png'
 
@@ -46,13 +47,15 @@ const useStyles = makeStyles({
 
 export default function DataTable(props) {
 
+    const classes = useStyles();
+    const matchesMin = useMediaQuery('(min-width:460px)');
+
     const [stateCols, setStateCols] = React.useState({
         change_1h: false,
         change_1d: false
     });
 
     const [allColumns, setColumns] = React.useState([])
-    const classes = useStyles();
 
     const rows = props.data
     // const rows2 = props.allInfoCoin.DISPLAY
@@ -139,11 +142,12 @@ export default function DataTable(props) {
 
     return (
         <>
-            <Container style={{ display: "flex", justifyContent: "flex-end", margin: "30px 0px 13px 0px" }}>
+            <Container style={{ display: "flex", justifyContent: "flex-end", transform: !matchesMin ? 'translateY(132px)' : 'translateY(82px)' }}>
                 <ControlledOpenSelect {...props} />
                 <Modal allColumns={columns} setColumns={setColumns} handleRows={handleRows} stateCols={stateCols} setStateCols={setStateCols} {...props} />
             </Container>
-            <div style={{ height: 750, width: '100%' }} className={classes.root} >
+            <div style={{ height: 750, width: '100%', marginTop: !matchesMin ? 140 : 100 }} className={classes.root} >
+
                 {props.data && <DataGrid components={{ Toolbar: CustomToolbar }} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} />}
             </div>
         </>

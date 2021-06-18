@@ -95,7 +95,7 @@ function App() {
     }, [])
 
     return (
-        <div className="App">
+        <div className="App" style={{ backgroundImage: 'linear-gradient(166deg, rgb(77, 168, 218) 58%, rgb(244, 244, 244) calc(84% + -7px))' }}>
             <SearchAppBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
             {!data ? <LinearProgress /> : ''}
             <Route path="/user" render={(props) => <UserProfile />} />

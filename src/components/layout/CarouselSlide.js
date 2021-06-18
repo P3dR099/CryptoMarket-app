@@ -1,4 +1,4 @@
-import { Box, Card, Container, Typography } from "@material-ui/core";
+import { Box, Container, Typography } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from "react-slick";
@@ -12,7 +12,7 @@ function SampleNextArrow(props) {
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "red", right: -20 }}
+            style={{ ...style, display: "block", background: "red", right: -40 }}
             onClick={onClick}
         />
     );
@@ -23,7 +23,7 @@ function SamplePrevArrow(props) {
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "green", left: -19 }}
+            style={{ ...style, display: "block", background: "green", left: -10 }}
             onClick={onClick}
         />
     );
@@ -59,7 +59,7 @@ export default function CustomArrows(props) {
 
     const classes = useStyles();
     const matchesMin = useMediaQuery('(min-width:460px)');
-    const matchesMin2 = useMediaQuery('(min-width:740px)');
+    const matchesMin2 = useMediaQuery('(min-width:770px)');
     const matchesMed = useMediaQuery('(min-width:1090px)');
     const matchesMax = useMediaQuery('(max-width:1100px)');
     const matchesMax2 = useMediaQuery('(max-width:1350px)');
@@ -95,7 +95,7 @@ export default function CustomArrows(props) {
         <>
             {props.data !== undefined &&
 
-                <Slider {...settings} style={{ margin: '29px 0px 0px 62px', transform: 'translateX(-34px) translateY(335px)' }} >
+                <Slider {...settings} style={{ margin: !matchesMax2 ? '0px 22px 0px 64px' : '0px 35px 0px 86px', transform: matchesMax2 ? 'translateX(-42px) translateY(465px)' : 'translateX(-34px) translateY(560px)', paddingLeft: !matchesMin || !matchesMax2 ? 25 : 0 }} >
                     {props.data.map(function (slide, index) {
                         return (
                             <Container key={index}>

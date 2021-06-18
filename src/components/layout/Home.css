@@ -4,14 +4,15 @@
 }
 #kid {
     position: absolute;
-    width: 98%;
+    width: 100%;
     margin: 10px 37;
-    top: 165px;
+    top: 100px;
     position: absolute;
     transform: translateY(80px);
 }
 
 .title {
     font-weight: 700;
-    color: #fff
+    color: #fff;
+    margin: 0
 }

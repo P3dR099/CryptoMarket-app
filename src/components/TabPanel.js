@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Tabs from '@material-ui/core/Tabs';
@@ -61,6 +60,8 @@ export default function FullWidthTabs(props) {
     const classes = useStyles();
     const theme = useTheme();
     const matchesMax = useMediaQuery('(max-width:1476px)');
+    const matchesMin = useMediaQuery('(min-width:400px)');
+
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -88,7 +89,7 @@ export default function FullWidthTabs(props) {
                 </Tabs>
             </ul>
 
-            <TabPanel style={{ margin: '0px 0px 0px 10px' }} value={value} index={0} dir={theme.direction}>
+            <TabPanel style={{ width: !matchesMin && 295, margin: !matchesMin && '0px 0px 0px -53px' }} value={value} index={0} dir={theme.direction}>
                 <GraphCoin value={value} {...props} />
             </TabPanel>
             <TabPanel style={{ margin: '0px 0px 0px 2px' }} value={value} index={1} dir={theme.direction}>

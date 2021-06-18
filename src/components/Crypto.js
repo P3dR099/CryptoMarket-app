@@ -156,14 +156,14 @@ const CardCrypto = (props) => {
     return (
 
         <Container style={{
-            padding: 0, marginTop: -100, maxWidth: '100%', backgroundImage: 'linear-gradient(166deg, rgb(24 61 200) 58%, rgb(244, 244, 244) calc(84% + -7px))', height: '100%', position: 'inherit'
+            padding: 0, marginTop: -26, maxWidth: '100%', backgroundImage: 'linear-gradient(166deg, rgb(77, 168, 218) 58%, rgb(244, 244, 244) calc(84% + -7px))', height: '100%', position: 'inherit'
         }}>
             <CustomizedBreadcrumbs />
 
             <Grid style={{ width: '99%', margin: 0 }} container spacing={2}>
                 <Grid item xs={matchesDown ? 12 : 8}>
                     <Paper style={{ margin: 0 }} elevation={3}>
-                        <Container style={{ padding: 10 }}>
+                        <Container style={{ padding: !matches && 18 }}>
                             <Container style={{ display: "flex", padding: 0 }}>
                                 <Grid style={{ display: "inherit" }} item xs={12}>
                                     <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={info.logo} />
@@ -201,7 +201,7 @@ const CardCrypto = (props) => {
                                     <TableRow>
                                         <TableCell className={classBottom.listStatsCoin}>
                                             24h Low / 24h High
-                                    </TableCell>
+                                        </TableCell>
                                         <TableCell className={classBottom.valueStatsCoin}>
                                             {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.LOW24HOUR + ' / ' + coinInfo.HIGH24HOUR : '€' + coinInfo.LOW24HOUR + ' / ' + coinInfo.HIGH24HOUR}
                                         </TableCell>
@@ -211,7 +211,7 @@ const CardCrypto = (props) => {
                                     <TableRow>
                                         <TableCell className={classBottom.listStatsCoin}>
                                             Market Cap 24h
-                                    </TableCell>
+                                        </TableCell>
                                         <TableCell className={classBottom.valueStatsCoin}>
                                             {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.MKTCAP : '€' + coinInfo.MKTCAP}
                                         </TableCell>
@@ -221,14 +221,14 @@ const CardCrypto = (props) => {
                                     <TableRow>
                                         <TableCell className={classBottom.listStatsCoin}>
                                             Change 24h
-                                       </TableCell>
+                                        </TableCell>
                                         <TableCell className={classBottom.valueStatsCoin}>
                                             {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}%
                                         </TableCell>
                                     </TableRow>
                                     <TableCell className={classBottom.listStatsCoin}>
                                         Volume 24 hour
-                                       </TableCell>
+                                    </TableCell>
                                     <TableCell className={classBottom.valueStatsCoin}>
                                         {coinInfo.TOTALVOLUME24H !== undefined && parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.TOTALVOLUME24H : '€' + coinInfo.TOTALVOLUME24H}
                                     </TableCell>
