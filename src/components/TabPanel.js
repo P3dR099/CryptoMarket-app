@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { createMuiTheme, makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -33,21 +33,30 @@ TabPanel.propTypes = {
     value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-    return {
-        id: `full-width-tab-${index}`,
-        'aria-controls': `full-width-tabpanel-${index}`,
-    };
-}
+const a11yProps = (index) => { return { id: `full-width-tab-${index}`, 'aria-controls': `full-width-tabpanel-${index}`, }; }
+
+const theme2 = createMuiTheme({
+    breakpoints: {
+        values: {
+            xxs: 0,
+            xs: 500,
+            sm: 650,
+            md: 960,
+            lg: 1280,
+            xl: 1920,
+        },
+    },
+})
+
 const useStyles = makeStyles((width) => ({
     root: {
         backgroundColor: width.palette.background.paper,
 
-        [width.breakpoints.up('sm')]: {
+        [theme2.breakpoints.up('sm')]: {
             width: 550,
         },
-        [width.breakpoints.down('xs')]: {
-            width: 250
+        [theme2.breakpoints.down('xs')]: {
+            width: '100%'
         },
     },
     root2: {
@@ -61,6 +70,7 @@ export default function FullWidthTabs(props) {
     const theme = useTheme();
     const matchesMax = useMediaQuery('(max-width:1476px)');
     const matchesMin = useMediaQuery('(min-width:400px)');
+
 
     const [value, setValue] = React.useState(0);
 
@@ -89,13 +99,13 @@ export default function FullWidthTabs(props) {
                 </Tabs>
             </ul>
 
-            <TabPanel style={{ width: !matchesMin && 295, margin: !matchesMin && '0px 0px 0px -53px' }} value={value} index={0} dir={theme.direction}>
+            <TabPanel style={{ margin: !matchesMin && '0px 0px 0px -40px' }} value={value} index={0} dir={theme.direction}>
                 <GraphCoin value={value} {...props} />
             </TabPanel>
-            <TabPanel style={{ margin: '0px 0px 0px 2px' }} value={value} index={1} dir={theme.direction}>
+            <TabPanel style={{ margin: '0px 0px 0px -30px' }} value={value} index={1} dir={theme.direction}>
                 <GraphCoin value={value} {...props} />
             </TabPanel>
-            <TabPanel style={{ margin: '0px 0px 0px 5px' }} value={value} index={2} dir={theme.direction}>
+            <TabPanel style={{ margin: '0px 0px 0px -30px' }} value={value} index={2} dir={theme.direction}>
                 <GraphCoin value={value} {...props} />
             </TabPanel>
         </div>

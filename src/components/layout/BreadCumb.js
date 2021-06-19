@@ -30,7 +30,7 @@ export default function CustomizedBreadcrumbs() {
         history.push('/');
     }
     return (
-        <Breadcrumbs aria-label="breadcrumb" style={{ padding: "5px 28px", marginTop: 25 }}>
+        <Breadcrumbs aria-label="breadcrumb" style={{ padding: "5px 20px" }}>
             <StyledBreadcrumb
                 component="a"
                 href="/"

@@ -42,7 +42,7 @@ const GraphCoin = (props) => {
         const smallest = Math.min(...props.arrTimesMinutes);
         const index = props.arrTimesMinutes.indexOf(smallest)
         const filterMin = props.arrTimesMinutes.filter((_, i) => i === index);
-        const restPercent = (filterMin / 100) * 95
+        const restPercent = (filterMin / 100) * 80
         if (smallest < 1) {
             return parseFloat(restPercent.toFixed(5))
         }
@@ -95,9 +95,7 @@ const GraphCoin = (props) => {
         if (!matchesMax) {
             return '169%'
         }
-        if (!matches) {
-            return '113%'
-        }
+
     }
 
     return (
@@ -107,7 +105,7 @@ const GraphCoin = (props) => {
                     <LineChart
                         data={props.value === 2 ? props.histoHour : getHistoryData()}
                         margin={{
-                            top: 20,
+                            top: 2,
                             right: 5,
                             left: 20,
                             bottom: 5,
