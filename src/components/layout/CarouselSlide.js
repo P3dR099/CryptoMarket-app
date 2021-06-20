@@ -38,7 +38,7 @@ const useStyles = makeStyles({
         margin: '0px 0px 1px 0px', width: 245, height: 170, borderRadius: 8, background: '#fff'
     },
     cardCoinMin: {
-        margin: '0px 0px 1px 0px', height: 170, borderRadius: 8, background: '#fff'
+        margin: '0px 0px 1px 0px', height: 170, borderRadius: 8, background: '#fff', width: '100%'
     },
     logoCoin: {
         padding: 10,
@@ -46,7 +46,7 @@ const useStyles = makeStyles({
     },
     logoCoinMin: {
         padding: 10,
-        width: 35,
+        width: 40,
     },
     priceCoin: {
         fontSize: '1.3rem',
@@ -100,8 +100,11 @@ export default function CustomArrows(props) {
                         return (
                             <Container key={index}>
                                 <Box boxShadow={4} className={matchesMin ? classes.cardCoin : classes.cardCoinMin}>
-                                    <Container style={{ display: 'flex', justifyContent: 'space-between', padding: !matchesMin ? '3px 13px' : 13 }}>
-                                        <h3>{slide.name}</h3>
+                                    <Container style={{ display: 'flex', justifyContent: 'space-between', padding: !matchesMin ? '3px 8px 0px 15px' : '5px 15px', alignItems: 'center' }}>
+                                        <h3 style={{ marginLeft: 0, fontSize: 'initial' }}>{slide.name}</h3>
+                                        <h3 style={{
+                                            color: 'gray', fontSize: 13, position: 'absolute', transform: 'translateY(20px)', fontWeight: 500, opacity: 0.7, paddingTop: 1
+                                        }}>{slide.symbol}</h3>
                                         <Link to={"/coin/" + slide.id} style={{ textDecoration: 'none', color: 'inherit' }} >
                                             <img className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
                                         </Link>

@@ -13,15 +13,13 @@ export default function Footer() {
             bottom: 0,
             width: '100%',
             height: 30,
-            boxShadow: '0px - 4px 5px 0px rgba(0, 0, 0, 0.75)'
+            boxShadow: '0px - 4px 5px 0px rgba(0, 0, 0, 0.75)',
+            marginTop: 35
         },
         p: {
             margin: 3
         }
     })
-    // -webkit - box - shadow: 0px - 4px 5px 0px rgba(0, 0, 0, 0.75),
-    // -moz - box - shadow: 0px - 4px 5px 0px rgba(0, 0, 0, 0.75),
-
 
     const classes = useStyles()
 

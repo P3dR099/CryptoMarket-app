@@ -5,6 +5,19 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContai
 import makeStyles from '@material-ui/core/styles/makeStyles';
 const tradeService = new Trade()
 
+const convertToDate = (unixTime) => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const date = new Date(unixTime * 1000)
+    const year = date.getFullYear();
+    const month = months[date.getMonth()];
+    const dayOfWeek = date.getDate()
+    const hours = date.getHours()
+    const minutes = "0" + date.getMinutes();
+    const seconds = "0" + date.getSeconds();
+    const formattedTime = year + ':' + month + ':' + dayOfWeek + ':' + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime;
+}
+
 const GraphCoin = (props) => {
 
     const matches = useMediaQuery('(min-width:700px)');
@@ -29,7 +42,7 @@ const GraphCoin = (props) => {
         const max = Math.max(...props.arrTimesMinutes);
         const index = props.arrTimesMinutes.indexOf(max)
         const filterMax = props.arrTimesMinutes.filter((_, i) => i === index);
-        let restPercent = (filterMax / 100) * 105
+        let restPercent = (filterMax / 100) * 95
 
         if (max < 1) {
             restPercent = (filterMax / 100) * 103
@@ -42,7 +55,7 @@ const GraphCoin = (props) => {
         const smallest = Math.min(...props.arrTimesMinutes);
         const index = props.arrTimesMinutes.indexOf(smallest)
         const filterMin = props.arrTimesMinutes.filter((_, i) => i === index);
-        const restPercent = (filterMin / 100) * 80
+        const restPercent = (filterMin / 100) * 100
         if (smallest < 1) {
             return parseFloat(restPercent.toFixed(5))
         }
@@ -65,6 +78,12 @@ const GraphCoin = (props) => {
     useEffect(() => {
         value === 2 && tradeService.getHistoByHour(props.coinSymbol, props.Currency, 730)
             .then(resp => {
+
+                resp.data.Data.Data.map(element => {
+                    const hours = convertToDate(element.time)
+                    return element.time = hours
+                });
+
                 props.setHistoHour(resp.data.Data.Data)
             })
             .catch(err => console.log(err))

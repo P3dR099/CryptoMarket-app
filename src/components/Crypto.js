@@ -22,13 +22,13 @@ const useStyles = makeStyles({
         alignItems: 'center'
     },
     logoCoin: {
-        width: 35,
+        width: 40,
         height: 35,
         marginRight: 10,
         marginTop: 30
     },
     logoCoinMin: {
-        width: 28,
+        width: 37,
         height: 28,
         marginRight: 10,
         marginTop: 12
@@ -98,7 +98,6 @@ const CardCrypto = (props) => {
     let lastSlash = props.location.pathname.lastIndexOf('/')
     let id = props.location.pathname.slice(lastSlash + 1, props.location.pathname.length)
 
-
     useEffect(() => {
 
         tradeService.getCoin(id)
@@ -107,14 +106,14 @@ const CardCrypto = (props) => {
                 if (props.allInfoCoin.length === 0) {
                     localInfo.filter((item) => {
                         if (item.FROMSYMBOL === res.data[0].symbol) {
-                            setPrice(item.PRICE)
+                            item.PRICE < 2 ? setPrice(item.PRICE.toFixed(4)) : setPrice(item.PRICE.toFixed(2))
                             setCoinInfo(item)
                         }
                     })
                 }
                 props.allInfoCoin.filter((item) => {
                     if (item.FROMSYMBOL === res.data[0].symbol) {
-                        setPrice(item.PRICE)
+                        item.PRICE < 2 ? setPrice(item.PRICE.toFixed(4)) : setPrice(item.PRICE.toFixed(2))
                         setCoinInfo(item)
                     }
                 })
