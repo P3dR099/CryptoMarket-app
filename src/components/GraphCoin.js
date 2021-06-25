@@ -42,11 +42,11 @@ const GraphCoin = (props) => {
         const max = Math.max(...props.arrTimesMinutes);
         const index = props.arrTimesMinutes.indexOf(max)
         const filterMax = props.arrTimesMinutes.filter((_, i) => i === index);
-        let restPercent = (filterMax / 100) * 95
+        let restPercent = (filterMax / 100) * 103
 
-        if (max < 1) {
-            restPercent = (filterMax / 100) * 103
-            return parseFloat(restPercent.toFixed(5))
+        if (max < 2) {
+            restPercent = (filterMax / 100) * 101
+            return parseFloat(restPercent.toFixed(9))
         }
         return parseFloat(restPercent.toFixed(1))
     }
@@ -55,9 +55,9 @@ const GraphCoin = (props) => {
         const smallest = Math.min(...props.arrTimesMinutes);
         const index = props.arrTimesMinutes.indexOf(smallest)
         const filterMin = props.arrTimesMinutes.filter((_, i) => i === index);
-        const restPercent = (filterMin / 100) * 100
-        if (smallest < 1) {
-            return parseFloat(restPercent.toFixed(5))
+        const restPercent = (filterMin / 100) * 98
+        if (smallest < 2) {
+            return parseFloat(restPercent.toFixed(9))
         }
 
         return parseFloat(restPercent.toFixed(1))
@@ -66,10 +66,10 @@ const GraphCoin = (props) => {
     const getHistoryData = () => {
 
         if (props.value === 0) {
-            return props.histoMinute.Data
+            return props.histoMinute.Data.slice(1380, -1)
         }
         if (props.value === 1) {
-            return props.histoMinute.Data.slice(1380, -1)
+            return props.histoMinute.Data
         }
     }
 
@@ -93,12 +93,12 @@ const GraphCoin = (props) => {
 
     const getColorHistoValues = () => {
         if (props.value === 0) {
-            if (props.histoMinute.Data !== undefined && props.histoMinute.Data[0].open > props.histoMinute.Data[props.histoMinute.Data.length - 1].open) {
+            if (props.histoMinute.Data !== undefined && props.histoMinute.Data[1380].open > props.histoMinute.Data[props.histoMinute.Data.length - 1].open) {
                 return 'red'
             } else return 'green'
         }
         else if (props.value === 1) {
-            if (props.histoMinute.Data !== undefined && props.histoMinute.Data[1380].open > props.histoMinute.Data[props.histoMinute.Data.length - 1].open) {
+            if (props.histoMinute.Data !== undefined && props.histoMinute.Data[0].open > props.histoMinute.Data[props.histoMinute.Data.length - 1].open) {
                 return 'red'
             } else return 'green'
         }

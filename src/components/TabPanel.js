@@ -50,7 +50,7 @@ const theme2 = createMuiTheme({
 
 const useStyles = makeStyles((width) => ({
     root: {
-        backgroundColor: width.palette.background.paper,
+        backgroundColor: 'transparent',
 
         [theme2.breakpoints.up('sm')]: {
             width: 550,
@@ -89,16 +89,16 @@ export default function FullWidthTabs(props) {
                     variant="fullWidth"
                     aria-label="full width tabs example"
                 >
-                    <Tab label="1 hora" {...a11yProps(1)} />
-                    <Tab label="24 horas" {...a11yProps(0)} />
+                    <Tab label="1 hora" {...a11yProps(0)} />
+                    <Tab label="24 horas" {...a11yProps(1)} />
                     <Tab label="1 mes" {...a11yProps(2)} />
                 </Tabs>
             </ul>
-
-            <TabPanel style={{ margin: !matchesMin && '0px 0px 0px -40px' }} value={value} index={0} dir={theme.direction}>
+            <TabPanel style={{ margin: !matchesMin ? '0px 0px 0px -30px' : '0px 0px 0px 5px' }} value={value} index={1} dir={theme.direction}>
                 <GraphCoin value={value} {...props} />
             </TabPanel>
-            <TabPanel style={{ margin: !matchesMin ? '0px 0px 0px -30px' : '0px 0px 0px 5px' }} value={value} index={1} dir={theme.direction}>
+
+            <TabPanel style={{ margin: !matchesMin && '0px 0px 0px -40px' }} value={value} index={0} dir={theme.direction}>
                 <GraphCoin value={value} {...props} />
             </TabPanel>
             <TabPanel style={{ margin: !matchesMin ? '0px 0px 0px -30px' : '0px 0px 0px 5px' }} value={value} index={2} dir={theme.direction}>

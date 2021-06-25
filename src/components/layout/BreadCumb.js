@@ -24,11 +24,6 @@ const StyledBreadcrumb = withStyles((theme) => ({
 
 export default function CustomizedBreadcrumbs() {
 
-    let history = useHistory();
-    function handleClick(event) {
-        event.preventDefault();
-        history.push('/');
-    }
     return (
         <Breadcrumbs aria-label="breadcrumb" style={{ padding: "5px 20px" }}>
             <StyledBreadcrumb
@@ -36,9 +31,9 @@ export default function CustomizedBreadcrumbs() {
                 href="/"
                 label="Home"
                 icon={<HomeIcon fontSize="small" />}
-                onClick={handleClick}
+
             />
-            <StyledBreadcrumb component="a" href="#" label="Coins" onClick={handleClick} />
+            <StyledBreadcrumb component="a" href="/table" label="Coins" />
         </Breadcrumbs>
     );
 }

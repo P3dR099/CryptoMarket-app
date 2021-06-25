@@ -22,14 +22,14 @@ const useStyles = makeStyles({
         alignItems: 'center'
     },
     logoCoin: {
-        width: 40,
+        width: 35,
         height: 35,
         marginRight: 10,
         marginTop: 30
     },
     logoCoinMin: {
-        width: 37,
-        height: 28,
+        width: 33,
+        height: 32,
         marginRight: 10,
         marginTop: 12
     },
@@ -160,7 +160,7 @@ const CardCrypto = (props) => {
             <Container className={classes.backgroundCripto} >
                 <Grid style={{ width: '99%', margin: 0 }} container spacing={2}>
                     <Grid item xs={matchesDown ? 12 : 8}>
-                        <Paper style={{ margin: 0 }} elevation={3}>
+                        <Paper style={{ margin: 0, backgroundColor: 'transparent' }} elevation={3}>
                             <Container style={{ padding: !matches && 18 }}>
                                 <Container style={{ display: "flex", padding: 0 }}>
                                     <Grid style={{ display: "inherit" }} item xs={12}>
