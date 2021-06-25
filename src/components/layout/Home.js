@@ -29,7 +29,7 @@ const Home = (props) => {
     return (
         <>
             <Container style={{ maxWidth: 2850, padding: 0 }}>
-                <Container style={{ backgroundImage: 'linear-gradient(166deg, rgb(77, 168, 218) 58%, rgb(244, 244, 244) calc(84% + -7px))', height: !matches ? 1200 : 707, padding: 'inherit', maxWidth: 'inherit' }}>
+                <Container style={{ backgroundImage: 'linear-gradient(166deg, rgb(77, 168, 218) 58%, rgb(244, 244, 244) calc(84% + -7px))', height: !matches ? 1200 : 739, padding: 'inherit', maxWidth: 'inherit' }}>
                     <div id="kid">
                         <h1 className="title" style={{ fontSize: !matchesMedium && '50px' }} >Mercado de Criptomonedas</h1>
 
