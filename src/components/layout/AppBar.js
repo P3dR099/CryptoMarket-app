@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: fade(theme.palette.common.white, 0.25),
         },
         marginLeft: 0,
-        width: '99%',
+        width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(1),
             width: 'auto',
@@ -80,6 +80,9 @@ export default function SearchAppBar(props) {
     const { data } = props
     let history = useHistory();
 
+    const matchesMin = useMediaQuery('(min-width:350px)');
+    const matches = useMediaQuery('(min-width:600px)');
+
     const handleClick = (event) => {
         data.map(el => {
             if (el.name === event.target.innerText) {
@@ -90,7 +93,6 @@ export default function SearchAppBar(props) {
         setVal(event.target.innerText)
     };
 
-    const matches = useMediaQuery('(min-width:600px)');
 
     return (
         <div className={classes.root}>
@@ -101,7 +103,7 @@ export default function SearchAppBar(props) {
                     <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
                         CryptoMarket
                     </Typography>
-                    <div className={classes.search}>
+                    <div className={classes.search} style={{ backgroundColor: !matches && 'transparent', width: !matchesMin && 160 }}>
                         <Autocomplete
                             freeSolo
                             onChange={(event) => handleClick(event)}
@@ -109,7 +111,7 @@ export default function SearchAppBar(props) {
                             disableClearable
                             options={data && data.map((option) => option.name)}
                             renderInput={(params) => (
-                                <Grid container spacing={1} alignItems="flex-end">
+                                <Grid container spacing={1} style={{ justifyContent: "flex-end" }}>
                                     <Grid item>
                                         {matches ? <SearchIcon style={{ marginTop: "15px" }} /> : ''}
                                         <TextField

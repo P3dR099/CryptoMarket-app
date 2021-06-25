@@ -31,7 +31,7 @@ const useStyles = makeStyles({
         width: 33,
         height: 32,
         marginRight: 10,
-        marginTop: 12
+        marginTop: 10
     },
 
     boxPriceCoin: {

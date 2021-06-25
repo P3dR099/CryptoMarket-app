@@ -30,7 +30,7 @@ const useStyles = makeStyles({
         },
         '& .super-app.negative': {
             // backgroundColor: '#d47483',
-            color: 'red',
+            color: '#dc143c',
             fontWeight: '600',
         },
         '& .super-app.positive': {
