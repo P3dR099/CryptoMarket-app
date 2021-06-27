@@ -35,6 +35,7 @@ const GraphCoin = (props) => {
         }
 
     })
+    const { value, setHistoHour, coinSymbol, Currency, histoMinute } = props
 
     const classes = useStyles()
 
@@ -55,8 +56,9 @@ const GraphCoin = (props) => {
         const smallest = Math.min(...props.arrTimesMinutes);
         const index = props.arrTimesMinutes.indexOf(smallest)
         const filterMin = props.arrTimesMinutes.filter((_, i) => i === index);
-        const restPercent = (filterMin / 100) * 98
+        let restPercent = (filterMin / 100) * 98
         if (smallest < 2) {
+            restPercent = (filterMin / 100) * 101
             return parseFloat(restPercent.toFixed(9))
         }
 
@@ -65,35 +67,34 @@ const GraphCoin = (props) => {
 
     const getHistoryData = () => {
 
-        if (props.value === 0) {
-            return props.histoMinute.Data.slice(1380, -1)
+        if (value === 0) {
+            return histoMinute.Data.slice(1379, props.histoMinute.Data.length - 1)
         }
-        if (props.value === 1) {
-            return props.histoMinute.Data
+        if (value === 1) {
+            return histoMinute.Data
         }
     }
 
-    const { value } = props
-
     useEffect(() => {
-        value === 2 && tradeService.getHistoByHour(props.coinSymbol, props.Currency, 730)
-            .then(resp => {
+        const getHistoMonth = () => {
+            tradeService.getHistoByHour(coinSymbol, Currency, 730)
+                .then(resp => {
+                    resp.data.Data.Data.map(element => {
+                        const hours = convertToDate(element.time)
+                        return element.time = hours
+                    });
+                    setHistoHour(resp.data.Data.Data)
+                })
+                .catch(err => console.log(err))
+        }
+        value === 2 && getHistoMonth()
 
-                resp.data.Data.Data.map(element => {
-                    const hours = convertToDate(element.time)
-                    return element.time = hours
-                });
-
-                props.setHistoHour(resp.data.Data.Data)
-            })
-            .catch(err => console.log(err))
-
-    }, [])
-
+    }, [coinSymbol, Currency, setHistoHour, value])
 
     const getColorHistoValues = () => {
         if (props.value === 0) {
-            if (props.histoMinute.Data !== undefined && props.histoMinute.Data[1380].open > props.histoMinute.Data[props.histoMinute.Data.length - 1].open) {
+
+            if (props.histoMinute.Data !== undefined && props.histoMinute.Data[1379].open > props.histoMinute.Data[props.histoMinute.Data.length - 2].open) {
                 return 'red'
             } else return 'green'
         }

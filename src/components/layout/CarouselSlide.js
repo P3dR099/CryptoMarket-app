@@ -13,8 +13,8 @@ function SampleNextArrow(props) {
         <div
             className={className}
             style={{
-                ...style, display: "block", right: -40, borderRadius: '50%', display: 'block',
-                background: 'cornflowerblue', right: -33, width: 23, height: 20, paddingTop: 3
+                ...style, borderRadius: '50%', display: 'block',
+                background: 'cornflowerblue', right: -33, width: 23, height: 20, paddingTop: 2.5
             }}
             onClick={onClick}
 
@@ -28,8 +28,8 @@ function SamplePrevArrow(props) {
         <div
             className={className}
             style={{
-                ...style, display: "block", left: -10, borderRadius: '50%', display: 'block',
-                background: 'cornflowerblue', right: -40, width: 23, height: 20, paddingTop: 3
+                ...style, left: -10, borderRadius: '50%', display: 'block',
+                background: 'cornflowerblue', right: -40, width: 23, height: 20, paddingTop: 2.5
             }}
             onClick={onClick}
         />
@@ -113,7 +113,7 @@ export default function CustomArrows(props) {
                                             color: 'gray', fontSize: 13, position: 'absolute', transform: 'translateY(20px)', fontWeight: 500, opacity: 0.7, paddingTop: 1
                                         }}>{slide.symbol}</h3>
                                         <Link to={"/coin/" + slide.id} style={{ textDecoration: 'none', color: 'inherit' }} >
-                                            <img className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
+                                            <img alt="coin" className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
                                         </Link>
                                     </Container>
                                     <Typography className={classes.priceCoin}>

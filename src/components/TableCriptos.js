@@ -12,13 +12,8 @@ import {
 } from '@material-ui/data-grid';
 import { Link } from "react-router-dom";
 import Modal from './layout/Modal'
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import logoEUR from '../logos/euro.png'
-import logoUSD from '../logos/dollar.png'
+import ModalCurrency from './layout/ModalCurrecy';
 
 const useStyles = makeStyles({
 
@@ -43,7 +38,20 @@ const useStyles = makeStyles({
         width: "24px", marginRight: 5
 
     },
+    contLogo: {
+        paddingLeft: '4px', padding: 5,
+        boxSizing: 'content-box', display: 'flex', alignItems: 'center'
+    }
 });
+
+function CustomToolbar() {
+    return (
+        <GridToolbarContainer>
+            <GridDensitySelector />
+            <GridFilterToolbarButton />
+        </GridToolbarContainer>
+    );
+}
 
 export default function DataTable(props) {
 
@@ -55,10 +63,9 @@ export default function DataTable(props) {
         change_1d: false
     });
 
-    const [allColumns, setColumns] = React.useState([])
+    const [, setColumns] = React.useState([])
 
     const rows = props.data
-    // const rows2 = props.allInfoCoin.DISPLAY
 
     const colChange_1h = {
 
@@ -86,10 +93,7 @@ export default function DataTable(props) {
             renderCell: (params) => (
                 <Container className="hidden">
                     <Link to={"/coin/" + params.row.id} style={{ textDecoration: 'none', color: 'inherit' }} >
-                        <Container style={{
-                            paddingLeft: '4px', padding: 5,
-                            boxSizing: 'content-box', display: 'flex', alignItems: 'center'
-                        }}>
+                        <Container className={classes.contLogo} >
                             <img alt="imageCrypto" src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${params.row.id}.png`} className={classes.imageCoin}></img>
                             <p>{params.row.name} </p>
                         </Container>
@@ -124,7 +128,7 @@ export default function DataTable(props) {
         setStateCols({ ...stateCols, [event.target.name]: event.target.checked })
     }
 
-    const addColumns = () => {
+    (() => {
 
         if (stateCols.change_1d) {
             columns.splice(3, 0, colChange_1d)
@@ -132,18 +136,22 @@ export default function DataTable(props) {
         if (stateCols.change_1h) {
             columns.splice(3, 0, colChange_1h)
         }
-    }
+    })()
 
-    addColumns()
+    // const useColumn) => setColumns(columns), [columns])
 
+    const myColumns = localStorage.setItem('columns', columns)
     React.useEffect(() => {
-        setColumns(columns)
-    }, [])
+
+        console.log(localStorage.columns)
+        // useColumns()
+        setColumns(myColumns)
+    }, [myColumns])
 
     return (
         <>
             <Container style={{ display: "flex", justifyContent: "flex-end", transform: !matchesMin ? 'translateY(132px)' : 'translateY(82px)' }}>
-                <ControlledOpenSelect {...props} />
+                <ModalCurrency {...props} />
                 <Modal allColumns={columns} setColumns={setColumns} handleRows={handleRows} stateCols={stateCols} setStateCols={setStateCols} {...props} />
             </Container>
             <div style={{ height: 750, width: '100%', marginTop: !matchesMin ? 140 : 100 }} className={classes.root} >
@@ -151,65 +159,5 @@ export default function DataTable(props) {
                 {props.data && <DataGrid components={{ Toolbar: CustomToolbar }} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} />}
             </div>
         </>
-    );
-}
-
-
-function CustomToolbar() {
-    return (
-        <GridToolbarContainer>
-            <GridDensitySelector />
-            <GridFilterToolbarButton />
-        </GridToolbarContainer>
-    );
-}
-
-function ControlledOpenSelect(props) {
-
-    const item = localStorage.getItem('value') !== null && parseInt(localStorage.getItem('value'))
-    const [CurrencyIndex, setCurrencyIndex] = React.useState(item ? item : 2)
-    const [open, setOpen] = React.useState(false);
-
-    const handleChange = (event) => {
-        if (event.target.value === 1) {
-            setCurrencyIndex(1)
-            props.setCurrency('EUR')
-            props.getCoins('EUR')
-            localStorage.setItem('value', event.target.value)
-        }
-        if (event.target.value === 2) {
-            setCurrencyIndex(2)
-            props.setCurrency('USD')
-            props.getCoins('USD')
-            localStorage.setItem('value', event.target.value)
-        }
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-
-    };
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    return (
-        <FormControl style={{ width: "65px", marginRight: 10 }}>
-            <InputLabel style={{ top: "-10px", left: "16px" }} >{parseInt(localStorage.getItem('value')) === 1 ? <img alt="logo EUR" style={{ width: "16px" }} src={logoEUR} /> : <img alt="logo USD" style={{ width: "16px" }} src={logoUSD} />}</InputLabel>
-            <Select
-                style={{ margin: "0px" }}
-                labelId="demo-controlled-open-select-label"
-                id="demo-controlled-open-select"
-                open={open}
-                onClose={handleClose}
-                onOpen={handleOpen}
-                value={CurrencyIndex}
-                onChange={handleChange}
-            >
-                <MenuItem value={1} name={"EUR"}>EUR</MenuItem>
-                <MenuItem value={2} name={"USD"}>USD</MenuItem>
-            </Select>
-        </FormControl>
     );
 }

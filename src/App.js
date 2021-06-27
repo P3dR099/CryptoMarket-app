@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import './index.css'
 import Crypto from './components/Crypto.js'
@@ -18,14 +18,10 @@ function App() {
 
     const [loggedInUser, setLoggedInUser] = useState(null)
     const [allInfoCoin, setAllInfoCoin] = useState([])
-    const [prices, setAllPrices] = useState([]);
     const [data, setData] = useState([]);
     const [Currency, setCurrency] = useState('USD')
 
-    let firstCriptos = []
-    let arrCripts
-
-    const setTheUser = (user) => { setLoggedInUser(user) }
+    const setTheUser = (user) => setLoggedInUser(user)
 
     const handleLogOut = () => {
         tradeService.logout()
@@ -36,18 +32,37 @@ function App() {
             .catch(err => console.log(err))
     }
 
-    // const functionThatBreaks = (element) => {
-    //     // arrSymbols.push(element.symbol)
-    //     element.quote.USD && { id: element.id, name: element.name, price: element.quote.USD.price, change_1h: element.quote.USD.percent_change_1h, change_1d: element.quote.USD.percent_change_24h, change_7d: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
-    //     // : { id: element.id, name: element.name, price: element.quote.EUR.price, change_1h: element.quote.EUR.percent_change_1h, change_1d: element.quote.EUR.percent_change_24h, change_7d: element.quote.EUR.percent_change_7d, symbol: element.symbol, marketCap: element.quote.EUR.market_cap }
-    // }
 
-    let arrSymbols = []
-    const getCoins = (Currency) => {
+    const getCoins = useCallback((Currency) => {
+        let arrInfo = []
+        let arrSymbols = []
+
+        const getAllInfo = (arrSymbols, Currency) => {
+            tradeService.getAllCoinsInfo(arrSymbols.toString(), Currency)
+                .then(res => {
+
+                    for (let key in res.data.RAW) {
+                        if (res.data.RAW[key].USD) {
+                            arrInfo.push(res.data.RAW[key].USD)
+                        }
+                        if (res.data.RAW[key].EUR) {
+                            arrInfo.push(res.data.RAW[key].EUR)
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        let arrCripts
+
         tradeService.getCoins(Currency)
             .then(response => {
-                firstCriptos = response.data
-                setAllPrices(response.data[0].quote.USD)
+                let firstCriptos = response.data
+
+                // setFirstCriptos(response.data)
+                // console.log(firstCriptos2)
 
                 arrCripts = firstCriptos.map(element => {
                     // console.log(functionThatBreaks(element))
@@ -66,34 +81,14 @@ function App() {
                 setAllInfoCoin(arrInfo)
             })
             .catch(error => console.log(error))
-    }
-
-    let arrInfo = []
-    const getAllInfo = (arrSymbols, Currency) => {
-
-        tradeService.getAllCoinsInfo(arrSymbols.toString(), Currency)
-            .then(res => {
-
-                for (let key in res.data.RAW) {
-                    if (res.data.RAW[key].USD) {
-                        arrInfo.push(res.data.RAW[key].USD)
-                    }
-                    if (res.data.RAW[key].EUR) {
-                        arrInfo.push(res.data.RAW[key].EUR)
-                    }
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
+    }, [])
 
     useEffect(() => {
 
         parseInt(localStorage.getItem('value')) === 1 ? setData(getCoins('EUR')) : setData(getCoins('USD'))
         const login = JSON.parse(localStorage.getItem('login'))
         setTheUser(login)
-    }, [])
+    }, [getCoins])
 
     return (
         <>

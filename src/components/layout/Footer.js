@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 
@@ -14,7 +14,7 @@ export default function Footer() {
             width: '100%',
             height: 30,
             boxShadow: '0px - 4px 5px 0px rgba(0, 0, 0, 0.75)',
-            marginTop: '10%'
+            marginTop: '1%'
         },
         p: {
             margin: 3
@@ -25,10 +25,7 @@ export default function Footer() {
 
     return (
         <Fragment>
-
             <footer className={classes.footer}> <p className={classes.p} >{new Date().getFullYear()} Todos los derechos reservados</p> </footer>
-
         </Fragment>
     )
-
 }

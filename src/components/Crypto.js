@@ -59,11 +59,11 @@ const convertToDate = (unixTime) => {
 
 const useStyles3 = makeStyles(() => ({
     green: {
-        display: "flex", marginBlock: 27, borderRadius: 10, width: 71, height: 30, padding: "4px 2px 2px 2px", marginLeft: "13px",
+        display: "flex", marginBlock: 27, borderRadius: 10, width: 71, height: 30, marginLeft: "13px",
         placeContent: 'center', padding: '2px 0px 0px 0px', color: 'white', backgroundColor: 'green'
     },
     red: {
-        display: "flex", marginBlock: 27, borderRadius: 10, width: 71, height: 30, padding: "4px 2px 2px 2px", marginLeft: "13px",
+        display: "flex", marginBlock: 27, borderRadius: 10, width: 71, height: 30, marginLeft: "13px",
         placeContent: 'center', padding: '2px 0px 0px 0px', color: 'white', backgroundColor: 'red'
     },
     fontText: {
@@ -113,8 +113,8 @@ const CardCrypto = (props) => {
                 }
                 props.allInfoCoin.filter((item) => {
                     if (item.FROMSYMBOL === res.data[0].symbol) {
-                        item.PRICE < 2 ? setPrice(item.PRICE.toFixed(4)) : setPrice(item.PRICE.toFixed(2))
                         setCoinInfo(item)
+                        item.PRICE < 2 ? setPrice(item.PRICE.toFixed(4)) : setPrice(item.PRICE.toFixed(2))
                     }
                 })
                 setCoinSymbol(res.data[0].symbol)
@@ -135,7 +135,7 @@ const CardCrypto = (props) => {
             .catch(err => console.log(err))
 
         const localInfo = JSON.parse(localStorage.getItem('info'))
-    }, [id])
+    }, [props.Currency, props.allInfoCoin, id])
 
     let arrTimes, arrTimesMinutes = []
     histoHour.Data !== undefined && histoHour.Data.map(el => { return arrTimes.push(el.high) })
@@ -144,7 +144,7 @@ const CardCrypto = (props) => {
     const showPrices = () => {
         if (!matchesDown) {
             return (
-                <Grid item spacing={3}>
+                <Grid container spacing={3}>
                     <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green}>
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                     </span>
@@ -182,9 +182,7 @@ const CardCrypto = (props) => {
                             </Container>
                             <TableContainer>
                                 <Table className={classes.table} size="small" aria-label="a dense table">
-                                    {/* <TableHead>
-
-</TableHead> */}
+                                    {/* <TableHead></TableHead> */}
                                     <TableBody>
                                         <TableRow>
                                             <TableCell className={classBottom.listStatsCoin}>
@@ -220,16 +218,20 @@ const CardCrypto = (props) => {
                                             <TableCell className={classBottom.listStatsCoin}>
                                                 Change 24h
                                             </TableCell>
-                                            <TableCell className={classBottom.valueStatsCoin}>
+                                            <TableCell className={classBottom.valueStatsCoin} style={{ color: coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2) < 0 ? 'red' : 'green' }}>
                                                 {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}%
                                             </TableCell>
                                         </TableRow>
-                                        <TableCell className={classBottom.listStatsCoin}>
-                                            Volume 24 hour
-                                        </TableCell>
-                                        <TableCell className={classBottom.valueStatsCoin}>
-                                            {coinInfo.TOTALVOLUME24H !== undefined && parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.TOTALVOLUME24H : '€' + coinInfo.TOTALVOLUME24H}
-                                        </TableCell>
+                                    </TableBody>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell className={classBottom.listStatsCoin}>
+                                                Volume 24 hour
+                                            </TableCell>
+                                            <TableCell className={classBottom.valueStatsCoin}>
+                                                {coinInfo.TOTALVOLUME24H !== undefined && parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.TOTALVOLUME24H : '€' + coinInfo.TOTALVOLUME24H}
+                                            </TableCell>
+                                        </TableRow>
                                     </TableBody>
                                 </Table>
                             </TableContainer>

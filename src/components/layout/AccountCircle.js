@@ -9,13 +9,10 @@ import { useHistory } from "react-router-dom";
 export default function MenuAccountBar(props) {
 
     let history = useHistory();
-    const [auth, setAuth] = React.useState(true);
+    const [auth,] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    // const handleChange = (event) => {
-    //     setAuth(event.target.checked);
-    // };
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);

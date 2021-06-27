@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -75,7 +75,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchAppBar(props) {
 
-    const [val, setVal] = useState({})
     const classes = useStyles();
     const { data } = props
     let history = useHistory();
@@ -90,7 +89,7 @@ export default function SearchAppBar(props) {
             }
             return 0;
         })
-        setVal(event.target.innerText)
+
     };
 
 
@@ -109,7 +108,7 @@ export default function SearchAppBar(props) {
                             onChange={(event) => handleClick(event)}
                             id="free-solo-2"
                             disableClearable
-                            options={data && data.map((option) => option.name)}
+                            options={data ? data.map((option) => option.name) : []}
                             renderInput={(params) => (
                                 <Grid container spacing={1} style={{ justifyContent: "flex-end" }}>
                                     <Grid item>
