@@ -93,7 +93,8 @@ function App() {
     return (
         <>
             <SearchAppBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
-            <div className="App" style={{ backgroundImage: 'linear-gradient(166deg, rgb(77, 168, 218) 58%, rgb(244, 244, 244) calc(84% + -7px))' }}>
+            <div className="App" style={{ backgroundImage: 'linear-gradient(16deg, rgba(255,255,255,1) 9%, rgba(215,249,249,1) 32%, rgba(145,241,247,1) 59%, rgba(139,234,240,1) 85%, rgba(91,228,236,1) 99%)' }}>
+
                 {!data ? <LinearProgress /> : ''}
                 <Route path="/user" render={(props) => <UserProfile />} />
                 <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} {...props} />} />

@@ -6,8 +6,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import SignUp from './Signup'
 import Login from './Login'
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export default function FormDialog(props) {
+    const matchesMin = useMediaQuery('(min-width:350px)');
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
 
@@ -31,7 +33,7 @@ export default function FormDialog(props) {
         <div>
             {!props.loggedInUser && <>
                 <Button variant="outlined" onClick={handleClickOpen}>Regístrate</Button>
-                <Button variant="outlined" onClick={handleClickOpen2}>Inicia Sesión</Button>
+                {matchesMin && <Button variant="outlined" onClick={handleClickOpen2}>Inicia Sesión</Button>}
             </>
             }
             <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title-login">

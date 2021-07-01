@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     logoCoin: {
         width: 35,
         height: 35,
-        marginRight: 10,
+        marginRight: 15,
         marginTop: 30
     },
     logoCoinMin: {
@@ -63,7 +63,7 @@ const useStyles3 = makeStyles(() => ({
         placeContent: 'center', padding: '2px 0px 0px 0px', color: 'white', backgroundColor: 'green'
     },
     red: {
-        display: "flex", marginBlock: 27, borderRadius: 10, width: 71, height: 30, marginLeft: "13px",
+        display: "flex", marginBlock: 29, borderRadius: 10, width: 71, height: 30, marginLeft: "13px",
         placeContent: 'center', padding: '2px 0px 0px 0px', color: 'white', backgroundColor: 'red'
     },
     fontText: {
@@ -94,7 +94,8 @@ const CardCrypto = (props) => {
     const [histoMinute, sethistoMinute] = useState([])
     const theme = useTheme();
     const matchesDown = useMediaQuery(theme.breakpoints.down('sm'));
-    const matches = useMediaQuery('(min-width:400px)');
+    const matchesMax = useMediaQuery('(min-width:1050px)');
+    const matches = useMediaQuery('(min-width:420px)');
     let lastSlash = props.location.pathname.lastIndexOf('/')
     let id = props.location.pathname.slice(lastSlash + 1, props.location.pathname.length)
 
@@ -144,7 +145,7 @@ const CardCrypto = (props) => {
     const showPrices = () => {
         if (!matchesDown) {
             return (
-                <Grid container spacing={3}>
+                <Grid container spacing={3} style={{ margin: 0, justifyContent: 'center' }}>
                     <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green}>
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                     </span>
@@ -154,7 +155,6 @@ const CardCrypto = (props) => {
     }
 
     return (
-
         <>
             <CustomizedBreadcrumbs />
             <Container className={classes.backgroundCripto} >
@@ -163,12 +163,18 @@ const CardCrypto = (props) => {
                         <Paper style={{ margin: 0, backgroundColor: 'transparent' }} elevation={3}>
                             <Container style={{ padding: !matches && 18 }}>
                                 <Container style={{ display: "flex", padding: 0 }}>
-                                    <Grid style={{ display: "inherit" }} item xs={12}>
+                                    <Grid style={{ display: "inherit", transform: !matches && 'translateX(15px)' }} item xs={12}>
                                         <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={info.logo} />
                                         <h1 className={!matches ? classBottom.fontTextMin : classBottom.fontText}>{info.name}</h1>
                                     </Grid>
-                                    <h1 style={{ fontSize: !matches ? 20 : 33 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price} </h1>
-                                    {showPrices()}
+                                    <Container style={{ padding: 0 }}>
+                                        <Container style={{ display: 'flex' }}>
+                                            <Container>
+                                                <h1 style={{ fontSize: !matches ? 20 : 33, transform: matchesMax && 'translateX(60px)' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price} </h1>
+                                            </Container>
+                                            {showPrices()}
+                                        </Container>
+                                    </Container>
                                 </Container>
 
                                 {histoMinute.Data !== undefined && <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} />}
