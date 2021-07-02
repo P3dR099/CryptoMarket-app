@@ -32,40 +32,19 @@ function App() {
             .catch(err => console.log(err))
     }
 
-
-    const getCoins = useCallback((Currency) => {
-        let arrInfo = []
-        let arrSymbols = []
-
-        const getAllInfo = (arrSymbols, Currency) => {
-            tradeService.getAllCoinsInfo(arrSymbols.toString(), Currency)
-                .then(res => {
-
-                    for (let key in res.data.RAW) {
-                        if (res.data.RAW[key].USD) {
-                            arrInfo.push(res.data.RAW[key].USD)
-                        }
-                        if (res.data.RAW[key].EUR) {
-                            arrInfo.push(res.data.RAW[key].EUR)
-                        }
-                    }
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }
-
-        let arrCripts
-
+    let arrSymbols = []
+    let arrInfo = []
+    const getCoins = () => {
         tradeService.getCoins(Currency)
             .then(response => {
                 let firstCriptos = response.data
+                console.log(response.data)
 
                 // setFirstCriptos(response.data)
                 // console.log(firstCriptos2)
 
-                arrCripts = firstCriptos.map(element => {
-                    // console.log(functionThatBreaks(element))
+                let arrCripts = firstCriptos.map(element => {
+
                     if (element.quote.USD) {
                         arrSymbols.push(element.symbol)
                         return { id: element.id, name: element.name, price: element.quote.USD.price, change_1h: element.quote.USD.percent_change_1h, change_1d: element.quote.USD.percent_change_24h, change_7d: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
@@ -76,25 +55,42 @@ function App() {
 
                 });
 
+                console.log(arrCripts)
+                const getAllInfo = (arrSymbols, Currency) => {
+                    tradeService.getAllCoinsInfo(arrSymbols.toString(), Currency)
+                        .then(res => {
+                            for (let key in res.data.RAW) {
+                                if (res.data.RAW[key].USD) {
+                                    arrInfo.push(res.data.RAW[key].USD)
+                                }
+                                if (res.data.RAW[key].EUR) {
+                                    arrInfo.push(res.data.RAW[key].EUR)
+                                }
+                            }
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                }
                 setData(arrCripts)
                 getAllInfo(arrSymbols, Currency)
                 setAllInfoCoin(arrInfo)
             })
-            .catch(error => console.log(error))
-    }, [])
+    }
+
 
     useEffect(() => {
 
-        parseInt(localStorage.getItem('value')) === 1 ? setData(getCoins('EUR')) : setData(getCoins('USD'))
+        getCoins()
+        // parseInt(localStorage.getItem('value')) === 1 ? setData(getCoins('EUR')) : setData(getCoins('USD'))
         const login = JSON.parse(localStorage.getItem('login'))
         setTheUser(login)
-    }, [getCoins])
+    }, [])
 
     return (
         <>
             <SearchAppBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
-            <div className="App" style={{ backgroundImage: 'linear-gradient(16deg, rgba(255,255,255,1) 9%, rgba(215,249,249,1) 32%, rgba(145,241,247,1) 59%, rgba(139,234,240,1) 85%, rgba(91,228,236,1) 99%)' }}>
-
+            <div className="App" style={{ backgroundImage: 'linear-gradient(16deg, rgba(255,255,255,1) 0%, rgba(178,250,255,1) 0%, rgba(111,176,252,1) 30%, rgba(61,91,244,1) 60%, rgba(44,67,184,1) 100%)' }}>
                 {!data ? <LinearProgress /> : ''}
                 <Route path="/user" render={(props) => <UserProfile />} />
                 <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} {...props} />} />

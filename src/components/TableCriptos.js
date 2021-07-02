@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {
     DataGrid,
@@ -63,7 +64,7 @@ export default function DataTable(props) {
         change_1d: false
     });
 
-    const [, setColumns] = React.useState([])
+    const [Columns, setColumns] = React.useState([])
 
     const rows = props.data
 
@@ -138,15 +139,8 @@ export default function DataTable(props) {
         }
     })()
 
-    // const useColumn) => setColumns(columns), [columns])
 
-    const myColumns = localStorage.setItem('columns', columns)
-    React.useEffect(() => {
-
-        console.log(localStorage.columns)
-        // useColumns()
-        setColumns(myColumns)
-    }, [myColumns])
+    console.log(props.data)
 
     return (
         <>
@@ -156,7 +150,9 @@ export default function DataTable(props) {
             </Container>
             <div style={{ height: 750, width: '100%', marginTop: !matchesMin ? 140 : 100 }} className={classes.root} >
 
-                {props.data && <DataGrid components={{ Toolbar: CustomToolbar }} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} />}
+                {/* {console.log(props.data)} */}
+
+                {props.data && <DataGrid loading={props.data.length === 0 && true} components={{ Toolbar: CustomToolbar }} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} />}
             </div>
         </>
     );

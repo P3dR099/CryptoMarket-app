@@ -121,10 +121,12 @@ const CardCrypto = (props) => {
                 setCoinSymbol(res.data[0].symbol)
                 tradeService.getHistoByMin(res.data[0].symbol, props.Currency, 1440)
                     .then(res => {
+                        console.log(res)
                         res.data.Data.Data.map(element => {
                             const hours = convertToDate(element.time)
                             return element.time = hours
                         });
+
                         sethistoMinute(res.data.Data)
                     })
                     .catch(err => console.log(err))
@@ -136,6 +138,7 @@ const CardCrypto = (props) => {
             .catch(err => console.log(err))
 
         const localInfo = JSON.parse(localStorage.getItem('info'))
+
     }, [props.Currency, props.allInfoCoin, id])
 
     let arrTimes, arrTimesMinutes = []
@@ -163,14 +166,14 @@ const CardCrypto = (props) => {
                         <Paper style={{ margin: 0, backgroundColor: 'transparent' }} elevation={3}>
                             <Container style={{ padding: !matches && 18 }}>
                                 <Container style={{ display: "flex", padding: 0 }}>
-                                    <Grid style={{ display: "inherit", transform: !matches && 'translateX(15px)' }} item xs={12}>
+                                    <Grid style={{ display: "inherit", transform: !matches && 'translateX(8px)' }} item xs={12}>
                                         <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={info.logo} />
                                         <h1 className={!matches ? classBottom.fontTextMin : classBottom.fontText}>{info.name}</h1>
                                     </Grid>
-                                    <Container style={{ padding: 0 }}>
+                                    <Container style={{ padding: 0, width: !matches && '45%' }}>
                                         <Container style={{ display: 'flex' }}>
                                             <Container>
-                                                <h1 style={{ fontSize: !matches ? 20 : 33, transform: matchesMax && 'translateX(60px)' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price} </h1>
+                                                <h1 style={{ fontSize: !matches ? 20 : 33, transform: matchesMax && 'translateX(70px)' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price} </h1>
                                             </Container>
                                             {showPrices()}
                                         </Container>
