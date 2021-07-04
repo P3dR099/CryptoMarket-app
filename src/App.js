@@ -4,11 +4,11 @@ import './index.css'
 import Crypto from './components/Crypto.js'
 import TableCriptos from './components/TableCriptos.js'
 import { Route } from 'react-router-dom'
-import SearchAppBar from './components/layout/AppBar'
+import NavBar from './components/layout/NavBar'
 import UserProfile from './components/pages/User'
 import Trade from './services/trade.service'
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Home from './components/layout/Home'
+import Home from './components/pages/Home'
 import Footer from './components/layout/Footer'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -89,7 +89,7 @@ function App() {
 
     return (
         <>
-            <SearchAppBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
+            <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
             <div className="App" style={{ backgroundImage: 'linear-gradient(16deg, rgba(255,255,255,1) 0%, rgba(178,250,255,1) 0%, rgba(111,176,252,1) 30%, rgba(61,91,244,1) 60%, rgba(44,67,184,1) 100%)' }}>
                 {!data ? <LinearProgress /> : ''}
                 <Route path="/user" render={(props) => <UserProfile />} />

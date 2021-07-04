@@ -1,12 +1,12 @@
 import { Container } from '@material-ui/core';
 import React from 'react';
-import '../layout/Home.css';
+import './Home.css';
 import CarouselSlide from '../layout/CarouselSlide';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const Home = (props) => {
-    const matches = useMediaQuery('(max-width:1350px)');
+    const matches = useMediaQuery('(max-width:1020px)');
     const matchesMedium = useMediaQuery('(max-width:900px)');
 
     const useStyles = makeStyles({
@@ -29,7 +29,7 @@ const Home = (props) => {
     return (
         <>
             <Container style={{ maxWidth: 2850, padding: 0 }}>
-                <Container style={{ height: !matches ? 1200 : 770, padding: 'inherit', maxWidth: 'inherit' }}>
+                <Container style={{ height: !matches ? 1080 : 770, padding: 'inherit', maxWidth: 'inherit' }}>
                     <div id="kid">
                         <h1 className="title" style={{ fontSize: !matchesMedium && '50px' }} >Mercado de Criptomonedas</h1>
 

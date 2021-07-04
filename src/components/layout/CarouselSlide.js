@@ -97,6 +97,11 @@ export default function CustomArrows(props) {
         prevArrow: <SamplePrevArrow />
     };
 
+
+    const carouselPosition = document.querySelectorAll('.slick-track')
+    if (carouselPosition[0] !== undefined && !matchesMin) carouselPosition[0].style.transform = "translate3d(-0.5%, 0px, 0px)"
+
+
     return (
 
         <>

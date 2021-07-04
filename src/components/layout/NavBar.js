@@ -11,6 +11,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
 import ModalAuth from '../pages/ModalAuth.js'
 import AccountCircle from './AccountCircle.js'
+import logoCripto from '../../logos/default.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,18 +34,24 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     search: {
+        display: 'flex',
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
         backgroundColor: fade(theme.palette.common.white, 0.15),
         '&:hover': {
             backgroundColor: fade(theme.palette.common.white, 0.25),
         },
+        justifyContent: 'flex-end',
         marginLeft: 0,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(1),
             width: 'auto',
         },
+    },
+    logoCripto: {
+        marginRight: 90,
+        width: 50
     },
     searchIcon: {
         padding: theme.spacing(0, 2),
@@ -98,7 +105,8 @@ export default function SearchAppBar(props) {
             <AppBar position="static" className={classes.navbar}>
                 <Toolbar>
                     {props.loggedInUser && <AccountCircle {...props} />}
-                    <ModalAuth {...props} />
+                    {/* <ModalAuth {...props} /> */}
+                    <img style={{ width: !matches ? 50 : 70 }} className={classes.logoCripto} src={logoCripto} />
                     <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
                         CryptoMarket
                     </Typography>
