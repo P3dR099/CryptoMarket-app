@@ -5,7 +5,7 @@ export default class tradeService {
     constructor() {
         this.source = axios.CancelToken.source()
         this.api = axios.create({
-            baseURL: 'http://localhost:5000/'
+            baseURL: 'https://backend-cripto.herokuapp.com/'
             //withCredentials: true
         })
     }
