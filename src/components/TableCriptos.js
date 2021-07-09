@@ -22,6 +22,7 @@ const useStyles = makeStyles({
         '& .super-app-theme--cell': {
             // backgroundColor: 'rgba(224, 183, 60, 0.55)',
             color: '#1a3e72',
+
             fontWeight: '600',
         },
         '& .super-app.negative': {
@@ -41,7 +42,8 @@ const useStyles = makeStyles({
     },
     contLogo: {
         paddingLeft: '4px', padding: 5,
-        boxSizing: 'content-box', display: 'flex', alignItems: 'center'
+        boxSizing: 'content-box', display: 'flex', alignItems: 'center',
+        transform: 'translateX(-20px)'
     }
 });
 
@@ -67,6 +69,7 @@ export default function DataTable(props) {
     const [Columns, setColumns] = React.useState([])
 
     const rows = props.data
+
 
     const colChange_1h = {
 
@@ -129,6 +132,7 @@ export default function DataTable(props) {
         setStateCols({ ...stateCols, [event.target.name]: event.target.checked })
     }
 
+
     (() => {
 
         if (stateCols.change_1d) {
@@ -140,8 +144,6 @@ export default function DataTable(props) {
     })()
 
 
-    console.log(props.data)
-
     return (
         <>
             <Container style={{ display: "flex", justifyContent: "flex-end", transform: !matchesMin ? 'translateY(132px)' : 'translateY(82px)' }}>
@@ -149,10 +151,7 @@ export default function DataTable(props) {
                 <Modal allColumns={columns} setColumns={setColumns} handleRows={handleRows} stateCols={stateCols} setStateCols={setStateCols} {...props} />
             </Container>
             <div style={{ height: 750, width: '100%', marginTop: !matchesMin ? 140 : 100 }} className={classes.root} >
-
-                {/* {console.log(props.data)} */}
-
-                {props.data && <DataGrid loading={props.data.length === 0 && true} components={{ Toolbar: CustomToolbar }} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} />}
+                {props.data ? <DataGrid components={{ Toolbar: CustomToolbar }} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} /> : <CircularProgress />}
             </div>
         </>
     );

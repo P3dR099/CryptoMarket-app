@@ -51,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
     },
     logoCripto: {
         marginRight: 90,
-        width: 50
+        marginTop: 8,
+        width: 60,
     },
     searchIcon: {
         padding: theme.spacing(0, 2),
@@ -106,7 +107,7 @@ export default function SearchAppBar(props) {
                 <Toolbar>
                     {props.loggedInUser && <AccountCircle {...props} />}
                     {/* <ModalAuth {...props} /> */}
-                    <img style={{ width: !matches ? 50 : 70 }} className={classes.logoCripto} src={logoCripto} />
+                    <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} className={classes.logoCripto} src={logoCripto} />
                     <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
                         CryptoMarket
                     </Typography>

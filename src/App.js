@@ -34,14 +34,10 @@ function App() {
 
     let arrSymbols = []
     let arrInfo = []
-    const getCoins = () => {
+    const getCoins = (Currency) => {
         tradeService.getCoins(Currency)
             .then(response => {
                 let firstCriptos = response.data
-                console.log(response.data)
-
-                // setFirstCriptos(response.data)
-                // console.log(firstCriptos2)
 
                 let arrCripts = firstCriptos.map(element => {
 
@@ -49,13 +45,10 @@ function App() {
                         arrSymbols.push(element.symbol)
                         return { id: element.id, name: element.name, price: element.quote.USD.price, change_1h: element.quote.USD.percent_change_1h, change_1d: element.quote.USD.percent_change_24h, change_7d: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
                     }
-
                     arrSymbols.push(element.symbol)
                     return { id: element.id, name: element.name, price: element.quote.EUR.price, change_1h: element.quote.EUR.percent_change_1h, change_1d: element.quote.EUR.percent_change_24h, change_7d: element.quote.EUR.percent_change_7d, symbol: element.symbol, marketCap: element.quote.EUR.market_cap }
-
                 });
 
-                console.log(arrCripts)
                 const getAllInfo = (arrSymbols, Currency) => {
                     tradeService.getAllCoinsInfo(arrSymbols.toString(), Currency)
                         .then(res => {
@@ -76,13 +69,13 @@ function App() {
                 getAllInfo(arrSymbols, Currency)
                 setAllInfoCoin(arrInfo)
             })
+            .catch(err => console.log(err))
     }
 
 
     useEffect(() => {
 
-        getCoins()
-        // parseInt(localStorage.getItem('value')) === 1 ? setData(getCoins('EUR')) : setData(getCoins('USD'))
+        parseInt(localStorage.getItem('value')) === 1 ? setData(getCoins('EUR')) : setData(getCoins('USD'))
         const login = JSON.parse(localStorage.getItem('login'))
         setTheUser(login)
     }, [])

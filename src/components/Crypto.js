@@ -103,25 +103,27 @@ const CardCrypto = (props) => {
 
         tradeService.getCoin(id)
             .then(res => {
+
                 props.allInfoCoin.length !== 0 && localStorage.setItem('info', JSON.stringify(props.allInfoCoin))
-                if (props.allInfoCoin.length === 0) {
-                    localInfo.filter((item) => {
-                        if (item.FROMSYMBOL === res.data[0].symbol) {
-                            item.PRICE < 2 ? setPrice(item.PRICE.toFixed(4)) : setPrice(item.PRICE.toFixed(2))
-                            setCoinInfo(item)
-                        }
+                setCoinSymbol(res.data[0].symbol)
+
+                tradeService.getCoinInfo(`id=${id}`)
+                    .then(res => {
+                        setInfo(res.data[id])
                     })
-                }
-                props.allInfoCoin.filter((item) => {
+                    .catch(err => console.log(err))
+
+                localInfo.filter((item) => {
                     if (item.FROMSYMBOL === res.data[0].symbol) {
                         setCoinInfo(item)
                         item.PRICE < 2 ? setPrice(item.PRICE.toFixed(4)) : setPrice(item.PRICE.toFixed(2))
                     }
                 })
-                setCoinSymbol(res.data[0].symbol)
+
+
+
                 tradeService.getHistoByMin(res.data[0].symbol, props.Currency, 1440)
                     .then(res => {
-                        console.log(res)
                         res.data.Data.Data.map(element => {
                             const hours = convertToDate(element.time)
                             return element.time = hours
@@ -133,17 +135,15 @@ const CardCrypto = (props) => {
             })
             .catch(error => console.log(error))
 
-        tradeService.getCoinInfo(`id=${id}`)
-            .then(res => setInfo(res.data[id]))
-            .catch(err => console.log(err))
-
         const localInfo = JSON.parse(localStorage.getItem('info'))
 
-    }, [props.Currency, props.allInfoCoin, id])
+    }, [id, props.allInfoCoin, props.Currency])
+
 
     let arrTimes, arrTimesMinutes = []
     histoHour.Data !== undefined && histoHour.Data.map(el => { return arrTimes.push(el.high) })
     histoMinute.Data !== undefined && histoMinute.Data.map(el => { return arrTimesMinutes.push(el.high) })
+
 
     const showPrices = () => {
         if (!matchesDown) {
@@ -157,6 +157,7 @@ const CardCrypto = (props) => {
         }
     }
 
+
     return (
         <>
             <CustomizedBreadcrumbs />
@@ -167,12 +168,14 @@ const CardCrypto = (props) => {
                             <Container style={{ padding: !matches && 18 }}>
                                 <Container style={{ display: "flex", padding: 0 }}>
                                     <Grid style={{ display: "inherit", transform: !matches && 'translateX(8px)' }} item xs={12}>
-                                        <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={info.logo} />
-                                        <h1 className={!matches ? classBottom.fontTextMin : classBottom.fontText}>{info.name}</h1>
+                                        <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`} />
+                                        <h1 className={!matches ? classBottom.fontTextMin : classBottom.fontText}>{info && info.name}</h1>
+
                                     </Grid>
                                     <Container style={{ padding: 0, width: !matches && '45%' }}>
                                         <Container style={{ display: 'flex' }}>
                                             <Container>
+                                                {/* {console.log(localStorage.getItem('info'))} */}
                                                 <h1 style={{ fontSize: !matches ? 20 : 33, transform: matchesMax && 'translateX(70px)' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price} </h1>
                                             </Container>
                                             {showPrices()}
@@ -187,7 +190,7 @@ const CardCrypto = (props) => {
                     <Grid item xs={matchesDown ? 12 : 4}>
                         <Paper style={{ margin: !matchesDown && '190px 0px 0px 16px', background: '#f8fafd', borderRadius: 16 }} elevation={3}>
                             <Container style={{ padding: 1 }}>
-                                <h2>{info.name} Price Today</h2>
+                                <h2>{info && info.name} Price Today</h2>
                             </Container>
                             <TableContainer>
                                 <Table className={classes.table} size="small" aria-label="a dense table">
@@ -198,7 +201,7 @@ const CardCrypto = (props) => {
                                                 {info.name} Price
                                             </TableCell>
                                             <TableCell className={classBottom.valueStatsCoin}>
-                                                €{coinInfo.PRICE}
+                                                €{coinInfo && coinInfo.PRICE}
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>

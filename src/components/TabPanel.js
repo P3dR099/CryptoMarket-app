@@ -33,7 +33,7 @@ TabPanel.propTypes = {
     value: PropTypes.any.isRequired,
 };
 
-const a11yProps = (index) => { return { id: `full-width-tab-${index}`, 'aria-controls': `full-width-tabpanel-${index}`, }; }
+const a11yProps = (index) => { return { id: `full-width-tab-${index}`, 'aria-controls': `full-width-tabpanel-${index}` }; }
 
 const theme2 = createMuiTheme({
     breakpoints: {
@@ -87,11 +87,11 @@ export default function FullWidthTabs(props) {
                     indicatorColor="primary"
                     textColor="primary"
                     variant="fullWidth"
-                    aria-label="full width tabs example"
+                    aria-label="full width tabs"
                 >
-                    <Tab label="1 hora" {...a11yProps(0)} />
-                    <Tab label="24 horas" {...a11yProps(1)} />
-                    <Tab label="1 mes" {...a11yProps(2)} />
+                    <Tab label="1 hora" style={{ color: "#0b1f58" }} {...a11yProps(0)} />
+                    <Tab label="24 horas" style={{ color: "#0b1f58" }} {...a11yProps(1)} />
+                    <Tab label="1 mes" style={{ color: "#0b1f58" }} {...a11yProps(2)} />
                 </Tabs>
             </ul>
             <TabPanel style={{ margin: !matchesMin ? '0px 0px 0px -30px' : '0px 0px 0px 5px' }} value={value} index={1} dir={theme.direction}>
