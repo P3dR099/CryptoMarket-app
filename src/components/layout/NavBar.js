@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
-import ModalAuth from '../pages/ModalAuth.js'
+// import ModalAuth from '../pages/ModalAuth.js'
 import AccountCircle from './AccountCircle.js'
 import logoCripto from '../../logos/default.png'
 
@@ -107,7 +107,7 @@ export default function SearchAppBar(props) {
                 <Toolbar>
                     {props.loggedInUser && <AccountCircle {...props} />}
                     {/* <ModalAuth {...props} /> */}
-                    <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} className={classes.logoCripto} src={logoCripto} />
+                    <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} className={classes.logoCripto} src={logoCripto} alt="cripto" />
                     <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
                         CryptoMarket
                     </Typography>

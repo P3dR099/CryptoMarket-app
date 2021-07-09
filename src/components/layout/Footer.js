@@ -14,10 +14,10 @@ export default function Footer() {
             width: '100%',
             height: 30,
             boxShadow: '0px - 4px 5px 0px rgba(0, 0, 0, 0.75)',
-            marginTop: '1%'
+            marginTop: 45
         },
         p: {
-            margin: 3
+            margin: 0
         }
     })
 

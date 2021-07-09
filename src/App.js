@@ -32,11 +32,11 @@ function App() {
             .catch(err => console.log(err))
     }
 
-    let arrSymbols = []
-    let arrInfo = []
-    const getCoins = (Currency) => {
+    const getCoins = useCallback((Currency) => {
         tradeService.getCoins(Currency)
             .then(response => {
+                let arrSymbols = []
+                let arrInfo = []
                 let firstCriptos = response.data
 
                 let arrCripts = firstCriptos.map(element => {
@@ -70,7 +70,7 @@ function App() {
                 setAllInfoCoin(arrInfo)
             })
             .catch(err => console.log(err))
-    }
+    }, [])
 
 
     useEffect(() => {
@@ -78,18 +78,20 @@ function App() {
         parseInt(localStorage.getItem('value')) === 1 ? setData(getCoins('EUR')) : setData(getCoins('USD'))
         const login = JSON.parse(localStorage.getItem('login'))
         setTheUser(login)
-    }, [])
+    }, [getCoins])
 
     return (
         <>
-            <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
-            <div className="App" style={{ backgroundImage: 'linear-gradient(16deg, rgba(255,255,255,1) 0%, rgba(178,250,255,1) 0%, rgba(111,176,252,1) 30%, rgba(61,91,244,1) 60%, rgba(44,67,184,1) 100%)' }}>
-                {!data ? <LinearProgress /> : ''}
-                <Route path="/user" render={(props) => <UserProfile />} />
-                <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} {...props} />} />
-                <Route exact path="/table" render={(props) => <TableCriptos data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
-                <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
-                <Footer />
+            <div className="App">
+                <main>
+                    <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
+                    {!data ? <LinearProgress /> : ''}
+                    <Route path="/user" render={(props) => <UserProfile />} />
+                    <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} data={data} {...props} />} />
+                    <Route exact path="/table" render={(props) => <TableCriptos data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
+                    <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
+                    <Footer />
+                </main>
             </div>
 
         </>

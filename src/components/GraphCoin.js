@@ -25,7 +25,6 @@ const GraphCoin = (props) => {
 
     const useStyles = makeStyles({
         graphCoin: {
-
             height: 500,
             margin: "0px 0px 0px",
             padding: 0,
@@ -35,7 +34,7 @@ const GraphCoin = (props) => {
         }
 
     })
-    const { value, setHistoHour, coinSymbol, Currency, histoMinute } = props
+    const { value, setHistoHour, coinSymbol, Currency, histoMinute, histoHour } = props
 
     const classes = useStyles()
 
@@ -68,7 +67,7 @@ const GraphCoin = (props) => {
     const getHistoryData = () => {
 
         if (value === 0) {
-            return histoMinute.Data.slice(1379, props.histoMinute.Data.length - 1)
+            return histoMinute.Data.slice(1379, histoMinute.Data.length - 1)
         }
         if (value === 1) {
             return histoMinute.Data
@@ -94,18 +93,18 @@ const GraphCoin = (props) => {
     const getColorHistoValues = () => {
         if (props.value === 0) {
 
-            if (props.histoMinute.Data !== undefined && props.histoMinute.Data[1379].open > props.histoMinute.Data[props.histoMinute.Data.length - 2].open) {
+            if (histoMinute.Data !== undefined && histoMinute.Data[1379].open > histoMinute.Data[histoMinute.Data.length - 2].open) {
                 return 'red'
             } else return 'green'
         }
-        else if (props.value === 1) {
-            if (props.histoMinute.Data !== undefined && props.histoMinute.Data[0].open > props.histoMinute.Data[props.histoMinute.Data.length - 1].open) {
+        else if (value === 1) {
+            if (histoMinute.Data !== undefined && histoMinute.Data[0].open > histoMinute.Data[histoMinute.Data.length - 1].open) {
                 return 'red'
             } else return 'green'
         }
 
         else {
-            if (props.histoHour[0] !== undefined && props.histoHour[0].open > props.histoHour[props.histoHour.length - 1].open) {
+            if (histoHour[0] !== undefined && histoHour[0].open > histoHour[histoHour.length - 1].open) {
                 return 'red'
             } else return 'green'
         }

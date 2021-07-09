@@ -6,7 +6,6 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const Home = (props) => {
-    const matches = useMediaQuery('(max-width:1020px)');
     const matchesMedium = useMediaQuery('(max-width:900px)');
 
     const useStyles = makeStyles({
@@ -21,6 +20,10 @@ const Home = (props) => {
             appearance: 'button',
             textDecoration: 'none',
             padding: '8px 0px 0px 3px'
+        },
+
+        contHome: {
+            maxWidth: 2850, padding: 0, height: '100vh'
         }
     })
 
@@ -28,8 +31,8 @@ const Home = (props) => {
 
     return (
         <>
-            <Container style={{ maxWidth: 2850, padding: 0 }}>
-                <Container style={{ height: !matches ? 1080 : 770, padding: 'inherit', maxWidth: 'inherit' }}>
+            <Container className={classes.contHome}>
+                <Container style={{ padding: 'inherit', maxWidth: 'inherit' }}>
                     <div id="kid">
                         <h1 className="title" style={{ fontSize: !matchesMedium && '50px' }} >Mercado de Criptomonedas</h1>
 

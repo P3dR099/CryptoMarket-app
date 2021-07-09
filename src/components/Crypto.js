@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Trade from '../services/trade.service'
 import Container from '@material-ui/core/Container';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
     },
 
     backgroundCripto: {
-        padding: 0, marginTop: -26, maxWidth: '100%', height: '100%', position: 'inherit'
+        padding: 0, maxWidth: '100%', height: '100%', position: 'inherit'
     }
 
 });
@@ -98,37 +99,35 @@ const CardCrypto = (props) => {
     const matches = useMediaQuery('(min-width:420px)');
     let lastSlash = props.location.pathname.lastIndexOf('/')
     let id = props.location.pathname.slice(lastSlash + 1, props.location.pathname.length)
+    const { data, allInfoCoin, Currency } = props
 
     useEffect(() => {
 
         tradeService.getCoin(id)
             .then(res => {
 
-                props.allInfoCoin.length !== 0 && localStorage.setItem('info', JSON.stringify(props.allInfoCoin))
+                allInfoCoin.length !== 0 && localStorage.setItem('info', JSON.stringify(allInfoCoin))
                 setCoinSymbol(res.data[0].symbol)
 
                 tradeService.getCoinInfo(`id=${id}`)
-                    .then(res => {
-                        setInfo(res.data[id])
-                    })
+                    .then(res => setInfo(res.data[id]))
                     .catch(err => console.log(err))
 
-                localInfo.filter((item) => {
-                    if (item.FROMSYMBOL === res.data[0].symbol) {
-                        setCoinInfo(item)
-                        item.PRICE < 2 ? setPrice(item.PRICE.toFixed(4)) : setPrice(item.PRICE.toFixed(2))
+                localInfo.filter((item) => (item.FROMSYMBOL === res.data[0].symbol) && setCoinInfo(item))
+
+                data && data.map(el => {
+                    if (el.symbol === res.data[0].symbol) {
+                        el.price < 2 ? setPrice(el.price.toFixed(4)) : setPrice(el.price.toFixed(2))
                     }
+                    return 0;
                 })
 
-
-
-                tradeService.getHistoByMin(res.data[0].symbol, props.Currency, 1440)
+                tradeService.getHistoByMin(res.data[0].symbol, Currency, 1440)
                     .then(res => {
                         res.data.Data.Data.map(element => {
                             const hours = convertToDate(element.time)
                             return element.time = hours
                         });
-
                         sethistoMinute(res.data.Data)
                     })
                     .catch(err => console.log(err))
@@ -137,7 +136,7 @@ const CardCrypto = (props) => {
 
         const localInfo = JSON.parse(localStorage.getItem('info'))
 
-    }, [id, props.allInfoCoin, props.Currency])
+    }, [id, allInfoCoin, Currency, data])
 
 
     let arrTimes, arrTimesMinutes = []
@@ -156,7 +155,6 @@ const CardCrypto = (props) => {
             )
         }
     }
-
 
     return (
         <>
@@ -183,7 +181,7 @@ const CardCrypto = (props) => {
                                     </Container>
                                 </Container>
 
-                                {histoMinute.Data !== undefined && <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} />}
+                                {histoMinute.Data !== undefined ? <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} /> : <CircularProgress />}
                             </Container>
                         </Paper>
                     </Grid>
@@ -201,7 +199,7 @@ const CardCrypto = (props) => {
                                                 {info.name} Price
                                             </TableCell>
                                             <TableCell className={classBottom.valueStatsCoin}>
-                                                €{coinInfo && coinInfo.PRICE}
+                                                {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price}
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>

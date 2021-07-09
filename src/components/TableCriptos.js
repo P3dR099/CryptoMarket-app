@@ -66,7 +66,7 @@ export default function DataTable(props) {
         change_1d: false
     });
 
-    const [Columns, setColumns] = React.useState([])
+    const [, setColumns] = React.useState([])
 
     const rows = props.data
 
