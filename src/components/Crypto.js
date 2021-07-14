@@ -9,6 +9,8 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import TableRow from '@material-ui/core/TableRow';
 import CustomizedBreadcrumbs from './layout/BreadCumb'
 import { Grid } from '@material-ui/core';
@@ -26,11 +28,11 @@ const useStyles = makeStyles({
         width: 35,
         height: 35,
         marginRight: 15,
-        marginTop: 30
+        marginTop: 25
     },
     logoCoinMin: {
         width: 33,
-        height: 32,
+        height: 35,
         marginRight: 10,
         marginTop: 10
     },
@@ -60,15 +62,15 @@ const convertToDate = (unixTime) => {
 
 const useStyles3 = makeStyles(() => ({
     green: {
-        display: "flex", marginBlock: 27, borderRadius: 10, width: 71, height: 30, marginLeft: "13px",
-        placeContent: 'center', padding: '2px 0px 0px 0px', color: 'white', backgroundColor: 'green'
+        display: "flex", marginTop: 25, marginRight: 10, borderRadius: 10, width: 120, height: 30,
+        placeContent: 'center', padding: '3px 5px 0px 0px', color: 'white', backgroundColor: 'green'
     },
     red: {
-        display: "flex", marginBlock: 29, borderRadius: 10, width: 71, height: 30, marginLeft: "13px",
-        placeContent: 'center', padding: '2px 0px 0px 0px', color: 'white', backgroundColor: 'red'
+        display: "flex", marginTop: 25, borderRadius: 10, width: 120, height: 30,
+        placeContent: 'center', padding: '3px 5px 0px 0px', color: 'white', backgroundColor: 'red'
     },
     fontText: {
-        fontSize: 33
+        fontSize: 30
     },
     fontTextMin: {
         fontSize: 20
@@ -87,7 +89,6 @@ const CardCrypto = (props) => {
 
     const classes = useStyles()
     const classBottom = useStyles3()
-    const [price, setPrice] = useState([])
     const [info, setInfo] = useState([])
     const [coinInfo, setCoinInfo] = useState([])
     const [coinSymbol, setCoinSymbol] = useState([])
@@ -96,7 +97,7 @@ const CardCrypto = (props) => {
     const theme = useTheme();
     const matchesDown = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesMax = useMediaQuery('(min-width:1050px)');
-    const matches = useMediaQuery('(min-width:420px)');
+    const matches = useMediaQuery('(min-width:470px)');
     let lastSlash = props.location.pathname.lastIndexOf('/')
     let id = props.location.pathname.slice(lastSlash + 1, props.location.pathname.length)
     const { data, allInfoCoin, Currency } = props
@@ -114,13 +115,7 @@ const CardCrypto = (props) => {
                     .catch(err => console.log(err))
 
                 localInfo.filter((item) => (item.FROMSYMBOL === res.data[0].symbol) && setCoinInfo(item))
-
-                data && data.map(el => {
-                    if (el.symbol === res.data[0].symbol) {
-                        el.price < 2 ? setPrice(el.price.toFixed(4)) : setPrice(el.price.toFixed(2))
-                    }
-                    return 0;
-                })
+                data && data.map(el => el.symbol === res.data[0].symbol && localStorage.setItem('price', el.price))
 
                 tradeService.getHistoByMin(res.data[0].symbol, Currency, 1440)
                     .then(res => {
@@ -138,23 +133,45 @@ const CardCrypto = (props) => {
 
     }, [id, allInfoCoin, Currency, data])
 
-
     let arrTimes, arrTimesMinutes = []
     histoHour.Data !== undefined && histoHour.Data.map(el => { return arrTimes.push(el.high) })
     histoMinute.Data !== undefined && histoMinute.Data.map(el => { return arrTimesMinutes.push(el.high) })
+    // const localInfo = JSON.parse(localStorage.getItem('info'))
 
+    let Price;
+    Price > 2 ? Price = parseFloat(localStorage.getItem('price')).toFixed(4) : Price = parseFloat(localStorage.getItem('price')).toFixed(2)
 
     const showPrices = () => {
         if (!matchesDown) {
             return (
-                <Grid container spacing={3} style={{ margin: 0, justifyContent: 'center' }}>
+                <Grid container spacing={3} style={{ margin: 'auto', display: 'contents', whiteSpace: 'pre' }}>
+                    <h1 style={{ fontSize: !matches ? 20 : 30 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
                     <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green}>
+                        <ArrowDropUpIcon />
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                     </span>
                 </Grid>
             )
         }
     }
+
+    const showPricesMin = () => {
+
+        if (matchesDown) {
+            return (
+                <Grid container spacing={3} style={{ display: 'contents' }}>
+                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ marginTop: !matches && 10 }}>
+                        <ArrowDropUpIcon />
+
+                        {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
+                    </span>
+                    <h1 style={{ fontSize: !matches ? 20 : 25, margin: 'auto' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
+                </Grid >
+            )
+        }
+    }
+
+    console.log(coinInfo.CHANGEPCT24HOUR)
 
     return (
         <>
@@ -164,21 +181,14 @@ const CardCrypto = (props) => {
                     <Grid item xs={matchesDown ? 12 : 8}>
                         <Paper style={{ margin: 0, backgroundColor: 'transparent' }} elevation={3}>
                             <Container style={{ padding: !matches && 18 }}>
-                                <Container style={{ display: "flex", padding: 0 }}>
+                                <Container style={{ display: "flex", paddingTop: 10 }}>
                                     <Grid style={{ display: "inherit", transform: !matches && 'translateX(8px)' }} item xs={12}>
                                         <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`} />
                                         <h1 className={!matches ? classBottom.fontTextMin : classBottom.fontText}>{info && info.name}</h1>
-
                                     </Grid>
-                                    <Container style={{ padding: 0, width: !matches && '45%' }}>
-                                        <Container style={{ display: 'flex' }}>
-                                            <Container>
-                                                {/* {console.log(localStorage.getItem('info'))} */}
-                                                <h1 style={{ fontSize: !matches ? 20 : 33, transform: matchesMax && 'translateX(70px)' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price} </h1>
-                                            </Container>
-                                            {showPrices()}
-                                        </Container>
-                                    </Container>
+
+                                    {matchesDown ? showPricesMin() : showPrices()}
+
                                 </Container>
 
                                 {histoMinute.Data !== undefined ? <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} /> : <CircularProgress />}
@@ -199,7 +209,7 @@ const CardCrypto = (props) => {
                                                 {info.name} Price
                                             </TableCell>
                                             <TableCell className={classBottom.valueStatsCoin}>
-                                                {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price}
+                                                {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price}
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>

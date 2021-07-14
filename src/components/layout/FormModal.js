@@ -8,11 +8,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-
 function rand() {
     return Math.round(Math.random() * 20) - 10;
 }
-
 
 export default React.forwardRef((props, ref) => {
 
@@ -29,7 +27,6 @@ export default React.forwardRef((props, ref) => {
                 left: `56%`,
                 transform: `translate(-176px, -78px)`,
             }
-
         }
 
         return {

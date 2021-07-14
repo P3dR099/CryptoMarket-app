@@ -5,7 +5,6 @@ import Crypto from './components/Crypto.js'
 import TableCriptos from './components/TableCriptos.js'
 import { Route } from 'react-router-dom'
 import NavBar from './components/layout/NavBar'
-import UserProfile from './components/pages/User'
 import Trade from './services/trade.service'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Home from './components/pages/Home'
@@ -40,7 +39,6 @@ function App() {
                 let firstCriptos = response.data
 
                 let arrCripts = firstCriptos.map(element => {
-
                     if (element.quote.USD) {
                         arrSymbols.push(element.symbol)
                         return { id: element.id, name: element.name, price: element.quote.USD.price, change_1h: element.quote.USD.percent_change_1h, change_1d: element.quote.USD.percent_change_24h, change_7d: element.quote.USD.percent_change_7d, symbol: element.symbol, marketCap: element.quote.USD.market_cap }
@@ -68,25 +66,25 @@ function App() {
                 setData(arrCripts)
                 getAllInfo(arrSymbols, Currency)
                 setAllInfoCoin(arrInfo)
+                console.log('HEY')
+
             })
             .catch(err => console.log(err))
     }, [])
 
-
     useEffect(() => {
 
-        parseInt(localStorage.getItem('value')) === 1 ? setData(getCoins('EUR')) : setData(getCoins('USD'))
+
         const login = JSON.parse(localStorage.getItem('login'))
         setTheUser(login)
-    }, [getCoins])
+    }, [])
 
     return (
         <>
             <div className="App">
                 <main>
-                    <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} Currency={Currency} setCurrency={setCurrency} />
+                    <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} setData={setData} Currency={Currency} setCurrency={setCurrency} />
                     {!data ? <LinearProgress /> : ''}
-                    <Route path="/user" render={(props) => <UserProfile />} />
                     <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} data={data} {...props} />} />
                     <Route exact path="/table" render={(props) => <TableCriptos data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
                     <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />

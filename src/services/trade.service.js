@@ -5,7 +5,7 @@ export default class tradeService {
     constructor() {
         this.source = axios.CancelToken.source()
         this.api = axios.create({
-            baseURL: 'https://backend-cripto.herokuapp.com/'
+            baseURL: 'http://localhost:5000/'
             //withCredentials: true
         })
     }
@@ -18,10 +18,13 @@ export default class tradeService {
     //
     getCoins = (params) => this.api.get(`api/getCoins?currency=${params}`)
     getAllCoinsInfo = (id, currency) => this.api.get(`api/allCoins/info/${id}/${currency}`)
-
     getPrices = () => this.api.get('api/getPrices')
     getCoinInfo = (params) => this.api.get(`api/coin/info?${params}`)
     getHistoByHour = (symbol, currency, limit) => this.api.get(`api/coin/histohour/${symbol}/${currency}/${limit}`)
     getHistoByMin = (symbol, currency, limit) => this.api.get(`api/coin/histominute/${symbol}/${currency}/${limit}`)
     getCoin = (coin_id) => this.api.get(`api/coin/${coin_id}`)
+
+    loginWallet = (keys) => this.api.post(`api/wallet/connect-wallet`, keys)
+    getBalance = keys => this.api.post(`api/wallet/getBalance`, keys)
+    lastPrices = key => this.api.post(`api/wallet/lastPrices`, key)
 }

@@ -1,5 +1,5 @@
 import { Container } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Home.css';
 import CarouselSlide from '../layout/CarouselSlide';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -24,15 +24,27 @@ const Home = (props) => {
 
         contHome: {
             maxWidth: 2850, padding: 0, height: '100vh'
+        },
+
+        subContHome: {
+            padding: 'inherit', maxWidth: 'inherit', height: 'inherit'
         }
     })
+
+    const { getCoins } = props
+
+    useEffect(() => {
+
+        parseInt(localStorage.getItem('value')) === 1 ? getCoins('EUR') : getCoins('USD')
+
+    }, [getCoins])
 
     const classes = useStyles()
 
     return (
         <>
             <Container className={classes.contHome}>
-                <Container style={{ padding: 'inherit', maxWidth: 'inherit' }}>
+                <Container className={classes.subContHome}>
                     <div id="kid">
                         <h1 className="title" style={{ fontSize: !matchesMedium && '50px' }} >Mercado de Criptomonedas</h1>
 

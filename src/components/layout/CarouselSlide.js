@@ -97,17 +97,15 @@ export default function CustomArrows(props) {
         prevArrow: <SamplePrevArrow />
     };
 
-
     const carouselPosition = document.querySelectorAll('.slick-track')
     if (carouselPosition[0] !== undefined && !matchesMin) carouselPosition[0].style.transform = "translate3d(-0.5%, 0px, 0px)"
-
+    if (carouselPosition[0] !== undefined && matchesMed) carouselPosition[0].style.transform = "translate3d(-1.45%, 0px, 0px)"
 
     return (
-
         <>
-            {props.data !== undefined &&
 
-                <Slider {...settings} style={{ margin: !matchesMax2 ? '0px 22px 0px 64px' : '0px 35px 0px 86px', transform: matchesMax2 ? 'translateX(-42px) translateY(465px)' : 'translateX(-34px) translateY(560px)', paddingLeft: !matchesMin || !matchesMax2 ? 25 : 0 }} >
+            {props.data !== undefined &&
+                <Slider {...settings} style={{ margin: !matchesMax2 ? '0px 22px 0px 64px' : '0px 35px 0px 86px', transform: matchesMax2 ? 'translateX(-42px) translateY(430px)' : 'translateX(-34px) translateY(500px)', paddingLeft: !matchesMin || !matchesMax2 ? 25 : 0 }} >
                     {props.data.map(function (slide, index) {
                         return (
                             <Container key={index}>

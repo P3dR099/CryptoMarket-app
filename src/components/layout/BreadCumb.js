@@ -6,7 +6,7 @@ import HomeIcon from '@material-ui/icons/Home';
 
 const StyledBreadcrumb = withStyles((theme) => ({
     root: {
-        margin: '100px 0px',
+        margin: '45px 0px',
         backgroundColor: theme.palette.grey[100],
         height: theme.spacing(3),
         color: theme.palette.grey[800],

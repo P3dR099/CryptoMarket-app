@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     navbar: {
         background: 'transparent',
         boxShadow: 'none',
-        position: 'absolute'
+        // position: 'absolute'
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -95,48 +95,46 @@ export default function SearchAppBar(props) {
             if (el.name === event.target.innerText) {
                 return history.push('/coin/' + el.id)
             }
-            return 0;
+            return 0
         })
 
     };
 
 
     return (
-        <div className={classes.root}>
-            <AppBar position="static" className={classes.navbar}>
-                <Toolbar>
-                    {props.loggedInUser && <AccountCircle {...props} />}
-                    {/* <ModalAuth {...props} /> */}
-                    <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} className={classes.logoCripto} src={logoCripto} alt="cripto" />
-                    <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
-                        CryptoMarket
-                    </Typography>
-                    <div className={classes.search} style={{ backgroundColor: !matches && 'transparent', width: !matchesMin && 160 }}>
-                        <Autocomplete
-                            freeSolo
-                            onChange={(event) => handleClick(event)}
-                            id="free-solo-2"
-                            disableClearable
-                            options={data ? data.map((option) => option.name) : []}
-                            renderInput={(params) => (
-                                <Grid container spacing={1} style={{ justifyContent: "flex-end" }}>
-                                    <Grid item>
-                                        {matches ? <SearchIcon style={{ marginTop: "15px" }} /> : ''}
-                                        <TextField
-                                            style={{ margin: 0, width: 175 }}
-                                            {...params}
-                                            label="Search"
-                                            margin="normal"
-                                            variant="outlined"
-                                            InputProps={{ ...params.InputProps, type: 'search' }}
-                                        />
-                                    </Grid>
+        <AppBar position="static" className={classes.navbar}>
+            <Toolbar>
+                {props.loggedInUser && <AccountCircle {...props} />}
+                {/* <ModalAuth {...props} /> */}
+                <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} className={classes.logoCripto} src={logoCripto} alt="cripto" />
+                <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
+                    CryptoMarket
+                </Typography>
+                <div className={classes.search} style={{ backgroundColor: !matches && 'transparent', width: !matchesMin && 160 }}>
+                    <Autocomplete
+                        freeSolo
+                        onChange={(event) => handleClick(event)}
+                        id="free-solo-2"
+                        disableClearable
+                        options={data ? data.map((option) => option.name) : []}
+                        renderInput={(params) => (
+                            <Grid container spacing={1} style={{ justifyContent: "flex-end" }}>
+                                <Grid item>
+                                    {matches ? <SearchIcon style={{ marginTop: "15px" }} /> : ''}
+                                    <TextField
+                                        style={{ margin: 0, width: 175 }}
+                                        {...params}
+                                        label="Search"
+                                        margin="normal"
+                                        variant="outlined"
+                                        InputProps={{ ...params.InputProps, type: 'search' }}
+                                    />
                                 </Grid>
-                            )}
-                        />
-                    </div>
-                </Toolbar>
-            </AppBar>
-        </div >
+                            </Grid>
+                        )}
+                    />
+                </div>
+            </Toolbar>
+        </AppBar>
     );
 }

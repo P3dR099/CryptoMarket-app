@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {
     DataGrid,
@@ -18,21 +18,17 @@ import ModalCurrency from './layout/ModalCurrecy';
 
 const useStyles = makeStyles({
 
-    root: {
+    table: {
         '& .super-app-theme--cell': {
-            // backgroundColor: 'rgba(224, 183, 60, 0.55)',
             color: '#1a3e72',
-
             fontWeight: '600',
         },
         '& .super-app.negative': {
-            // backgroundColor: '#d47483',
-            color: '#dc143c',
+            color: '#ea3943',
             fontWeight: '600',
         },
         '& .super-app.positive': {
-            // backgroundColor: 'rgba(157, 255, 118, 0.49)',
-            color: 'green',
+            color: '#5ced75',
             fontWeight: '600',
         },
     },
@@ -61,18 +57,23 @@ export default function DataTable(props) {
     const classes = useStyles();
     const matchesMin = useMediaQuery('(min-width:460px)');
 
-    const [stateCols, setStateCols] = React.useState({
+    const [stateCols, setStateCols] = useState({
         change_1h: false,
         change_1d: false
     });
 
     const [, setColumns] = React.useState([])
 
-    const rows = props.data
+    const { getCoins, data } = props
+    const rows = data
 
+    useEffect(() => {
+
+        parseInt(localStorage.getItem('value')) === 1 ? getCoins('EUR') : getCoins('USD')
+
+    }, [getCoins])
 
     const colChange_1h = {
-
         renderCell: (params) => (
             <>
                 {params.row.change_1h > 0 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
@@ -128,21 +129,17 @@ export default function DataTable(props) {
         { field: 'marketCap', renderCell: (params) => <strong> {params.row.marketCap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong>, headerName: 'Market Cap', width: 150 }
     ];
 
-    const handleRows = event => {
-        setStateCols({ ...stateCols, [event.target.name]: event.target.checked })
-    }
+    const handleRows = event => setStateCols({ ...stateCols, [event.target.name]: event.target.checked })
 
+        (() => {
 
-    (() => {
-
-        if (stateCols.change_1d) {
-            columns.splice(3, 0, colChange_1d)
-        }
-        if (stateCols.change_1h) {
-            columns.splice(3, 0, colChange_1h)
-        }
-    })()
-
+            if (stateCols.change_1d) {
+                columns.splice(3, 0, colChange_1d)
+            }
+            if (stateCols.change_1h) {
+                columns.splice(3, 0, colChange_1h)
+            }
+        })()
 
     return (
         <>
@@ -150,8 +147,8 @@ export default function DataTable(props) {
                 <ModalCurrency {...props} />
                 <Modal allColumns={columns} setColumns={setColumns} handleRows={handleRows} stateCols={stateCols} setStateCols={setStateCols} {...props} />
             </Container>
-            <div style={{ height: 750, width: '100%', marginTop: !matchesMin ? 140 : 100 }} className={classes.root} >
-                {props.data ? <DataGrid components={{ Toolbar: CustomToolbar }} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} /> : <CircularProgress />}
+            <div style={{ height: 750, width: '100%', marginTop: !matchesMin ? 140 : 100 }} className={classes.table} >
+                {data.length !== 0 ? <DataGrid components={{ Toolbar: CustomToolbar }} loading={!props.data && true} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} /> : <CircularProgress />}
             </div>
         </>
     );
