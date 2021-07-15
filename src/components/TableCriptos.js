@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {
     DataGrid,
@@ -129,17 +129,17 @@ export default function DataTable(props) {
         { field: 'marketCap', renderCell: (params) => <strong> {params.row.marketCap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong>, headerName: 'Market Cap', width: 150 }
     ];
 
-    const handleRows = event => setStateCols({ ...stateCols, [event.target.name]: event.target.checked })
+    const handleRows = event => { setStateCols({ ...stateCols, [event.target.name]: event.target.checked }) }
 
-        (() => {
+    (() => {
 
-            if (stateCols.change_1d) {
-                columns.splice(3, 0, colChange_1d)
-            }
-            if (stateCols.change_1h) {
-                columns.splice(3, 0, colChange_1h)
-            }
-        })()
+        if (stateCols.change_1d) {
+            columns.splice(3, 0, colChange_1d)
+        }
+        if (stateCols.change_1h) {
+            columns.splice(3, 0, colChange_1h)
+        }
+    })()
 
     return (
         <>

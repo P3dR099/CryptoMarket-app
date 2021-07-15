@@ -63,11 +63,11 @@ const convertToDate = (unixTime) => {
 const useStyles3 = makeStyles(() => ({
     green: {
         display: "flex", marginTop: 25, marginRight: 10, borderRadius: 10, width: 120, height: 30,
-        placeContent: 'center', padding: '3px 5px 0px 0px', color: 'white', backgroundColor: 'green'
+        placeContent: 'center', padding: '5px 5px 0px 0px', color: 'white', backgroundColor: 'green'
     },
     red: {
         display: "flex", marginTop: 25, borderRadius: 10, width: 120, height: 30,
-        placeContent: 'center', padding: '3px 5px 0px 0px', color: 'white', backgroundColor: 'red'
+        placeContent: 'center', padding: '5px 5px 0px 0px', color: 'white', backgroundColor: 'red'
     },
     fontText: {
         fontSize: 30
@@ -96,7 +96,6 @@ const CardCrypto = (props) => {
     const [histoMinute, sethistoMinute] = useState([])
     const theme = useTheme();
     const matchesDown = useMediaQuery(theme.breakpoints.down('sm'));
-    const matchesMax = useMediaQuery('(min-width:1050px)');
     const matches = useMediaQuery('(min-width:470px)');
     let lastSlash = props.location.pathname.lastIndexOf('/')
     let id = props.location.pathname.slice(lastSlash + 1, props.location.pathname.length)
@@ -147,7 +146,7 @@ const CardCrypto = (props) => {
                 <Grid container spacing={3} style={{ margin: 'auto', display: 'contents', whiteSpace: 'pre' }}>
                     <h1 style={{ fontSize: !matches ? 20 : 30 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
                     <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green}>
-                        <ArrowDropUpIcon />
+                        {coinInfo.CHANGEPCT24HOUR > 0 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                     </span>
                 </Grid>
@@ -157,12 +156,12 @@ const CardCrypto = (props) => {
 
     const showPricesMin = () => {
 
+
         if (matchesDown) {
             return (
-                <Grid container spacing={3} style={{ display: 'contents' }}>
-                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ marginTop: !matches && 10 }}>
-                        <ArrowDropUpIcon />
-
+                <Grid container spacing={3} style={{ display: 'contents', whiteSpace: 'pre' }}>
+                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ width: 70, height: 20, fontSize: 11, marginTop: 14, placeItems: 'center', padding: '3px 8px 3px 4px' }}>
+                        {coinInfo.CHANGEPCT24HOUR > 0 ? <ArrowDropUpIcon style={{ width: 26 }} /> : <ArrowDropDownIcon style={{ width: 26 }} />}
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                     </span>
                     <h1 style={{ fontSize: !matches ? 20 : 25, margin: 'auto' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
@@ -181,14 +180,12 @@ const CardCrypto = (props) => {
                     <Grid item xs={matchesDown ? 12 : 8}>
                         <Paper style={{ margin: 0, backgroundColor: 'transparent' }} elevation={3}>
                             <Container style={{ padding: !matches && 18 }}>
-                                <Container style={{ display: "flex", paddingTop: 10 }}>
-                                    <Grid style={{ display: "inherit", transform: !matches && 'translateX(8px)' }} item xs={12}>
+                                <Container style={{ display: "flex", paddingTop: 10, paddingLeft: 1 }}>
+                                    <Grid style={{ display: "inherit" }} item xs={12}>
                                         <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`} />
                                         <h1 className={!matches ? classBottom.fontTextMin : classBottom.fontText}>{info && info.name}</h1>
                                     </Grid>
-
                                     {matchesDown ? showPricesMin() : showPrices()}
-
                                 </Container>
 
                                 {histoMinute.Data !== undefined ? <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} /> : <CircularProgress />}
