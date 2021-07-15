@@ -83,6 +83,9 @@ const useStyles3 = makeStyles(() => ({
     valueStatsCoin: {
         fontWeight: 600, color: '#000', lineHeight: 3, textAlign: 'end'
     },
+    contSpanMin: {
+
+    }
 }))
 
 const CardCrypto = (props) => {
@@ -160,7 +163,7 @@ const CardCrypto = (props) => {
         if (matchesDown) {
             return (
                 <Grid container spacing={3} style={{ display: 'contents', whiteSpace: 'pre' }}>
-                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ width: 70, height: 20, fontSize: 11, marginTop: 14, placeItems: 'center', padding: '3px 8px 3px 4px' }}>
+                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ width: 70, height: 20, fontSize: 11, marginTop: 12, placeItems: 'center', padding: '3px 8px 3px 4px' }}>
                         {coinInfo.CHANGEPCT24HOUR > 0 ? <ArrowDropUpIcon style={{ width: 26 }} /> : <ArrowDropDownIcon style={{ width: 26 }} />}
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                     </span>
