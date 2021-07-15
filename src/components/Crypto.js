@@ -62,7 +62,7 @@ const convertToDate = (unixTime) => {
 
 const useStyles3 = makeStyles(() => ({
     green: {
-        display: "flex", marginTop: 25, marginRight: 10, borderRadius: 10, width: 120, height: 30,
+        display: "flex", marginTop: 25, borderRadius: 10, width: 120, height: 30,
         placeContent: 'center', padding: '5px 5px 0px 0px', color: 'white', backgroundColor: 'green'
     },
     red: {
@@ -163,11 +163,11 @@ const CardCrypto = (props) => {
         if (matchesDown) {
             return (
                 <Grid container spacing={3} style={{ display: 'contents', whiteSpace: 'pre' }}>
-                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ width: 70, height: 20, fontSize: 11, marginTop: 12, placeItems: 'center', padding: '3px 8px 3px 4px' }}>
+                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ width: 40, height: 15, fontSize: 10, marginTop: !matches ? 16 : 33, placeItems: 'center', padding: '3px 11px 4px 3px', marginLeft: 15 }}>
                         {coinInfo.CHANGEPCT24HOUR > 0 ? <ArrowDropUpIcon style={{ width: 26 }} /> : <ArrowDropDownIcon style={{ width: 26 }} />}
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                     </span>
-                    <h1 style={{ fontSize: !matches ? 20 : 25, margin: 'auto' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
+                    <h1 style={{ fontSize: !matches ? 20 : 25, margin: matches && '25px auto auto' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
                 </Grid >
             )
         }
