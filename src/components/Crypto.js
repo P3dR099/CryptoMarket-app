@@ -159,8 +159,8 @@ const CardCrypto = (props) => {
 
         if (matchesDown) {
             return (
-                <Grid container spacing={3} style={{ display: 'flex', whiteSpace: 'pre', justifyContent: 'flex-end' }}>
-                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ width: 40, height: 12, fontSize: 9, marginTop: !matches ? 16.5 : 20, placeItems: 'center', padding: '3px 11px 4px 3px', marginLeft: 15, marginRight: 2 }}>
+                <Grid container spacing={3} style={{ display: 'flex', whiteSpace: 'pre', justifyContent: 'flex-end', flexBasis: '155%' }}>
+                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ width: 40, height: 12, fontSize: 9, marginTop: !matches ? 16.5 : 19, placeItems: 'center', padding: '3px 11px 4px 3px', marginLeft: 15, marginRight: 2 }}>
                         {coinInfo.CHANGEPCT24HOUR > 0 ? <ArrowDropUpIcon style={{ width: 26 }} /> : <ArrowDropDownIcon style={{ width: 26 }} />}
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                     </span>
