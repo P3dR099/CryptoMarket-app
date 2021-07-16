@@ -13,7 +13,7 @@ Application created to analyze the cryptocurrency market, developed with React, 
 
 ## Tech
 
-Dillinger uses a number of open source projects to work properly:
+These are the main technologies used:
 
 - [React js](https://github.com/facebook/react.git)
 - [Material-UI](https://material-ui.com/)
