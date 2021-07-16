@@ -3,7 +3,7 @@ import './App.css';
 import './index.css'
 import Crypto from './components/Crypto.js'
 import TableCriptos from './components/TableCriptos.js'
-import { Route } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import NavBar from './components/layout/NavBar'
 import Trade from './services/trade.service'
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -83,12 +83,14 @@ function App() {
         <>
             <div className="App">
                 <main>
-                    <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} setData={setData} Currency={Currency} setCurrency={setCurrency} />
-                    {!data ? <LinearProgress /> : ''}
-                    <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} data={data} {...props} />} />
-                    <Route exact path="/table" render={(props) => <TableCriptos data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
-                    <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
-                    <Footer />
+                    <BrowserRouter>
+                        <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} setData={setData} Currency={Currency} setCurrency={setCurrency} />
+                        {!data ? <LinearProgress /> : ''}
+                        <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} data={data} {...props} />} />
+                        <Route exact path="/table" render={(props) => <TableCriptos data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
+                        <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
+                        <Footer />
+                    </BrowserRouter>
                 </main>
             </div>
 
