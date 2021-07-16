@@ -34,7 +34,7 @@ const useStyles = makeStyles({
         width: 33,
         height: 35,
         marginRight: 10,
-        marginTop: 7
+        marginTop: 6
     },
 
     boxPriceCoin: {
@@ -62,7 +62,7 @@ const convertToDate = (unixTime) => {
 
 const useStyles3 = makeStyles(() => ({
     green: {
-        display: "flex", marginTop: 25, borderRadius: 10, width: 120, height: 30,
+        display: "flex", borderRadius: 10, width: 120, height: 30,
         placeContent: 'center', padding: '5px 5px 0px 0px', color: 'white', backgroundColor: 'green'
     },
     red: {
@@ -74,7 +74,7 @@ const useStyles3 = makeStyles(() => ({
     },
     fontTextMin: {
         fontSize: 20,
-        marginTop: 10
+        marginTop: 9
     },
 
     listStatsCoin: {
@@ -145,7 +145,7 @@ const CardCrypto = (props) => {
         if (!matchesDown) {
             return (
                 <Grid container spacing={3} style={{ margin: 'auto', display: 'contents', whiteSpace: 'pre' }}>
-                    <h1 style={{ fontSize: !matches ? 20 : 30 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
+                    <h1 style={{ fontSize: !matches ? 20 : 30, marginRight: 3 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
                     <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green}>
                         {coinInfo.CHANGEPCT24HOUR > 0 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
