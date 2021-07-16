@@ -1,7 +1,7 @@
 # Cripto-Market
 ## _App to analyze the cryptocurrency market minute by minute_
 
-[![Build Status](https://travis-ci.com/P3dR099/CryptoMarket-app.svg?token=pqgpLKWQbMy9eSnob2Ym&branch=main)](https://travis-ci.org/joemccann/dillinger)
+[![Build Status](https://travis-ci.com/P3dR099/CryptoMarket-app.svg?token=pqgpLKWQbMy9eSnob2Ym&branch=main)]
 
 Application created to analyze the cryptocurrency market, developed with React, Express and Material-UI technologies. I have used the APIs of coinMarketCap and CryptoCompare.
 
