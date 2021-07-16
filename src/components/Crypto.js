@@ -62,7 +62,7 @@ const convertToDate = (unixTime) => {
 
 const useStyles3 = makeStyles(() => ({
     green: {
-        display: "flex", borderRadius: 10, width: 120, height: 30,
+        display: "flex", borderRadius: 10, width: 120, height: 30, marginTop: 0,
         placeContent: 'center', padding: '5px 5px 0px 0px', color: 'white', backgroundColor: 'green'
     },
     red: {
@@ -74,7 +74,7 @@ const useStyles3 = makeStyles(() => ({
     },
     fontTextMin: {
         fontSize: 20,
-        marginTop: 9
+        marginTop: 9.5
     },
 
     listStatsCoin: {
