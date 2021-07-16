@@ -99,7 +99,8 @@ export default function CustomArrows(props) {
 
     const carouselPosition = document.querySelectorAll('.slick-track')
     if (carouselPosition[0] !== undefined && !matchesMin) carouselPosition[0].style.transform = "translate3d(-0.5%, 0px, 0px)"
-    if (carouselPosition[0] !== undefined && matchesMed) carouselPosition[0].style.transform = "translate3d(-1.45%, 0px, 0px)"
+    if (carouselPosition[0] !== undefined && !matchesMin) console.log(carouselPosition[0].style)
+    // if (carouselPosition[0] !== undefined && matchesMed) carouselPosition[0].style.transform = "translate3d(-1.45%, 0px, 0px)"
 
     return (
         <>

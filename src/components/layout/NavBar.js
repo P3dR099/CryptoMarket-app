@@ -106,7 +106,7 @@ export default function SearchAppBar(props) {
             <Toolbar>
                 {props.loggedInUser && <AccountCircle {...props} />}
                 {/* <ModalAuth {...props} /> */}
-                <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} className={classes.logoCripto} src={logoCripto} alt="cripto" />
+                <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} onClick={() => history.push('/')} className={classes.logoCripto} src={logoCripto} alt="cripto" />
                 <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
                     CryptoMarket
                 </Typography>
