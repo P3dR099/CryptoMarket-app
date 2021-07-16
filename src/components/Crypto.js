@@ -159,7 +159,6 @@ const CardCrypto = (props) => {
 
     const showPricesMin = () => {
 
-
         if (matchesDown) {
             return (
                 <Grid container spacing={3} style={{ display: 'inherit', whiteSpace: 'pre', justifyContent: 'flex-end', marginTop: 0 }}>
@@ -167,7 +166,7 @@ const CardCrypto = (props) => {
                         {coinInfo.CHANGEPCT24HOUR > 0 ? <ArrowDropUpIcon style={{ width: 26 }} /> : <ArrowDropDownIcon style={{ width: 26 }} />}
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                     </span>
-                    <h1 style={{ fontSize: !matches ? 20 : 25, margin: matches && '25px auto auto' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
+                    <h1 style={{ fontSize: !matches ? 20 : 25, margin: matches && '25px 10px 10px 11px' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
                 </Grid >
             )
         }

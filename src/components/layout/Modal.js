@@ -17,7 +17,7 @@ export default function SimpleModal(props) {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleOpen}>Open modal</Button>
+            <Button variant="outlined" onClick={handleOpen}>Add Columns</Button>
 
             <Modal
                 open={open}

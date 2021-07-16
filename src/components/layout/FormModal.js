@@ -54,7 +54,7 @@ export default React.forwardRef((props, ref) => {
         <>
             <div style={modalStyle} className={classes.paper}>
                 <FormControl component="fieldset">
-                    <FormLabel component="legend">Assign responsibility</FormLabel>
+                    <FormLabel component="legend">Add new columns</FormLabel>
                     <FormGroup>
                         <FormControlLabel
                             control={<Switch checked={props.stateCols.change_1h} onChange={props.handleRows} name="change_1h" />}
@@ -65,12 +65,9 @@ export default React.forwardRef((props, ref) => {
                             label="Add 1d change"
                         />
                     </FormGroup>
-                    <FormHelperText>Be careful</FormHelperText>
+                    <FormHelperText>
+                        columns to show the change of 1 hour and 1 day </FormHelperText>
                 </FormControl>
-                <h2 id="simple-modal-title">Text in a modal</h2>
-                <p id="simple-modal-description">
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                </p>
             </div>
         </>
     )
