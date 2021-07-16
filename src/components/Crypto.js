@@ -34,7 +34,7 @@ const useStyles = makeStyles({
         width: 33,
         height: 35,
         marginRight: 10,
-        marginTop: 10
+        marginTop: 7
     },
 
     boxPriceCoin: {
@@ -66,14 +66,15 @@ const useStyles3 = makeStyles(() => ({
         placeContent: 'center', padding: '5px 5px 0px 0px', color: 'white', backgroundColor: 'green'
     },
     red: {
-        display: "flex", marginTop: 25, borderRadius: 10, width: 120, height: 30,
+        display: "flex", marginTop: 3, borderRadius: 10, width: 120, height: 30,
         placeContent: 'center', padding: '5px 5px 0px 0px', color: 'white', backgroundColor: 'red'
     },
     fontText: {
         fontSize: 30
     },
     fontTextMin: {
-        fontSize: 20
+        fontSize: 20,
+        marginTop: 10
     },
 
     listStatsCoin: {
@@ -82,9 +83,6 @@ const useStyles3 = makeStyles(() => ({
 
     valueStatsCoin: {
         fontWeight: 600, color: '#000', lineHeight: 3, textAlign: 'end'
-    },
-    contPricesMin: {
-
     }
 }))
 
@@ -161,12 +159,12 @@ const CardCrypto = (props) => {
 
         if (matchesDown) {
             return (
-                <Grid container spacing={3} style={{ display: 'contents', whiteSpace: 'pre', justifyContent: 'flex-end', marginTop: 0 }}>
-                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ width: 40, height: 12, fontSize: 9, marginTop: !matches ? 16.5 : 33, placeItems: 'center', padding: '3px 11px 4px 3px', marginLeft: 15, marginRight: 2 }}>
+                <Grid container spacing={3} style={{ display: 'flex', whiteSpace: 'pre', justifyContent: 'flex-end' }}>
+                    <span className={coinInfo.CHANGEPCT24HOUR < 0 ? classBottom.red : classBottom.green} style={{ width: 40, height: 12, fontSize: 9, marginTop: !matches ? 16.5 : 20, placeItems: 'center', padding: '3px 11px 4px 3px', marginLeft: 15, marginRight: 2 }}>
                         {coinInfo.CHANGEPCT24HOUR > 0 ? <ArrowDropUpIcon style={{ width: 26 }} /> : <ArrowDropDownIcon style={{ width: 26 }} />}
                         {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                     </span>
-                    <h1 style={{ fontSize: !matches ? 20 : 25, margin: matches && '25px 10px 10px 11px' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
+                    <h1 style={{ fontSize: !matches ? 20 : 25, margin: matches && '12px 10px 10px 11px' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
                 </Grid >
             )
         }
@@ -182,8 +180,8 @@ const CardCrypto = (props) => {
                     <Grid item xs={matchesDown ? 12 : 8}>
                         <Paper style={{ margin: 0, backgroundColor: 'transparent' }} elevation={3}>
                             <Container style={{ padding: !matches && 18 }}>
-                                <Container style={{ display: "flex", paddingTop: 10, paddingLeft: 1 }}>
-                                    <Grid style={{ display: "inherit" }} item xs={12}>
+                                <Container style={{ display: "flex", paddingTop: 10, paddingLeft: 1, alignItems: 'center' }}>
+                                    <Grid style={{ display: "inherit", flexBasis: !matches ? '120%' : '124%' }} item xs={12}>
                                         <img alt="coin logo" className={matches ? classes.logoCoin : classes.logoCoinMin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`} />
                                         <h1 className={!matches ? classBottom.fontTextMin : classBottom.fontText}>{info && info.name}</h1>
                                     </Grid>
