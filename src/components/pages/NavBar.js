@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
 // import ModalAuth from '../pages/ModalAuth.js'
-import AccountCircle from './AccountCircle.js'
+import AccountCircle from '../layout/AccountCircle.js'
 import logoCripto from '../../logos/default.png'
 
 const useStyles = makeStyles((theme) => ({

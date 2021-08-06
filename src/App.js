@@ -4,11 +4,11 @@ import './index.css'
 import Crypto from './components/Crypto.js'
 import TableCriptos from './components/TableCriptos.js'
 import { BrowserRouter, Route } from 'react-router-dom'
-import NavBar from './components/layout/NavBar'
+import NavBar from './components/pages/NavBar'
 import Trade from './services/trade.service'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Home from './components/pages/Home'
-import Footer from './components/layout/Footer'
+import Footer from './components/pages/Footer'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 const tradeService = new Trade()
@@ -73,7 +73,6 @@ function App() {
     }, [])
 
     useEffect(() => {
-
 
         const login = JSON.parse(localStorage.getItem('login'))
         setTheUser(login)

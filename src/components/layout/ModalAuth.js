@@ -4,8 +4,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import SignUp from './Signup'
-import Login from './Login'
+import SignUp from '../pages/Signup'
+import Login from '../pages/Login'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export default function FormDialog(props) {

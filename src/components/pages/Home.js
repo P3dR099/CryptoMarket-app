@@ -4,8 +4,14 @@ import './Home.css';
 import CarouselSlide from '../layout/CarouselSlide';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useHistory } from "react-router-dom";
+import { Button } from '../style/Home';
+
+
 
 const Home = (props) => {
+
+    let history = useHistory();
     const matchesMedium = useMediaQuery('(max-width:900px)');
 
     const useStyles = makeStyles({
@@ -52,9 +58,9 @@ const Home = (props) => {
                             <Container style={{ marginBlockStart: '15px', color: 'antiquewhite' }}>
                                 Analiza el mercado de criptomonedas actualizado minuto a minuto,<br></br>y personalizando el tiempo mostrado sobre cada moneda
                             </Container>
-                            <a className={classes.button} href="/table">
+                            <Button onClick={() => history.push('/table')}>
                                 Go to table
-                            </a>
+                            </Button>
                         </Container>
                     </div>
                     <CarouselSlide {...props} />
