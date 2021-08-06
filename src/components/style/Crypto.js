@@ -29,7 +29,10 @@ export const boxPriceCoin = styled.div`
 `
 
 export const BackgroundCripto = styled.div`
-    padding: 0px; max-width: 100%; height: 100%; position: inherit;
+    padding: 0px;
+    max-width: 100%;
+    height: 100%;
+    position: inherit;
 `
 
 export const ContainerPaperCrypto = styled(Paper)`
@@ -37,23 +40,55 @@ export const ContainerPaperCrypto = styled(Paper)`
     background-color: transparent;
 `
 
+export const ContainerPaperList = styled(Paper)`
+    background: #f8fafd;
+    border-radius: 8px;
+`
+
 export const Green = styled.div`
-    display: -webkit-flex; border-radius: 10px; width: 60px; margin-top: 0; -webkit-align-items: center;
-        place-content: center; padding: 1px 5px 0px 0px; color: white; background-color: green; font-size: 12px;
+    display: -webkit-flex; border-radius: 10px; width: 48px; height: 20px;
+        ${({ matches }) => matches && `
+        width: 78px;
+        height: 25px;
+    `}
+        margin-top: 0;
+        -webkit-align-items: center;
+        place-content: center;
+        padding: 0px 5px 0px 0px;
+        color: white;
+        background-color: green;
+        font-size: 9px;
+         ${({ matches }) => matches && `
+        font-size: 11px;
+    `}
 `
 
 export const Red = styled.div`
-    display: flex; margin-top: 3px; border-radius: 10px; width: 60px; align-items: center;
-        place-content: center; padding: 1px 5px 0px 0px; color: white; background-color: red; font-size: 12px;
+    display: -webkit-flex; border-radius: 10px; width: 48px; height: 20px;
+        ${({ matches }) => matches && `
+        width: 78px;
+        height: 25px;
+    `}
+        margin-top: 0;
+        -webkit-align-items: center;
+        place-content: center;
+        padding: 0px 5px 0px 0px;
+        color: white;
+        background-color: red;
+        font-size: 9px;
+        ${({ matches }) => matches && `
+        font-size: 11px;
+    `}
 `
 export const FontText = styled.h1`
     font-size: 30px;
 `
 
 export const FontTextMin = styled.h1`
-    font-size: 20px;
+    font-size: 19px;
     margin-top: 9.5px;
-    margin-right: 25px;
+    margin-right: 15px;
+    text-align: start;
 `
 
 const ListStatsCoin = styled.div`
@@ -61,7 +96,10 @@ const ListStatsCoin = styled.div`
 `
 
 export const ValueStatsCoin = styled.div`
-    font-weight: 600; color: #000; line-height: 3; text-align: end;
+    font-weight: 600;
+    color: #000;
+    line-height: 3;
+    text-align: end;
 `
 
 export default ListStatsCoin;

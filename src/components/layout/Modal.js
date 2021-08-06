@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import FormModal from './FormModal'
 import { Button } from '@material-ui/core';
 
 export default function SimpleModal(props) {
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);

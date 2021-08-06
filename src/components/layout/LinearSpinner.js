@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -38,7 +38,7 @@ export default function LinearWithValueLabel() {
     const classes = useStyles();
     const [progress, setProgress] = React.useState(10);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const timer = setInterval(() => {
             setProgress((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
         }, 800);

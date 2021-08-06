@@ -1,11 +1,12 @@
 import { Box, Container, Typography } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import { Link } from "react-router-dom";
+import CarouselSlider from "../style/CarouselSlide";
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -106,7 +107,7 @@ export default function CustomArrows(props) {
         <>
 
             {props.data !== undefined &&
-                <Slider {...settings} style={{ margin: !matchesMax2 ? '0px 22px 0px 64px' : '0px 35px 0px 86px', transform: matchesMax2 ? 'translateX(-42px) translateY(430px)' : 'translateX(-34px) translateY(500px)', paddingLeft: !matchesMin || !matchesMax2 ? 25 : 0 }} >
+                <CarouselSlider {...settings} matchesMin={!matchesMin} matchesMax2={!matchesMin2} >
                     {props.data.map(function (slide, index) {
                         return (
                             <Container key={index}>
@@ -136,7 +137,7 @@ export default function CustomArrows(props) {
                             </Container>
                         )
                     })}
-                </Slider>
+                </CarouselSlider>
             }
         </>
     );
