@@ -42,12 +42,34 @@ export const ContainerSection = styled.div`
     background: dimgrey;
     border-radius: 63px;
     width: 100%;
-    height: 600px;
-    background-color: rgb(227 224 242 / 50%);
+    height: 500px;
+    background-color: #F0F2F7;
 `
 
 export const ContainerParentSection = styled(Container)`
     ${({ matches }) => matches ? `margin-top: 0px;` : `margin-top: 160px;`}
+`
+export const ContainerGraphAppImg = styled.div`
+	
+    webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+
+`
+
+export const FigureTransition = styled.figure`
+    :hover{
+
+        webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+`
+
+export const GraphAppLogoImg = styled.img`
+    transform: skewX(10deg);
+    width: 150px
+    
 `
 
 export default Button;
