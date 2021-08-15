@@ -1,71 +1,53 @@
 import { Container } from '@material-ui/core';
 import React, { useEffect } from 'react';
-import './Home.css';
-import CarouselSlide from '../layout/CarouselSlide';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import CarouselSlider from '../layout/CarouselSlider';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
-import { Button } from '../style/Home';
-
+import './Home.css';
+import BtcLogo from '../../logos/btc-logo.png';
+import EthLogo from '../../logos/Ethereum-Logo.png';
+import Button, { ContainerHome, ContainerKid, ContainerSection, ContainerParentSection } from '../style/Home';
+// import Greeter from '../../artifacts/contracts/Greeter.sol/Greeter.json';
 
 
 const Home = (props) => {
 
     let history = useHistory();
-    const matchesMedium = useMediaQuery('(max-width:900px)');
-
-    const useStyles = makeStyles({
-
-        button: {
-            borderRadius: 14,
-            width: 100,
-            color: 'white',
-            height: 35,
-            background: 'steelblue',
-            margin: 25,
-            appearance: 'button',
-            textDecoration: 'none',
-            padding: '8px 0px 0px 3px'
-        },
-
-        contHome: {
-            maxWidth: 2850, padding: 0, height: '100vh'
-        },
-
-        subContHome: {
-            padding: 'inherit', maxWidth: 'inherit', height: 'inherit'
-        }
-    })
-
+    const matchesMedium = useMediaQuery('(max-width:700px)');
     const { getCoins } = props
 
     useEffect(() => {
-
         parseInt(localStorage.getItem('value')) === 1 ? getCoins('EUR') : getCoins('USD')
-
     }, [getCoins])
-
-    const classes = useStyles()
 
     return (
         <>
-            <Container className={classes.contHome}>
-                <Container className={classes.subContHome}>
-                    <div id="kid">
+            <ContainerHome>
+                <ContainerKid matches={matchesMedium}>
+                    <Container style={{ padding: matchesMedium ? '40px 25px 20px 25px' : '130px 25px 20px 25px' }}>
+                        <img style={{ width: 50 }} src={BtcLogo} />
+                        <img style={{ width: 80 }} src={EthLogo} />
                         <h1 className="title" style={{ fontSize: !matchesMedium && '50px' }} >Mercado de Criptomonedas</h1>
-
-                        <Container style={{ padding: 0 }}>
-                            <Container style={{ marginBlockStart: '15px', color: 'antiquewhite' }}>
-                                Analiza el mercado de criptomonedas actualizado minuto a minuto,<br></br>y personalizando el tiempo mostrado sobre cada moneda
-                            </Container>
-                            <Button onClick={() => history.push('/table')}>
-                                Go to table
-                            </Button>
+                        <Container style={{ marginBlockStart: '15px', color: 'antiquewhite' }}>
+                            Analiza el mercado de criptomonedas actualizado minuto a minuto,<br></br>y personalizando el tiempo mostrado sobre cada moneda
                         </Container>
-                    </div>
-                    <CarouselSlide {...props} />
-                </Container>
-            </Container>
+                        <Button onClick={() => history.push('/table')}>
+                            Go to table
+                        </Button>
+                    </Container>
+                </ContainerKid>
+                <CarouselSlider {...props} />
+            </ContainerHome>
+            <ContainerParentSection matches={matchesMedium}>
+
+                <ContainerSection matches={matchesMedium}>
+                    <section>
+                        <h2>
+                            El monedero de criptomonedas más poderoso y fácil de usar
+                        </h2>
+                    </section>
+                </ContainerSection>
+            </ContainerParentSection>
         </>
     )
 }

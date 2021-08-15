@@ -2,8 +2,8 @@ import { Paper } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const boxCoin = styled.div`
-    display: 'flex';
-    alignItems: 'center'
+    display: flex;
+    align-items: center;
 `
 
 export const LogoCoin = styled.div`
@@ -32,6 +32,7 @@ export const BackgroundCripto = styled.div`
     padding: 0px;
     max-width: 100%;
     height: 100%;
+    ${({ matchesDown }) => matchesDown ? `height: 100vh;` : 'height: auto;'}
     position: inherit;
 `
 
@@ -64,18 +65,23 @@ export const Green = styled.div`
 `
 
 export const Red = styled.div`
-    display: -webkit-flex; border-radius: 10px; width: 48px; height: 20px;
+    display: -webkit-flex;
+    border-radius: 10px;
+    width:50px;
+    height: 20px;
+    padding: 0px 5px 0px 0px;
+    font-size: 9px;
         ${({ matches }) => matches && `
         width: 78px;
         height: 25px;
+        padding: 0px 5px 2px 0px;
+        font-size: 10px;
     `}
         margin-top: 0;
         -webkit-align-items: center;
         place-content: center;
-        padding: 0px 5px 0px 0px;
         color: white;
         background-color: red;
-        font-size: 9px;
         ${({ matches }) => matches && `
         font-size: 11px;
     `}

@@ -43,7 +43,7 @@ const useStyles = makeStyles({
         margin: 10
     },
     cardCoin: {
-        margin: '0px 0px 1px 0px', width: 245, height: 170, borderRadius: 8, background: '#fff'
+        margin: '0px 0px 1px 0px', width: '100%', height: 170, borderRadius: 8, background: '#fff'
     },
     cardCoinMin: {
         margin: '0px 0px 1px 0px', height: 170, borderRadius: 8, background: '#fff', width: '100%'
@@ -67,7 +67,7 @@ export default function CustomArrows(props) {
 
     const classes = useStyles();
     const matchesMin = useMediaQuery('(min-width:460px)');
-    const matchesMin2 = useMediaQuery('(min-width:770px)');
+    const matchesMin2 = useMediaQuery('(min-width:700px)');
     const matchesMed = useMediaQuery('(min-width:1090px)');
     const matchesMax = useMediaQuery('(max-width:1100px)');
     const matchesMax2 = useMediaQuery('(max-width:1350px)');
@@ -100,22 +100,22 @@ export default function CustomArrows(props) {
 
     const carouselPosition = document.querySelectorAll('.slick-track')
     if (carouselPosition[0] !== undefined && !matchesMin) carouselPosition[0].style.transform = "translate3d(-0.5%, 0px, 0px)"
-    if (carouselPosition[0] !== undefined && !matchesMin) console.log(carouselPosition[0].style)
+    // if (carouselPosition[0] !== undefined && !matchesMin) console.log(carouselPosition[0].style)
     // if (carouselPosition[0] !== undefined && matchesMed) carouselPosition[0].style.transform = "translate3d(-1.45%, 0px, 0px)"
 
     return (
         <>
 
             {props.data !== undefined &&
-                <CarouselSlider {...settings} matchesMin={!matchesMin} matchesMax2={!matchesMin2} >
+                <CarouselSlider {...settings} matchesMin={!matchesMin} matchesMin2={!matchesMin2} >
                     {props.data.map(function (slide, index) {
                         return (
                             <Container key={index}>
                                 <Box boxShadow={4} className={matchesMin ? classes.cardCoin : classes.cardCoinMin}>
                                     <Container style={{ display: 'flex', justifyContent: 'space-between', padding: !matchesMin ? '3px 8px 0px 15px' : '5px 15px', alignItems: 'center' }}>
-                                        <h3 style={{ marginLeft: 0, fontSize: 'initial' }}>{slide.name}</h3>
+                                        <h3 style={{ marginLeft: 0, fontSize: 'initial', alignSelf: 'baseline' }}>{slide.name}</h3>
                                         <h3 style={{
-                                            color: 'gray', fontSize: 13, position: 'absolute', transform: 'translateY(20px)', fontWeight: 500, opacity: 0.7, paddingTop: 1
+                                            color: 'gray', fontSize: 13, position: 'absolute', transform: 'translateY(20px)', fontWeight: 500, opacity: 0.7, marginTop: 0
                                         }}>{slide.symbol}</h3>
                                         <Link to={"/coin/" + slide.id} style={{ textDecoration: 'none', color: 'inherit' }} >
                                             <img alt="coin" className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />

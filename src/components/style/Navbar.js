@@ -6,7 +6,7 @@ const Navbar = makeStyles((theme) => ({
         textAlignLast: 'center'
     },
     navbar: {
-        background: 'transparent',
+        background: '#000046',
         boxShadow: 'none',
         // position: 'absolute'
     },
@@ -21,6 +21,7 @@ const Navbar = makeStyles((theme) => ({
         },
     },
     search: {
+        webkitTextFillColor: 'whitesmoke',
         display: 'flex',
         position: 'relative',
         borderRadius: theme.shape.borderRadius,

@@ -1,12 +1,14 @@
 .parent {
-
     border: 2px solid #000;
 }
 #kid {
     position: absolute;
     width: 100%;
     position: absolute;
-    transform: translateY(80px);
+    height: 500px;
+/* background: #000046; */
+    background: -webkit-linear-gradient(to top, #1CB5E0, #000046);
+    background: linear-gradient(to top, #1CB5E0, #000046);
 }
 
 .title {

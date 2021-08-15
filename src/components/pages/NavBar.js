@@ -13,74 +13,6 @@ import AccountCircle from '../layout/AccountCircle.js';
 import logoCripto from '../../logos/default.png';
 import Navbar from '../style/Navbar';
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         flexGrow: 1,
-//         textAlignLast: 'center'
-//     },
-//     navbar: {
-//         background: 'transparent',
-//         boxShadow: 'none',
-//         // position: 'absolute'
-//     },
-//     menuButton: {
-//         marginRight: theme.spacing(2),
-//     },
-//     title: {
-//         flexGrow: 1,
-//         display: 'none',
-//         [theme.breakpoints.up('sm')]: {
-//             display: 'block',
-//         },
-//     },
-//     search: {
-//         display: 'flex',
-//         position: 'relative',
-//         borderRadius: theme.shape.borderRadius,
-//         backgroundColor: fade(theme.palette.common.white, 0.15),
-//         '&:hover': {
-//             backgroundColor: fade(theme.palette.common.white, 0.25),
-//         },
-//         justifyContent: 'flex-end',
-//         marginLeft: 0,
-//         width: '100%',
-//         [theme.breakpoints.up('sm')]: {
-//             marginLeft: theme.spacing(1),
-//             width: 'auto',
-//         },
-//     },
-//     logoCripto: {
-//         marginRight: 90,
-//         marginTop: 8,
-//         width: 60,
-//     },
-//     searchIcon: {
-//         padding: theme.spacing(0, 2),
-//         height: '100%',
-//         position: 'absolute',
-//         pointerEvents: 'none',
-//         display: 'flex',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//     },
-//     inputRoot: {
-//         color: 'inherit',
-//     },
-//     inputInput: {
-//         padding: theme.spacing(1, 1, 1, 0),
-//         // vertical padding + font size from searchIcon
-//         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-//         transition: theme.transitions.create('width'),
-//         width: '100%',
-//         [theme.breakpoints.up('sm')]: {
-//             width: '12ch',
-//             '&:focus': {
-//                 width: '20ch',
-//             },
-//         },
-//     },
-// }));
-
 export default function SearchAppBar(props) {
 
     const classes = Navbar();
@@ -89,6 +21,7 @@ export default function SearchAppBar(props) {
 
     const matchesMin = useMediaQuery('(min-width:350px)');
     const matches = useMediaQuery('(min-width:600px)');
+    const matchesMedium = useMediaQuery('(min-width:750px)');
 
     const handleClick = (event) => {
         data.map(el => {
@@ -103,14 +36,14 @@ export default function SearchAppBar(props) {
 
     return (
         <AppBar position="static" className={classes.navbar}>
-            <Toolbar>
+            <Toolbar style={{ justifyContent: 'space-between' }}>
                 {props.loggedInUser && <AccountCircle {...props} />}
                 {/* <ModalAuth {...props} /> */}
                 <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} onClick={() => history.push('/')} className={classes.logoCripto} src={logoCripto} alt="cripto" />
                 <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
                     CryptoMarket
                 </Typography>
-                <div className={classes.search} style={{ backgroundColor: !matches && 'transparent', width: !matchesMin && 160 }}>
+                <div className={classes.search} style={{ backgroundColor: !matches && 'whitesmoke', width: !matchesMin && 160, flexBasis: !matchesMedium && '35%' }}>
                     <Autocomplete
                         freeSolo
                         onChange={(event) => handleClick(event)}
@@ -122,7 +55,7 @@ export default function SearchAppBar(props) {
                                 <Grid item>
                                     {matches ? <SearchIcon style={{ marginTop: "15px" }} /> : ''}
                                     <TextField
-                                        style={{ margin: 0, width: 175 }}
+                                        style={{ margin: 0, width: 162 }}
                                         {...params}
                                         label="Search"
                                         margin="normal"
