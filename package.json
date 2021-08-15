@@ -34,7 +34,6 @@
         "travis": "^0.1.1",
         "truffle": "^5.4.5",
         "web-vitals": "^1.1.0",
-        "web3": "^1.5.1"
     },
     "scripts": {
         "start": "PORT=3006 react-scripts start",
