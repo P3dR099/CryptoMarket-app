@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createMuiTheme, makeStyles, useTheme } from '@material-ui/core/styles';
+import { createTheme, makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -35,7 +35,7 @@ TabPanel.propTypes = {
 
 const a11yProps = (index) => { return { id: `full-width-tab-${index}`, 'aria-controls': `full-width-tabpanel-${index}` }; }
 
-const theme2 = createMuiTheme({
+const theme2 = createTheme({
     breakpoints: {
         values: {
             xxs: 0,

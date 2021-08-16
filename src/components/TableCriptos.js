@@ -7,7 +7,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {
     DataGrid,
     GridToolbarContainer,
-    GridDensitySelector,
     GridFilterToolbarButton,
 } from '@material-ui/data-grid';
 import { Link } from "react-router-dom";
@@ -21,8 +20,8 @@ import colChange_1h, { colChange_1d } from './utils/TableColumns';
 function CustomToolbar() {
     return (
         <GridToolbarContainer>
-            <GridDensitySelector />
-            <GridFilterToolbarButton />
+            {/* <GridDensitySelector /> */}
+            {/* <GridFilterToolbarButton /> */}
         </GridToolbarContainer>
     );
 }
