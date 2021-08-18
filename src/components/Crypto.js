@@ -118,7 +118,7 @@ const CardCrypto = (props) => {
             <BackgroundCripto>
                 <Grid style={{ width: '99%', margin: 0 }} container spacing={2}>
                     <Grid item xs={matchesDown ? 12 : 8} style={{ width: '99%', margin: 0 }} >
-                        <ContainerPaperCrypto matchesDown={matchesDown} elevation={3}>
+                        <ContainerPaperCrypto matches={matches ? 'width: 95%;' : 'width: 100%;'} elevation={3}>
                             <Container style={{ padding: !matches ? 18 : undefined }}>
                                 <Container style={{ display: "flex", paddingLeft: 1, alignItems: 'center' }}>
                                     <Grid style={{ display: "inherit", flexBasis: !matches ? '125%' : '124%' }} item xs={12}>

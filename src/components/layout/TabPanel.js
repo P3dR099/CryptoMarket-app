@@ -69,7 +69,7 @@ export default function FullWidthTabs(props) {
     const classes = useStyles();
     const theme = useTheme();
     const matchesMax = useMediaQuery('(max-width:1476px)');
-    const matchesMin = useMediaQuery('(min-width:400px)');
+    const matchesMin = useMediaQuery('(min-width:600px)');
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {

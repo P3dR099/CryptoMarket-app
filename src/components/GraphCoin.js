@@ -88,7 +88,7 @@ const GraphCoin = (props) => {
         }
 
         if (matchesMedium) {
-            return 390
+            return 450
         }
     }
 
