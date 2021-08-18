@@ -10,7 +10,6 @@ import GraphAppLogo from '../../logos/app-screenshots/androidTable.png';
 import Button, { ContainerHome, ContainerKid, ContainerSection, GraphAppLogoImg } from '../style/Home';
 import { bounceIn } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
-import "animate.css/animate.min.css";
 
 // import Greeter from '../../artifacts/contracts/Greeter.sol/Greeter.json';
 
@@ -60,7 +59,7 @@ const Home = (props) => {
             </ContainerHome>
             <ContainerSection matches={matchesMedium} >
                 {/* {console.log(window.screen)} */}
-                <ScrollAnimation animateIn="fadeIn">
+                <BouncyDiv>
                     <section>
                         <h2>
                             Aplicación en desarrollo <div />
@@ -69,8 +68,7 @@ const Home = (props) => {
                         </h2>
                         <GraphAppLogoImg src={GraphAppLogo} />
                     </section>
-
-                </ScrollAnimation>
+                </BouncyDiv>
             </ContainerSection>
         </>
     )
