@@ -83,7 +83,7 @@ export default function FullWidthTabs(props) {
                 <Tabs
                     value={value}
                     onChange={handleChange}
-                    style={{ padding: 0 }}
+                    style={{ padding: 0, width: '100%' }}
                     indicatorColor="primary"
                     textColor="primary"
                     variant="fullWidth"
@@ -94,14 +94,14 @@ export default function FullWidthTabs(props) {
                     <Tab label="1 mes" style={{ color: "#0b1f58" }} {...a11yProps(2)} />
                 </Tabs>
             </ul>
-            <TabPanel style={{ margin: !matchesMin ? '0px 0px 0px -30px' : '0px 0px 0px 5px' }} value={value} index={1} dir={theme.direction}>
+            <TabPanel style={{margin: !matchesMin ? '0px 0px 0px -30px' : '0px 0px 0px 50px' }} value={value} index={1} dir={theme.direction}>
                 <GraphCoin value={value} {...props} />
             </TabPanel>
 
-            <TabPanel style={{ margin: !matchesMin && '0px 0px 0px -40px' }} value={value} index={0} dir={theme.direction}>
+            <TabPanel style={{ margin: !matchesMin ? '0px 0px 0px 0px' : '0px 0px 0px 50px'}} value={value} index={0} dir={theme.direction}>
                 <GraphCoin value={value} {...props} />
             </TabPanel>
-            <TabPanel style={{ margin: !matchesMin ? '0px 0px 0px -30px' : '0px 0px 0px 5px' }} value={value} index={2} dir={theme.direction}>
+            <TabPanel style={{ margin: !matchesMin ? '0px 0px 0px -30px' : '0px 0px 0px 50px' }} value={value} index={2} dir={theme.direction}>
                 <GraphCoin value={value} {...props} />
             </TabPanel>
         </div>

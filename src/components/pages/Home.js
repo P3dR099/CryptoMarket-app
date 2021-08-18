@@ -17,8 +17,8 @@ const Flip = flip;
 const bounceAnimation = keyframes`${bounceIn}`;
 
 const BouncyDiv = styled.div`
+    transform: translateY(190px);
 
-:hover{
     -webkit-animation: 3.5s ${bounceAnimation};
 }
 `;
@@ -27,7 +27,16 @@ const Home = (props) => {
 
     let history = useHistory();
     const matchesMedium = useMediaQuery('(max-width:700px)');
+    const matchesHt = useMediaQuery('(max-height:700px)');
     const { getCoins } = props
+
+
+    const handleEvent = (event) => {
+        console.log(event)
+        console.log('hola')
+
+    }
+
 
     useEffect(() => {
         parseInt(localStorage.getItem('value')) === 1 ? getCoins('EUR') : getCoins('USD')
@@ -52,20 +61,19 @@ const Home = (props) => {
                 </ContainerKid>
                 <CarouselSlider {...props} />
             </ContainerHome>
-            <ContainerParentSection matches={matchesMedium}>
-                <ContainerSection matches={matchesMedium}>
-                    <BouncyDiv>
-                        <section>
-                            <h2>
-                                Aplicación en desarrollo <div />
-                                para el analisis del mercado de criptomonedas,<div />
-                                más poderoso y fácil de usar
-                            </h2>
-                            <GraphAppLogoImg src={GraphAppLogo} />
-                        </section>
-                    </BouncyDiv>
-                </ContainerSection>
-            </ContainerParentSection>
+            <ContainerSection matches={matchesMedium} >
+                {/* {console.log(window.screen)} */}
+                <BouncyDiv>
+                    <section>
+                        <h2>
+                            Aplicación en desarrollo <div />
+                            para el analisis del mercado de criptomonedas,<div />
+                            más poderoso y fácil de usar
+                        </h2>
+                        <GraphAppLogoImg src={GraphAppLogo} />
+                    </section>
+                </BouncyDiv>
+            </ContainerSection>
         </>
     )
 }

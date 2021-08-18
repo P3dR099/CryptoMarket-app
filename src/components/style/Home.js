@@ -34,7 +34,7 @@ export const ContainerKid = styled.div`
     background: linear-gradient(to top, #1CB5E0, #000046);
 `
 
-export const ContainerSection = styled.div`
+export const ContainerSection = styled(Container)`
     display: -webkit-flex;
     -webkit-justify-content: center;
     -webkit-align-items: center;
@@ -47,6 +47,7 @@ export const ContainerSection = styled.div`
 `
 
 export const ContainerParentSection = styled(Container)`
+    transform: translateY(190px);
     ${({ matches }) => matches ? `margin-top: 0px;` : `margin-top: 160px;`}
 `
 export const ContainerGraphAppImg = styled.div`

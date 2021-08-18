@@ -76,11 +76,10 @@ const CardCrypto = (props) => {
                 <Grid container spacing={3} style={{ margin: 'auto', display: 'contents', whiteSpace: 'pre' }}>
                     <h1 style={{ fontSize: !matches ? 20 : 30, marginRight: 3 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
                     <span>
-                        {coinInfo.CHANGEPCT24HOUR < 0 ?
-                            <Red matches={matches}>
-                                <ArrowDropDownIcon />
-                                {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
-                            </Red> :
+                        {coinInfo.CHANGEPCT24HOUR < 0 ? <Red>
+                            <ArrowDropDownIcon />
+                            {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
+                        </Red> :
                             <Green matches={matches}>
                                 <ArrowDropUpIcon />
                                 {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
@@ -107,7 +106,7 @@ const CardCrypto = (props) => {
                             </Green>
                         }
                     </span>
-                    <h1 style={{ fontSize: !matches ? 19 : 30, margin: matches ? '5px 10px 10px 11px' : '5px 5px 8px 11px' }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
+                    <h1 style={{ fontSize: !matches ? 19 : 30, margin: matches ? '12px 10px 10px 11px' : undefined }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
                 </Grid >
             )
         }
@@ -116,24 +115,26 @@ const CardCrypto = (props) => {
     return (
         <>
             <CustomizedBreadcrumbs />
-            <BackgroundCripto matches={!matches} matchesDown={!matchesDown}>
+            <BackgroundCripto>
                 <Grid style={{ width: '99%', margin: 0 }} container spacing={2}>
-                    <Grid item xs={matchesDown ? 12 : 8}>
+                    <Grid item xs={matchesDown ? 12 : 8} style={{width: '99%', margin: 0 }} >
                         <ContainerPaperCrypto elevation={3}>
                             <Container style={{ padding: !matches ? 18 : undefined }}>
                                 <Container style={{ display: "flex", paddingTop: 10, paddingLeft: 1, alignItems: 'center' }}>
                                     <Grid style={{ display: "inherit", flexBasis: !matches ? '125%' : '124%' }} item xs={12}>
                                         <LogoCoin matches={!matches}>
-                                            <img alt={`coin ${id}`} style={{ width: !matches ? 35 : 45, marginRight: 7, marginTop: 3 }} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`} />
+                                            <img alt={`coin ${id}`} style={{ width: !matches ? 35 : 45, marginRight: 6, marginTop: 3 }} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`} />
                                             {!matches ? <FontTextMin>{info && info.name}</FontTextMin> : <FontText> {info && info.name}</FontText>}
                                         </LogoCoin>
                                     </Grid>
                                     {matchesDown ? showPricesMin() : showPrices()}
                                 </Container>
-                                {histoMinute.Data !== undefined ? <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} /> : <CircularProgress />}
                             </Container>
                         </ContainerPaperCrypto>
                     </Grid>
+
+                        {histoMinute.Data !== undefined ? <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} /> : <CircularProgress />}
+                
                     <Grid item xs={matchesDown ? 12 : 4}>
                         <ContainerPaperList style={{ margin: !matchesDown && '190px 0px 0px 16px' }} elevation={3}>
                             <Container style={{ padding: 1 }}>
