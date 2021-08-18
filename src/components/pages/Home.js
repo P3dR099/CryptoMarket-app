@@ -7,13 +7,12 @@ import './Home.css';
 import BtcLogo from '../../logos/btc-logo.png';
 import EthLogo from '../../logos/Ethereum-Logo.png';
 import GraphAppLogo from '../../logos/app-screenshots/androidTable.png';
-import Button, { ContainerHome, ContainerKid, ContainerSection, ContainerParentSection, GraphAppLogoImg } from '../style/Home';
-import { flip, bounceIn } from 'react-animations';
+import Button, { ContainerHome, ContainerKid, ContainerSection, GraphAppLogoImg } from '../style/Home';
+import { bounceIn } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
 
 // import Greeter from '../../artifacts/contracts/Greeter.sol/Greeter.json';
 
-const Flip = flip;
 const bounceAnimation = keyframes`${bounceIn}`;
 
 const BouncyDiv = styled.div`
@@ -26,15 +25,12 @@ const BouncyDiv = styled.div`
 const Home = (props) => {
 
     let history = useHistory();
-    const matchesMedium = useMediaQuery('(max-width:700px)');
-    const matchesHt = useMediaQuery('(max-height:700px)');
+    const matchesMedium = useMediaQuery('(max-width:700px)')
     const { getCoins } = props
-
 
     const handleEvent = (event) => {
         console.log(event)
         console.log('hola')
-
     }
 
 

@@ -39,6 +39,7 @@ export const BackgroundCripto = styled.div`
 export const ContainerPaperCrypto = styled(Paper)`
     margin: 0px;
     background-color: transparent;
+    ${({ matchesDown }) => !matchesDown ? `width: 90%;` : `width: 100%;`}
 `
 
 export const ContainerPaperList = styled(Paper)`

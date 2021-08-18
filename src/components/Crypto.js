@@ -117,10 +117,10 @@ const CardCrypto = (props) => {
             <CustomizedBreadcrumbs />
             <BackgroundCripto>
                 <Grid style={{ width: '99%', margin: 0 }} container spacing={2}>
-                    <Grid item xs={matchesDown ? 12 : 8} style={{width: '99%', margin: 0 }} >
-                        <ContainerPaperCrypto elevation={3}>
+                    <Grid item xs={matchesDown ? 12 : 8} style={{ width: '99%', margin: 0 }} >
+                        <ContainerPaperCrypto matchesDown={matchesDown} elevation={3}>
                             <Container style={{ padding: !matches ? 18 : undefined }}>
-                                <Container style={{ display: "flex", paddingTop: 10, paddingLeft: 1, alignItems: 'center' }}>
+                                <Container style={{ display: "flex", paddingLeft: 1, alignItems: 'center' }}>
                                     <Grid style={{ display: "inherit", flexBasis: !matches ? '125%' : '124%' }} item xs={12}>
                                         <LogoCoin matches={!matches}>
                                             <img alt={`coin ${id}`} style={{ width: !matches ? 35 : 45, marginRight: 6, marginTop: 3 }} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`} />
@@ -133,9 +133,9 @@ const CardCrypto = (props) => {
                         </ContainerPaperCrypto>
                     </Grid>
 
-                        {histoMinute.Data !== undefined ? <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} /> : <CircularProgress />}
-                
-                    <Grid item xs={matchesDown ? 12 : 4}>
+                    {histoMinute.Data !== undefined ? <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} /> : <CircularProgress />}
+
+                    <Grid item xs={matchesDown ? 12 : 4} style={{ transform: !matchesDown && 'translateX(275px)' }} >
                         <ContainerPaperList style={{ margin: !matchesDown && '190px 0px 0px 16px' }} elevation={3}>
                             <Container style={{ padding: 1 }}>
                                 <h2>{info && info.name} Price Today</h2>

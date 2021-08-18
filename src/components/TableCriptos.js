@@ -7,7 +7,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {
     DataGrid,
     GridToolbarContainer,
-    GridFilterToolbarButton,
 } from '@material-ui/data-grid';
 import { Link } from "react-router-dom";
 import Modal from './layout/Modal'

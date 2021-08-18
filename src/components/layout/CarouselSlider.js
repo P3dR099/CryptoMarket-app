@@ -112,11 +112,21 @@ export default function CustomArrows(props) {
                         return (
                             <Container key={index}>
                                 <Box boxShadow={4} className={matchesMin ? classes.cardCoin : classes.cardCoinMin}>
-                                    <Container style={{ display: 'flex', justifyContent: 'space-between', padding: !matchesMin ? '3px 8px 0px 15px' : '5px 15px', alignItems: 'center' }}>
-                                        <h3 style={{ marginLeft: 0, fontSize: 'initial', alignSelf: 'baseline' }}>{slide.name}</h3>
-                                        <h3 style={{
-                                            color: 'gray', fontSize: 13, position: 'absolute', transform: 'translateY(20px)', fontWeight: 500, opacity: 0.7, marginTop: 0
-                                        }}>{slide.symbol}</h3>
+                                    <Container style={{ display: 'flex', justifyContent: 'space-between', padding: !matchesMin ? '3px 12px 0px 7px' : '0px 5px 0px 0px', alignItems: 'center' }}>
+                                        <Container style={{
+                                            display: 'inline-grid',
+                                            textAlignLast: 'left',
+                                            paddingLeft: !matchesMin2 && 10
+                                        }}>
+
+                                            <h3 style={{ marginTop: '3px', marginLeft: 0, fontSize: 'initial', alignSelf: 'baseline', marginBottom: 'auto', textAlign: '-webkit-left' }}>{slide.name}</h3>
+
+                                            <h3 style={{
+                                                color: 'gray', fontSize: 13, opacity: 0.7, marginBlock: 'auto'
+                                            }}>{slide.symbol}</h3>
+                                        </Container>
+
+
                                         <Link to={"/coin/" + slide.id} style={{ textDecoration: 'none', color: 'inherit' }} >
                                             <img alt="coin" className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
                                         </Link>
