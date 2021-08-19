@@ -112,11 +112,11 @@ export default function CustomArrows(props) {
                         return (
                             <Container key={index}>
                                 <Box boxShadow={4} className={matchesMin ? classes.cardCoin : classes.cardCoinMin}>
-                                    <Container style={{ display: 'flex', justifyContent: 'space-between', padding: !matchesMin ? '3px 12px 0px 7px' : '0px 5px 0px 0px', alignItems: 'center' }}>
+                                    <Container style={{ display: 'flex', justifyContent: 'space-between', padding: matchesMin2 ? '3px 12px 0px 7px' : '12px 15px 0px 0px', alignItems: 'center' }}>
                                         <Container style={{
                                             display: 'inline-grid',
                                             textAlignLast: 'left',
-                                            paddingLeft: !matchesMin2 && 10
+                                            paddingLeft: matchesMin && 10
                                         }}>
 
                                             <h3 style={{ marginTop: '3px', marginLeft: 0, fontSize: 'initial', alignSelf: 'baseline', marginBottom: 'auto', textAlign: '-webkit-left' }}>{slide.name}</h3>
@@ -128,7 +128,7 @@ export default function CustomArrows(props) {
 
 
                                         <Link to={"/coin/" + slide.id} style={{ textDecoration: 'none', color: 'inherit' }} >
-                                            <img alt="coin" className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
+                                            <img alt="coin" className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} style={{ padding: !matchesMin2 && 0 }} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
                                         </Link>
                                     </Container>
                                     <Typography className={classes.priceCoin}>

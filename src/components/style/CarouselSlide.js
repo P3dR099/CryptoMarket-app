@@ -8,7 +8,7 @@ const CarouselSlider = styled(Slider)`
     margin: 0px 22px 0px 64px;
     -webkit-transform: translateX(-42px) translateY(600px);` :
         `margin:0px 35px 0px 86px;
-        -webkit-transform: translateX(-34px) translateY(595px);
+        -webkit-transform: translateX(-34px) translateY(690px);
     `
     }
 

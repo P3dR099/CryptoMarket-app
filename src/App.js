@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import './index.css';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Crypto from './components/Crypto.js';
 import TableCriptos from './components/TableCriptos.js';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -21,6 +22,9 @@ function App() {
     const [data, setData] = useState([]);
     const [Currency, setCurrency] = useState('USD')
     // const [stateEth, setStateEth] = useState({ storageValue: 0, web3: null, accounts: null, contract: null })
+
+    const matches = useMediaQuery('(min-width:700px)');
+    const matchesMax = useMediaQuery('(max-width:1256px)');
 
     const setTheUser = (user) => setLoggedInUser(user)
 
@@ -85,7 +89,7 @@ function App() {
 
     return (
         <>
-            <AppContainer>
+            <AppContainer matches={matches}>
                 <BrowserRouter>
                     <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} setData={setData} Currency={Currency} setCurrency={setCurrency} />
                     {!data ? <LinearProgress /> : ''}
