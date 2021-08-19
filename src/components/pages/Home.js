@@ -8,10 +8,8 @@ import BtcLogo from '../../logos/btc-logo.png';
 import EthLogo from '../../logos/Ethereum-Logo.png';
 import GraphAppLogo from '../../logos/app-screenshots/androidTable.png';
 import Button, { ContainerHome, ContainerKid, ContainerSection, GraphAppLogoImg } from '../style/Home';
-import { bounce, bounceIn } from 'react-animations';
-import styled, { keyframes } from 'styled-components';
-// import ScrollAnimation from 'react-animate-on-scroll';
-// import "animate.css/animate.min.css";
+// import { bounce, bounceIn } from 'react-animations';
+// import styled, { keyframes } from 'styled-components';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -19,14 +17,6 @@ AOS.init()
 
 // import Greeter from '../../artifacts/contracts/Greeter.sol/Greeter.json';
 
-const bounceAnimation = keyframes`${bounceIn}`;
-
-const BouncyDiv = styled.div`
-    transform: translateY(190px);
-
-    -webkit-animation: 3.5s ${bounceAnimation};
-}
-`;
 
 const Home = (props) => {
 
