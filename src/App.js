@@ -72,8 +72,6 @@ function App() {
                 setData(arrCripts)
                 getAllInfo(arrSymbols, Currency)
                 setAllInfoCoin(arrInfo)
-                console.log('HEY')
-
             })
             .catch(err => console.log(err))
     }, [])

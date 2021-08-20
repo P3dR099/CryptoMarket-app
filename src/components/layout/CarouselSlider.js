@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 // import Slider from "react-slick";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -66,6 +66,8 @@ const useStyles = makeStyles({
 export default function CustomArrows(props) {
 
     const classes = useStyles();
+
+    const matchesHeight = useMediaQuery('(min-height:1000px)');
     const matchesMin = useMediaQuery('(min-width:460px)');
     const matchesMin2 = useMediaQuery('(min-width:700px)');
     const matchesMed = useMediaQuery('(min-width:1090px)');
@@ -86,28 +88,50 @@ export default function CustomArrows(props) {
         if (!matchesMax) {
             return 4
         }
-
+        if (!matchesMax2) {
+            return 5
+        }
+        return 4
     }
 
     const settings = {
         dots: false,
-        infinite: true,
-        slidesToShow: !matchesMax2 ? 5 : showSlides(),
+        infinite: false,
+        speed: 500,
+        slidesToShow: showSlides(),
         slidesToScroll: 1,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />
     };
 
-    const carouselPosition = document.querySelectorAll('.slick-track')
-    if (carouselPosition[0] !== undefined && !matchesMin) carouselPosition[0].style.transform = "translate3d(-0.5%, 0px, 0px)"
-    // if (carouselPosition[0] !== undefined && !matchesMin) console.log(carouselPosition[0].style)
-    // if (carouselPosition[0] !== undefined && matchesMed) carouselPosition[0].style.transform = "translate3d(-1.45%, 0px, 0px)"
+    const name = () => {
+
+        if (!matchesMin) {
+            const slickTrack = document.querySelectorAll('.slick-track')[0] !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(0px, 0px, 0px); width: 60032px;" : undefined;
+        }
+        if (!matchesMin) {
+            const slickTrack = document.querySelectorAll('.slick-track')[0] !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(0px, 0px, 0px); width: 37032px;" : undefined;
+        }
+        if (!matchesMed) {
+            const slickTrack2 = document.querySelectorAll('.slick-track')[0] !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(10px, 0px, 0px); width: 37032px;" : undefined;
+        }
+
+        if (matchesMax) {
+            const slickTrack2 = document.querySelectorAll('.slick-track')[0] !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(3px, 0px, 0px); width: 37032px;" : undefined;
+        }
+        else {
+            const slickTrack2 = document.querySelectorAll('.slick-track')[0] !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(7px, 0px, 0px); width: 67032px;" : undefined;
+        }
+
+    }
+
+    name()
 
     return (
         <>
 
             {props.data !== undefined &&
-                <CarouselSlider {...settings} matchesMin={!matchesMin} matchesMin2={!matchesMin2} >
+                <CarouselSlider {...settings} matchesMin={!matchesMin} matchesMin2={!matchesMin2} matchesMax2={matchesMax2} matchesHeight={matchesHeight}>
                     {props.data.map(function (slide, index) {
                         return (
                             <Container key={index}>
@@ -120,7 +144,6 @@ export default function CustomArrows(props) {
                                         }}>
 
                                             <h3 style={{ marginTop: '3px', marginLeft: 0, fontSize: 'initial', alignSelf: 'baseline', marginBottom: 'auto', textAlign: '-webkit-left' }}>{slide.name}</h3>
-
                                             <h3 style={{
                                                 color: 'gray', fontSize: 13, opacity: 0.7, marginBlock: 'auto'
                                             }}>{slide.symbol}</h3>

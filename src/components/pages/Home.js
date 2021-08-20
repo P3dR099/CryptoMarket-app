@@ -15,20 +15,13 @@ import 'aos/dist/aos.css';
 
 AOS.init()
 
-// import Greeter from '../../artifacts/contracts/Greeter.sol/Greeter.json';
-
 
 const Home = (props) => {
 
     let history = useHistory();
     const matchesMedium = useMediaQuery('(max-width:700px)')
+    const matchesMax = useMediaQuery('(max-width:1350px)')
     const { getCoins } = props
-
-    const handleEvent = (event) => {
-        console.log(event)
-        console.log('hola')
-    }
-
 
     useEffect(() => {
         parseInt(localStorage.getItem('value')) === 1 ? getCoins('EUR') : getCoins('USD')
@@ -37,12 +30,12 @@ const Home = (props) => {
 
     return (
         <>
-            <ContainerHome matches={matchesMedium} >
+            <ContainerHome matches={matchesMedium} matchesMax={matchesMax} >
                 <ContainerKid matches={matchesMedium}>
                     <Container style={{ padding: matchesMedium ? '40px 25px 20px 25px' : '130px 25px 20px 25px' }}>
                         <img style={{ width: 30 }} src={BtcLogo} alt="btc logo" />
                         <img style={{ width: 30 }} src={EthLogo} alt="eth logo" />
-                        <h1 className="title" style={{ fontSize: !matchesMedium && '50px' }} >Mercado de Criptomonedas</h1>
+                        <h1 className="title" style={{ fontSize: !matchesMedium && '3.6rem' }} >Mercado de Criptomonedas</h1>
                         <Container style={{ marginBlockStart: '15px', color: 'antiquewhite' }}>
                             Analiza el mercado de criptomonedas actualizado minuto a minuto,<br></br>y personalizando el tiempo mostrado sobre cada moneda
                         </Container>

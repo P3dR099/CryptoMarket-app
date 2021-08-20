@@ -81,7 +81,7 @@ const GraphCoin = (props) => {
 
     const scaleGraph = () => {
         if (!matchesMax) {
-            return '135%'
+            return '145%'
         }
         if (matches) {
             return 630
