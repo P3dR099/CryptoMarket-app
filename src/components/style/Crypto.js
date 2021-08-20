@@ -37,14 +37,18 @@ export const BackgroundCripto = styled.div`
 `
 
 export const ContainerPaperCrypto = styled(Paper)`
-    margin: 0px;
+    width: 95%;
+    margin-left: 2.5%;
     background-color: transparent;
     ${({ matches }) => matches}
 `
 
 export const ContainerPaperList = styled(Paper)`
     background: #f8fafd;
-    border-radius: 8px;
+ 
+    .MuiPaper-rounded {
+    border-radius: 20px;
+}
 `
 
 export const Green = styled.div`

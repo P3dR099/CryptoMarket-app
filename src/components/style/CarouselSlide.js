@@ -9,7 +9,7 @@ const CarouselSlider = styled(Slider)`
 
     margin: 0px 22px 0px 64px;
     -webkit-transform: translateX(-42px) translateY(820px);` :
-        `margin:0px 35px 0px 86px;
+        `margin:0px 50px 0px 75px;
     ` }
 
     ${({ matchesMin2 }) => matchesMin2 && `

@@ -42,7 +42,7 @@ const theme2 = createTheme({
             xs: 500,
             sm: 650,
             md: 960,
-            lg: 1280,
+            lg: 1580,
             xl: 1920,
         },
     },
@@ -53,6 +53,7 @@ const useStyles = makeStyles((width) => ({
         backgroundColor: 'transparent',
 
         [theme2.breakpoints.up('sm')]: {
+            marginLeft: 31,
             width: 550,
         },
         [theme2.breakpoints.down('xs')]: {
@@ -60,7 +61,12 @@ const useStyles = makeStyles((width) => ({
         },
     },
     root2: {
-        width: 680
+        width: 680,
+        marginLeft: 10,
+        [theme2.breakpoints.up('lg')]: {
+            display: 'inline-table',
+            marginLeft: 31
+        },
     }
 
 }))
@@ -78,7 +84,7 @@ export default function FullWidthTabs(props) {
 
     return (
         <div className={!matchesMax ? classes.root2 : classes.root}>
-            <ul style={{ marginInlineStart: 0 }} position="static" color="default">
+            <ul style={{ marginInlineStart: 0, width: '85%' }} position="static" color="default">
                 <Tabs
                     value={value}
                     onChange={handleChange}

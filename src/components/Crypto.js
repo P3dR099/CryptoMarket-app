@@ -116,12 +116,12 @@ const CardCrypto = (props) => {
         <>
             <CustomizedBreadcrumbs />
             <BackgroundCripto>
-                <Grid style={{ width: '99%', margin: 0, display: 'flex', justifyContent: 'space-between' }} container spacing={2}>
-                    <Grid item xs={matchesDown ? 12 : 8} style={{ width: '99%', margin: 0 }} >
+                <Grid style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }} container spacing={2}>
+                    <Grid item xs={matchesDown ? 12 : 8} >
                         <ContainerPaperCrypto matches={matches ? 'width: 95%;' : 'width: 100%;'} elevation={3}>
                             <Container style={{ padding: !matches ? 18 : undefined }}>
                                 <Container style={{ display: "flex", paddingLeft: 1, alignItems: 'center' }}>
-                                    <Grid style={{ display: "inherit", flexBasis: !matches ? '125%' : '124%' }} item xs={12}>
+                                    <Grid style={{ display: "inherit" }} item xs={12}>
                                         <LogoCoin matches={!matches}>
                                             <img alt={`coin ${id}`} style={{ width: !matches ? 35 : 45, marginRight: 6, marginTop: 3 }} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${id}.png`} />
                                             {!matches ? <FontTextMin>{info && info.name}</FontTextMin> : <FontText> {info && info.name}</FontText>}
@@ -133,11 +133,14 @@ const CardCrypto = (props) => {
                         </ContainerPaperCrypto>
                     </Grid>
 
-                    {histoMinute.Data !== undefined ? <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} /> : <CircularProgress />}
+                    {histoMinute.Data !== undefined ? <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} /> :
+                        <Container style={{ textAlign: 'justify' }}>
+                            <CircularProgress style={{ marginLeft: matchesDown ? '50%' : '30%' }} />
+                        </Container>}
 
-                    <Grid item xs={matchesDown ? 12 : 4} >
-                        <ContainerPaperList elevation={3}>
-                            <Container style={{ padding: 1 }}>
+                    <Grid item xs={matchesDown ? 12 : 4} style={{ paddingLeft: 18, }} >
+                        <ContainerPaperList elevation={3} style={{ borderRadius: 20 }} >
+                            <Container style={{ padding: 2 }}>
                                 <h2>{info && info.name} Price Today</h2>
                             </Container>
                             <TableContainer>
