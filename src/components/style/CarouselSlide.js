@@ -21,7 +21,7 @@ const CarouselSlider = styled(Slider)`
     ` :
         `padding-left:25px;`
     }
-
+    
     .slick-track {
         transform: translate3d(-10px, 0px, 0px);
     }

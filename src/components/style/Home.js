@@ -56,7 +56,7 @@ export const ContainerGraphAppImg = styled.div`
 export const GraphAppLogoImg = styled.img`
     transform: skewX(10deg);
     width: 150px;
-    ${({ matches }) => matches && `width: 75px;`}    
+    ${({ matches }) => matches && `width: 95px;`}    
 `
 
 export default Button;

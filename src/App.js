@@ -21,11 +21,7 @@ function App() {
     const [allInfoCoin, setAllInfoCoin] = useState([])
     const [data, setData] = useState([]);
     const [Currency, setCurrency] = useState('USD')
-    // const [stateEth, setStateEth] = useState({ storageValue: 0, web3: null, accounts: null, contract: null })
-
     const matches = useMediaQuery('(min-width:700px)');
-    const matchesMax = useMediaQuery('(max-width:1256px)');
-
     const setTheUser = (user) => setLoggedInUser(user)
 
     const handleLogOut = () => {

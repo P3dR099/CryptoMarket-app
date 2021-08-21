@@ -6,8 +6,7 @@ const convertToDate = (unixTime) => {
     const dayOfWeek = date.getDate()
     const hours = date.getHours()
     const minutes = "0" + date.getMinutes();
-    const seconds = "0" + date.getSeconds();
-    const formattedTime = Math.floor((year / 100) + 1) + ':' + month + ':' + dayOfWeek + ':' + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    const formattedTime = Math.floor((year / 100) + 1) + ':' + month + ':' + dayOfWeek + ':' + hours + ':' + minutes.substr(-2)
     return formattedTime;
 }
 

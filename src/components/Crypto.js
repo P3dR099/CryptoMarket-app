@@ -116,7 +116,7 @@ const CardCrypto = (props) => {
         <>
             <CustomizedBreadcrumbs />
             <BackgroundCripto>
-                <Grid style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }} container spacing={2}>
+                <Grid style={{ width: '98%', display: 'flex', justifyContent: 'space-between' }} container spacing={2}>
                     <Grid item xs={matchesDown ? 12 : 8} >
                         <ContainerPaperCrypto matches={matches ? 'width: 95%;' : 'width: 100%;'} elevation={3}>
                             <Container style={{ padding: !matches ? 18 : undefined }}>
@@ -138,7 +138,7 @@ const CardCrypto = (props) => {
                             <CircularProgress style={{ marginLeft: matchesDown ? '50%' : '30%' }} />
                         </Container>}
 
-                    <Grid item xs={matchesDown ? 12 : 4} style={{ paddingLeft: 18, }} >
+                    <Grid item xs={matchesDown ? 12 : 4} style={{ paddingLeft: matchesDown ? 40 : 54, alignSelf: 'center' }} >
                         <ContainerPaperList elevation={3} style={{ borderRadius: 20 }} >
                             <Container style={{ padding: 2 }}>
                                 <h2>{info && info.name} Price Today</h2>

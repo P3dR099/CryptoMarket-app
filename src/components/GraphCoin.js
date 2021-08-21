@@ -12,6 +12,8 @@ const tradeService = new Trade()
 
 const GraphCoin = (props) => {
 
+    const matchesMin2 = useMediaQuery('(max-width:375px)');
+    const matchesMin = useMediaQuery('(max-width:500px)');
     const matches = useMediaQuery('(min-width:700px)');
     const matchesMedium = useMediaQuery('(max-width:700px)');
     const matchesMax = useMediaQuery('(max-width:1256px)');
@@ -20,10 +22,9 @@ const GraphCoin = (props) => {
         graphCoin: {
             height: 500,
             width: '100%',
-            margin: "0px 0px 0px",
             padding: 0,
             fontSize: matches ? 15 : 12,
-            marginInlineStart: !matchesMax ? -40 : -42,
+            marginInlineStart: !matchesMax ? -40 : -39,
             marginInlineEnd: !matchesMax ? 130 : 0
         }
 
@@ -81,14 +82,19 @@ const GraphCoin = (props) => {
 
     const scaleGraph = () => {
         if (!matchesMax) {
-            return 850
+            return 900
         }
         if (matches) {
             return 650
         }
-
-        if (matchesMedium) {
+        if (matchesMedium && !matchesMin) {
+            return 550
+        }
+        if (matchesMin && !matchesMin2) {
             return 450
+        }
+        if (matchesMin2) {
+            return 380
         }
     }
 

@@ -1,7 +1,6 @@
 import { Box, Container, Typography } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-// import Slider from "react-slick";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -106,21 +105,22 @@ export default function CustomArrows(props) {
 
     const name = () => {
 
+        const slickTrack = document.querySelectorAll('.slick-track')[0];
         if (!matchesMin) {
-            const slickTrack = document.querySelectorAll('.slick-track')[0] !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(0px, 0px, 0px); width: 60032px;" : undefined;
+            return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(0px, 0px, 0px); width: 60032px;" : undefined
         }
         if (!matchesMin) {
-            const slickTrack = document.querySelectorAll('.slick-track')[0] !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(0px, 0px, 0px); width: 37032px;" : undefined;
+            return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(0px, 0px, 0px); width: 37032px;" : undefined
         }
         if (!matchesMed) {
-            const slickTrack2 = document.querySelectorAll('.slick-track')[0] !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(10px, 0px, 0px); width: 37032px;" : undefined;
+            return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(10px, 0px, 0px); width: 37032px;" : undefined
         }
 
         if (matchesMax) {
-            const slickTrack2 = document.querySelectorAll('.slick-track')[0] !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(3px, 0px, 0px); width: 37032px;" : undefined;
+            return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(3px, 0px, 0px); width: 37032px;" : undefined
         }
         else {
-            const slickTrack2 = document.querySelectorAll('.slick-track')[0] !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(7px, 0px, 0px); width: 67032px;" : undefined;
+            return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(7px, 0px, 0px); width: 67032px;" : undefined
         }
 
     }

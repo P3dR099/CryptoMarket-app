@@ -54,9 +54,11 @@ const Home = (props) => {
                     data-aos-duration="1300"
                     style={{ height: 'inherit' }}
                 >
-                    <section style={{ display: 'flex', height: 'inherit', alignItems: 'center' }}>
+
+
+                    <section style={{ display: !matchesMedium ? 'flex' : 'inline-grid', height: 'inherit', alignItems: 'center' }}>
                         <Container>
-                            <h2>
+                            <h2 style={{ fontFamily: 'sans-serif', fontWeight: 'normal' }}>
                                 Aplicación en desarrollo <div />
                                 para el analisis del mercado de criptomonedas,<div />
                                 más poderoso y fácil de usar
