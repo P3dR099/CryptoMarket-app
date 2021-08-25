@@ -5,12 +5,14 @@ export default class tradeService {
     constructor() {
         this.source = axios.CancelToken.source()
         this.api = axios.create({
-            baseURL: 'http://localhost:5000/'
+            baseURL: 'https://backend-cripto.herokuapp.com/'
             //withCredentials: true
         })
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+
     }
 
-    // Auth
+    // AuthS
     login = user => this.api.post('api/auth/login', user)
     signup = user => this.api.post('api/auth/signup', user)
     logout = () => this.api.post('api/auth/logout')
