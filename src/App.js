@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import './App.css';
+import './App.scss';
 import './index.css';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Crypto from './components/Crypto.js';
@@ -13,10 +13,16 @@ import Footer from './components/pages/Footer';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AppContainer from './components/style/App';
+import { useSelector, useDispatch } from 'react-redux'
+import { getData, getAllinfoCoin } from './actions/actions';
 const tradeService = new Trade();
 
 function App() {
 
+    const dispatch = useDispatch()
+    const Data = useSelector(state => state)
+
+    // console.log(Data)
     const [loggedInUser, setLoggedInUser] = useState(null)
     const [allInfoCoin, setAllInfoCoin] = useState([])
     const [data, setData] = useState([]);
@@ -52,8 +58,10 @@ function App() {
                 const getAllInfo = (arrSymbols, Currency) => {
                     tradeService.getAllCoinsInfo(arrSymbols.toString(), Currency)
                         .then(res => {
+                            console.log(res)
                             for (let key in res.data.RAW) {
                                 if (res.data.RAW[key].USD) {
+
                                     arrInfo.push(res.data.RAW[key].USD)
                                 }
                                 if (res.data.RAW[key].EUR) {
@@ -68,9 +76,12 @@ function App() {
                 setData(arrCripts)
                 getAllInfo(arrSymbols, Currency)
                 setAllInfoCoin(arrInfo)
+
+                dispatch(getData(arrCripts))
+                dispatch(getAllinfoCoin(arrInfo))
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [dispatch])
 
 
 
@@ -80,6 +91,7 @@ function App() {
         setTheUser(login)
     }, [])
 
+    // console.log(Data)
 
     return (
         <>
@@ -88,8 +100,8 @@ function App() {
                     <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} setData={setData} Currency={Currency} setCurrency={setCurrency} />
                     {!data ? <LinearProgress /> : ''}
                     <main>
-                        <Route path="/coin" render={(props) => <Crypto Currency={Currency} allInfoCoin={allInfoCoin} setCurrency={setCurrency} data={data} {...props} />} />
-                        <Route exact path="/table" render={(props) => <TableCriptos data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
+                        <Route path="/coin" render={(props) => <Crypto Currency={Currency} setCurrency={setCurrency} {...props} />} />
+                        <Route exact path="/table" render={(props) => <TableCriptos allInfoCoin={allInfoCoin} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
                         <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
                     </main>
                     <Footer />

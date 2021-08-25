@@ -4,18 +4,16 @@ import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import TableRow from '@material-ui/core/TableRow';
+import { useSelector } from 'react-redux'
 import CustomizedBreadcrumbs from './layout/BreadCumb';
 import { Grid } from '@material-ui/core';
 import TabPanel from './layout/TabPanel';
-import ListStatsCoin, { Green, Red, FontText, FontTextMin, ValueStatsCoin, LogoCoin, BackgroundCripto, ContainerPaperCrypto, ContainerPaperList } from './style/Crypto';
+import { Green, Red, FontText, FontTextMin, LogoCoin, BackgroundCripto, ContainerPaperCrypto } from './style/Crypto';
 import convertToDate from './utils/convertToDate';
+import GridStatsCrypto from './layout/GridStatsCrypto';
+
 const tradeService = new Trade()
 
 
@@ -31,21 +29,29 @@ const CardCrypto = (props) => {
     const matches = useMediaQuery('(min-width:470px)');
     let lastSlash = props.location.pathname.lastIndexOf('/')
     let id = props.location.pathname.slice(lastSlash + 1, props.location.pathname.length)
-    const { data, allInfoCoin, Currency } = props
+    const { Currency } = props
+    const { data } = useSelector(state => state)
+    const { allInfoCoins } = useSelector(state => state)
+    const data2 = useSelector(state => state)
+
+
+    allInfoCoins.length !== 0 && localStorage.setItem('info', JSON.stringify(allInfoCoins))
+
+    // console.log(data2)
 
     useEffect(() => {
+
+        const localInfoCoin = JSON.parse(localStorage.getItem('info'))
 
         tradeService.getCoin(id)
             .then(res => {
 
-                allInfoCoin.length !== 0 && localStorage.setItem('info', JSON.stringify(allInfoCoin))
                 setCoinSymbol(res.data[0].symbol)
 
-                tradeService.getCoinInfo(`id=${id}`)
-                    .then(res => setInfo(res.data[id]))
-                    .catch(err => console.log(err))
+                tradeService.getCoinInfo(`id=${id}`).then(res => setInfo(res.data[id])).catch(err => console.log(err))
 
-                localInfo.filter((item) => (item.FROMSYMBOL === res.data[0].symbol) && setCoinInfo(item))
+                localInfoCoin.filter((item) => (item.FROMSYMBOL === res.data[0].symbol) && setCoinInfo(item))
+
                 data && data.map(el => el.symbol === res.data[0].symbol && localStorage.setItem('price', el.price))
 
                 tradeService.getHistoByMin(res.data[0].symbol, Currency, 1440)
@@ -60,9 +66,9 @@ const CardCrypto = (props) => {
             })
             .catch(error => console.log(error))
 
-        const localInfo = JSON.parse(localStorage.getItem('info'))
+    }, [id, Currency, data])
 
-    }, [id, allInfoCoin, Currency, data])
+
 
     let Price;
     let arrTimes, arrTimesMinutes = []
@@ -76,10 +82,11 @@ const CardCrypto = (props) => {
                 <Grid container spacing={3} style={{ margin: 'auto', display: 'contents', whiteSpace: 'pre' }}>
                     <h1 style={{ fontSize: !matches ? 20 : 30, marginRight: 3 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
                     <span>
-                        {coinInfo.CHANGEPCT24HOUR < 0 ? <Red>
-                            <ArrowDropDownIcon />
-                            {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
-                        </Red> :
+                        {coinInfo.CHANGEPCT24HOUR < 0 ?
+                            <Red>
+                                <ArrowDropDownIcon />
+                                {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
+                            </Red> :
                             <Green matches={matches}>
                                 <ArrowDropUpIcon />
                                 {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
@@ -96,10 +103,11 @@ const CardCrypto = (props) => {
             return (
                 <Grid container spacing={3} style={{ display: 'flex', whiteSpace: 'pre', justifyContent: 'flex-end', flexBasis: '155%' }}>
                     <span style={{ alignSelf: 'center' }}>
-                        {coinInfo.CHANGEPCT24HOUR < 0 ? <Red>
-                            <ArrowDropDownIcon />
-                            {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
-                        </Red> :
+                        {coinInfo.CHANGEPCT24HOUR < 0 ?
+                            <Red>
+                                <ArrowDropDownIcon />
+                                {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
+                            </Red> :
                             <Green>
                                 <ArrowDropUpIcon />
                                 {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
@@ -112,6 +120,8 @@ const CardCrypto = (props) => {
         }
     }
 
+
+    // console.log('crypto data: ', data, allInfoCoins)
     return (
         <>
             <CustomizedBreadcrumbs />
@@ -138,88 +148,8 @@ const CardCrypto = (props) => {
                             <CircularProgress style={{ marginLeft: matchesDown ? '50%' : '30%' }} />
                         </Container>}
 
-                    <Grid item xs={matchesDown ? 12 : 4} style={{ paddingLeft: matchesDown ? 40 : 54, alignSelf: 'center' }} >
-                        <ContainerPaperList elevation={3} style={{ borderRadius: 20 }} >
-                            <Container style={{ padding: 2 }}>
-                                <h2>{info && info.name} Price Today</h2>
-                            </Container>
-                            <TableContainer>
-                                <Table size="small" aria-label="a dense table">
-                                    {/* <TableHead></TableHead> */}
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell>
-                                                <ListStatsCoin>
-                                                    {info.name} Price
-                                                </ListStatsCoin>
-                                            </TableCell>
-                                            <TableCell>
-                                                <ValueStatsCoin>
-                                                    {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price}
-                                                </ValueStatsCoin>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell>
-                                                <ListStatsCoin>
-                                                    24h Low / 24h High
-                                                </ListStatsCoin>
-                                            </TableCell>
-                                            <TableCell>
-                                                <ValueStatsCoin>
-                                                    {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.LOW24HOUR + ' / ' + coinInfo.HIGH24HOUR : '€' + coinInfo.LOW24HOUR + ' / ' + coinInfo.HIGH24HOUR}
-                                                </ValueStatsCoin>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell>
-                                                <ListStatsCoin>
-                                                    Market Cap 24h
-                                                </ListStatsCoin>
-                                            </TableCell>
-                                            <TableCell>
-                                                <ValueStatsCoin>
-                                                    {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.MKTCAP : '€' + coinInfo.MKTCAP}
-                                                </ValueStatsCoin>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell>
-                                                <ListStatsCoin>
-                                                    Change 24h
-                                                </ListStatsCoin>
-                                            </TableCell>
-                                            <TableCell>
-                                                <ValueStatsCoin style={{ color: coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2) < 0 ? 'red' : 'green' }}>
-                                                    {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}%
-                                                </ValueStatsCoin>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell>
-                                                <ListStatsCoin>
-                                                    Volume 24 hour
-                                                </ListStatsCoin>
-                                            </TableCell>
-                                            <TableCell>
-                                                <ValueStatsCoin>
-                                                    {coinInfo.TOTALVOLUME24H !== undefined && parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.TOTALVOLUME24H : '€' + coinInfo.TOTALVOLUME24H}
-                                                </ValueStatsCoin>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </ContainerPaperList>
-                    </Grid>
+                    <GridStatsCrypto info={info} coinInfo={coinInfo} />
+
                 </Grid>
             </BackgroundCripto>
         </>

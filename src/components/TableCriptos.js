@@ -4,6 +4,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import { useSelector } from 'react-redux'
 import {
     DataGrid,
     GridToolbarContainer,
@@ -14,6 +15,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ModalCurrency from './layout/ModalCurrecy';
 import TableStyle, { ContainerLogo, ImageCoin } from './style/TableCriptos';
 import colChange_1h, { colChange_1d } from './utils/TableColumns';
+
 
 
 function CustomToolbar() {
@@ -29,15 +31,15 @@ export default function DataTable(props) {
 
     const classes = TableStyle();
     const matchesMin = useMediaQuery('(min-width:460px)');
-
     const [stateCols, setStateCols] = useState({
         change_1h: false,
         change_1d: false
     });
 
     const [, setColumns] = React.useState([])
-
-    const { getCoins, data } = props
+    const { data } = useSelector(state => state)
+    const { allInfoCoins } = useSelector(state => state)
+    const { getCoins } = props
     const rows = data
 
     useEffect(() => {
@@ -99,7 +101,7 @@ export default function DataTable(props) {
                 <Modal allColumns={columns} setColumns={setColumns} handleRows={handleRows} stateCols={stateCols} setStateCols={setStateCols} {...props} />
             </Container>
             <div style={{ height: '100vh', width: '99.5%', marginTop: !matchesMin ? 140 : 100 }} className={classes.table} >
-                {data.length !== 0 ? <DataGrid components={{ Toolbar: CustomToolbar }} loading={!props.data && true} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} /> : <CircularProgress />}
+                {data.length !== 0 ? <DataGrid components={{ Toolbar: CustomToolbar }} loading={data.length === 0 && true} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} /> : <CircularProgress />}
             </div>
         </>
     );

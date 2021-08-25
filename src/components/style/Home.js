@@ -22,9 +22,8 @@ export const ContainerHome = styled.div`
 export const ContainerKid = styled.div`
     position: absolute;
     width: 100%;
-    ${({ matches }) => !matches ? `height: 101vh;` : `height: 440px;`}
+    ${({ matches }) => !matches ? `height: 101vh;` : `height: 27.5rem;`}
     ${({ matchesMax }) => matchesMax && `height: 103vh;`}
-
     background: -webkit-linear-gradient(to top, #1CB5E0, #000046);
     background: linear-gradient(to top, #1CB5E0, #000046);
     
@@ -58,5 +57,7 @@ export const GraphAppLogoImg = styled.img`
     width: 150px;
     ${({ matches }) => matches && `width: 95px;`}    
 `
+
+
 
 export default Button;
