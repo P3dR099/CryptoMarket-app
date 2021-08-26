@@ -13,16 +13,13 @@ import Footer from './components/pages/Footer';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AppContainer from './components/style/App';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getData, getAllinfoCoin } from './actions/actions';
 const tradeService = new Trade();
 
 function App() {
 
     const dispatch = useDispatch()
-    const Data = useSelector(state => state)
-
-    // console.log(Data)
     const [loggedInUser, setLoggedInUser] = useState(null)
     const [allInfoCoin, setAllInfoCoin] = useState([])
     const [data, setData] = useState([]);

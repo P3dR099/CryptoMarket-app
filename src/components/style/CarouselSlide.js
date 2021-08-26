@@ -8,7 +8,7 @@ const CarouselSlider = styled(Slider)`
     ${({ matchesMax2 }) => matchesMax2 ? `
 
     margin: 0px 22px 0px 64px;
-    -webkit-transform: translateX(-42px) translateY(820px);` :
+    -webkit-transform: translateX(-42px) translateY(600px);` :
         `margin:0px 50px 0px 75px;
     ` }
 

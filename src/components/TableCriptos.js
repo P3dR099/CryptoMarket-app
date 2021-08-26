@@ -38,7 +38,7 @@ export default function DataTable(props) {
 
     const [, setColumns] = React.useState([])
     const { data } = useSelector(state => state)
-    const { allInfoCoins } = useSelector(state => state)
+    // const { allInfoCoins } = useSelector(state => state)
     const { getCoins } = props
     const rows = data
 

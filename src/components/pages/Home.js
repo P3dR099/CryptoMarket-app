@@ -43,7 +43,7 @@ const Home = (props) => {
         <>
             <ContainerHome matches={matchesMedium} matchesMax={matchesMax} >
                 <ContainerKid matches={matchesMedium}>
-                    <Container style={{ padding: matchesMedium ? '40px 25px 20px 25px' : '130px 25px 20px 25px' }}>
+                    <Container style={{ height: '50%', padding: '12% 8% 4% 8%' }}>
                         <img style={{ width: 30 }} src={BtcLogo} alt="btc logo" />
                         <img style={{ width: 30 }} src={EthLogo} alt="eth logo" />
                         <h1 className="title">Mercado de Criptomonedas</h1>

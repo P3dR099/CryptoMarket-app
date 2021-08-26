@@ -32,7 +32,7 @@ const CardCrypto = (props) => {
     const { Currency } = props
     const { data } = useSelector(state => state)
     const { allInfoCoins } = useSelector(state => state)
-    const data2 = useSelector(state => state)
+    // const data2 = useSelector(state => state)
 
 
     allInfoCoins.length !== 0 && localStorage.setItem('info', JSON.stringify(allInfoCoins))

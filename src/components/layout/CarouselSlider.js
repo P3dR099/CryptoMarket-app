@@ -5,6 +5,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 import CarouselSlider from "../style/CarouselSlide";
 
 function SampleNextArrow(props) {
@@ -69,9 +70,12 @@ export default function CustomArrows(props) {
     const matchesHeight = useMediaQuery('(min-height:1000px)');
     const matchesMin = useMediaQuery('(min-width:460px)');
     const matchesMin2 = useMediaQuery('(min-width:700px)');
-    const matchesMed = useMediaQuery('(min-width:1090px)');
-    const matchesMax = useMediaQuery('(max-width:1100px)');
+    const matchesMed = useMediaQuery('(min-width:950px)');
     const matchesMax2 = useMediaQuery('(max-width:1350px)');
+
+    const { data } = useSelector(state => state)
+
+    console.log(data)
 
     const showSlides = () => {
 
@@ -83,9 +87,6 @@ export default function CustomArrows(props) {
         }
         if (!matchesMed) {
             return 3;
-        }
-        if (!matchesMax) {
-            return 4
         }
         if (!matchesMax2) {
             return 5
@@ -115,10 +116,6 @@ export default function CustomArrows(props) {
         if (!matchesMed) {
             return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(10px, 0px, 0px); width: 37032px;" : undefined
         }
-
-        if (matchesMax) {
-            return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(3px, 0px, 0px); width: 37032px;" : undefined
-        }
         else {
             return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(7px, 0px, 0px); width: 67032px;" : undefined
         }
@@ -127,12 +124,13 @@ export default function CustomArrows(props) {
 
     name()
 
+
     return (
         <>
 
-            {props.data !== undefined &&
+            {data !== undefined &&
                 <CarouselSlider {...settings} matchesMin={!matchesMin} matchesMin2={!matchesMin2} matchesMax2={matchesMax2} matchesHeight={matchesHeight}>
-                    {props.data.map(function (slide, index) {
+                    {data.map(function (slide, index) {
                         return (
                             <Container key={index}>
                                 <Box boxShadow={4} className={matchesMin ? classes.cardCoin : classes.cardCoinMin}>

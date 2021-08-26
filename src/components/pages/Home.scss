@@ -11,9 +11,22 @@
     background: linear-gradient(to top, #1CB5E0, #000046);
 }
 
+$small: 300px;
+$medium: 900px;
+
 .title {
-    font-weight: 700;
+
+    font-weight: 600;
     color: #fff;
     margin: 0;
-    font-size: calc(60% + 5.6vmin)
+    font-size: 3.4rem;
+    line-height: 3.5rem;
+
+    @media (max-width: $medium) {
+      font-weight: 600;
+      color: #fff;
+      margin: 0;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+  }
 }
