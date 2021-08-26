@@ -19,7 +19,7 @@ $medium: 900px;
     font-weight: 600;
     color: #fff;
     margin: 0;
-    font-size: 3.4rem;
+    font-size: 3rem;
     line-height: 3.5rem;
 
     @media (max-width: $medium) {
@@ -29,4 +29,8 @@ $medium: 900px;
       font-size: 1.5rem;
       line-height: 1.5rem;
   }
+}
+
+.containerHomeSection {
+    
 }

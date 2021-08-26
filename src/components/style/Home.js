@@ -34,8 +34,8 @@ export const ContainerSection = styled.div`
     height: 240px;
     background: dimgrey;
     border-radius: 63px;
-    margin:160px 55px 10px 55px;
-    ${({ matches }) => matches && `margin: 15px;`}
+    margin: 13rem 3rem 1rem 3rem;
+    ${({ matches }) => matches && `margin: 1.2rem;`}
 
     height: 500px;
     background-color: rgba(239, 236, 254, 0.5);

@@ -43,16 +43,23 @@ const Home = (props) => {
         <>
             <ContainerHome matches={matchesMedium} matchesMax={matchesMax} >
                 <ContainerKid matches={matchesMedium}>
-                    <Container style={{ height: '50%', padding: '12% 8% 4% 8%' }}>
-                        <img style={{ width: 30 }} src={BtcLogo} alt="btc logo" />
-                        <img style={{ width: 30 }} src={EthLogo} alt="eth logo" />
-                        <h1 className="title">Mercado de Criptomonedas</h1>
-                        <Container style={{ marginBlockStart: '15px', color: 'antiquewhite', fontSize: '1rem' }}>
-                            Analiza el mercado de criptomonedas actualizado minuto a minuto,<br></br>y personalizando el tiempo mostrado sobre cada moneda
+                    <Container style={{ height: '80%', padding: !matchesMedium ? '8% 8% 4% 8%' : '12% 6% 4% 6%', display: 'grid', alignItems: 'center', textAlign: '-webkit-left' }}>
+                        <Container>
+                            {/* <img style={{ width: 30 }} src={BtcLogo} alt="btc logo" />
+                            <img style={{ width: 30 }} src={EthLogo} alt="eth logo" /> */}
+                            <h1 className="title">
+                                Analiza el mercado de criptomonedas de una manera sencilla y rápida
+                            </h1>
+                            <Container style={{ marginBlockStart: !matchesMedium ? '1.8rem' : '1.3rem', color: 'antiquewhite', fontSize: !matchesMedium ? '1.5rem' : '0.90rem', padding: 0 }}>
+                                Recogemos datos de las apis más confiables del mercado
+                                y los mostramos de una forma eficiente para agilizar su análisis
+                            </Container>
                         </Container>
-                        <Button onClick={() => history.push('/table')}>
-                            Go to table
-                        </Button>
+                        <Container style={{ display: 'flex', justifyContent: 'center' }}>
+                            <Button onClick={() => history.push('/table')}>
+                                Go to table
+                            </Button>
+                        </Container>
                     </Container>
                 </ContainerKid>
                 <CarouselSlider {...props} />

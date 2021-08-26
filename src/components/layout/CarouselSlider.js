@@ -75,8 +75,6 @@ export default function CustomArrows(props) {
 
     const { data } = useSelector(state => state)
 
-    console.log(data)
-
     const showSlides = () => {
 
         if (!matchesMin) {
@@ -121,7 +119,6 @@ export default function CustomArrows(props) {
         }
 
     }
-
     name()
 
 
