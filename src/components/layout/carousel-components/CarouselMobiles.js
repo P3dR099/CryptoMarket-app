@@ -3,36 +3,9 @@ import React from "react";
 import CarouselMobile from "../../style/CarouselMobiles";
 import arrImages from '../../utils/arrImages'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-
-
-function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{
-                ...style, borderRadius: '50%', display: 'block',
-                background: 'cornflowerblue', right: -33, width: 23, height: 20, paddingTop: 2.5
-            }}
-            onClick={onClick}
-
-        />
-    );
-}
-
-function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{
-                ...style, left: -10, borderRadius: '50%', display: 'block',
-                background: 'cornflowerblue', right: -40, width: 23, height: 20, paddingTop: 2.5
-            }}
-            onClick={onClick}
-        />
-    );
-}
+import ArrowForward from '@material-ui/icons/ArrowForward';
+import ArrowBack from "@material-ui/icons/ArrowBack";
+import SamplePrevArrow, { SampleNextArrow } from "./CarouselArrowMobile";
 
 const CarouselMobiles = () => {
 
@@ -44,8 +17,8 @@ const CarouselMobiles = () => {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />
+        nextArrow: <SampleNextArrow logo={<ArrowForward style={{ color: 'black' }} />} />,
+        prevArrow: <SamplePrevArrow logo={<ArrowBack style={{ color: 'black' }} />} />
     };
 
     return (
@@ -59,9 +32,7 @@ const CarouselMobiles = () => {
                             <Container style={{ display: matches && 'flex', textAlign: '-webkit-center' }} key={index}>
                                 <Container style={{ alignSelf: 'center' }}>
                                     <h2 style={{ fontFamily: 'sans-serif', fontWeight: 'normal', fontSize: matches ? '1.2rem' : '1rem' }}>
-                                        Aplicación en desarrollo <div />
-                                        para el analisis del mercado de criptomonedas,<div />
-                                        más poderoso y fácil de usar
+                                        {slide.title}
                                     </h2>
                                 </Container>
                                 <Container style={{ marginTop: !matches && '30%' }}>
@@ -73,6 +44,7 @@ const CarouselMobiles = () => {
                         </div>
                     )
                 })}
+
             </CarouselMobile >
         </>
     )
