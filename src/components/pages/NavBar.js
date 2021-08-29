@@ -43,7 +43,7 @@ export default function SearchAppBar(props) {
                 <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
                     CryptoMarket
                 </Typography>
-                <div className={classes.search} style={{ backgroundColor: !matches && 'whitesmoke', width: !matchesMin && 160, flexBasis: !matchesMedium && '35%' }}>
+                <div className={classes.search} style={{ backgroundColor: !matches && 'whitesmoke', width: !matchesMin && 160, flexBasis: !matchesMedium && '31%' }}>
                     <Autocomplete
                         freeSolo
                         onChange={(event) => handleClick(event)}
@@ -55,7 +55,7 @@ export default function SearchAppBar(props) {
                                 <Grid item>
                                     {matches ? <SearchIcon style={{ marginTop: "15px" }} /> : ''}
                                     <TextField
-                                        style={{ margin: 0, width: 162 }}
+                                        style={{ margin: 0, width: '9.6rem' }}
                                         {...params}
                                         label="Search"
                                         margin="normal"

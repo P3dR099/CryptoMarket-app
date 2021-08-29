@@ -42,7 +42,7 @@ export function SampleNextArrow(props) {
                 ...style, borderRadius: '15%', display: 'block',
                 background: 'transparent', right: -33,
                 width: matches ? 50 : 40, height: matches ? 30 : 28, paddingTop: 2.5,
-                top: matches ? '20rem' : '25rem', left: '7rem',
+                top: matches ? '20rem' : '25rem', left: matches ? '4rem' : '3rem',
                 border: '1px solid #1cb5e0'
             }}
             onClick={onClick}
