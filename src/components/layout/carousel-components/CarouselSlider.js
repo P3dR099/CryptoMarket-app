@@ -5,8 +5,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import CarouselSlider from "../style/CarouselSlide";
+import { useSelector } from 'react-redux';
+import CarouselSlider from "../../style/CarouselSlide";
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;

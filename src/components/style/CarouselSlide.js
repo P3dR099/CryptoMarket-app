@@ -28,4 +28,9 @@ const CarouselSlider = styled(Slider)`
 
 `
 
+export const CarouselMobile = styled(Slider)`
+  -webkit-transform: translateX(-228px) translateY(245px);
+  
+`
+
 export default CarouselSlider;
