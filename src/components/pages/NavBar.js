@@ -53,7 +53,7 @@ export default function SearchAppBar(props) {
                         renderInput={(params) => (
                             <Grid container spacing={1} style={{ justifyContent: "flex-end" }}>
                                 <Grid item>
-                                    {matches ? <SearchIcon style={{ marginTop: "15px" }} /> : ''}
+                                    {matches ? <SearchIcon style={{ marginTop: "1rem" }} /> : ''}
                                     <TextField
                                         style={{ margin: 0, width: '9.6rem' }}
                                         {...params}

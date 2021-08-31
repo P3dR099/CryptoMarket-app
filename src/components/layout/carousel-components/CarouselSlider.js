@@ -29,7 +29,7 @@ function SamplePrevArrow(props) {
         <div
             className={className}
             style={{
-                ...style, left: -20, borderRadius: '50%', display: 'block',
+                ...style, left: 0, borderRadius: '50%', display: 'block',
                 background: 'cornflowerblue', right: -40, width: 23, height: 20, paddingTop: 2.5
             }}
             onClick={onClick}
@@ -68,9 +68,8 @@ export default function CustomArrows(props) {
 
     const classes = useStyles();
 
-    const matchesHeight = useMediaQuery('(min-height:1000px)');
-    const matchesMin = useMediaQuery('(min-width:460px)');
-    const matchesMin2 = useMediaQuery('(min-width:700px)');
+    const matchesMin2 = useMediaQuery('(min-width:460px)');
+    const matchesMin = useMediaQuery('(min-width:700px)');
     const matchesMed = useMediaQuery('(min-width:950px)');
     const matchesMax2 = useMediaQuery('(max-width:1350px)');
 
@@ -127,7 +126,7 @@ export default function CustomArrows(props) {
         <>
 
             {data !== undefined &&
-                <CarouselSlider {...settings} matchesMin={!matchesMin} matchesMin2={!matchesMin2} matchesMax2={matchesMax2} matchesHeight={matchesHeight}>
+                <CarouselSlider {...settings} matchesMin={!matchesMin} matchesMin2={!matchesMin2} matchesMax2={matchesMax2} >
                     {data.map(function (slide, index) {
                         return (
                             <Container key={index}>

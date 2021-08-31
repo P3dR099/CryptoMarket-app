@@ -16,13 +16,14 @@ AOS.init()
 const Home = (props) => {
 
     let history = useHistory();
-    const matchesMedium = useMediaQuery('(max-width:700px)')
+    const matchesMedium = useMediaQuery('(max-width:900px)')
     const matchesMax = useMediaQuery('(max-width:1350px)')
     const { getCoins } = props
 
     const sectionClass = makeStyles({
         sectionMobile: {
-            display: 'flex',
+            display: !matchesMedium && 'grid',
+            gridTemplateColumns: '60% 40%',
             height: 'inherit',
             alignItems: 'center'
         }
@@ -41,8 +42,6 @@ const Home = (props) => {
                 <ContainerKid matches={matchesMedium}>
                     <Container style={{ height: '80%', padding: !matchesMedium ? '8% 8% 4% 8%' : '12% 3% 4% 3%', display: 'grid', alignItems: 'center', textAlign: '-webkit-left' }}>
                         <Container>
-                            {/* <img style={{ width: 30 }} src={BtcLogo} alt="btc logo" />
-                            <img style={{ width: 30 }} src={EthLogo} alt="eth logo" /> */}
                             <h1 className="title">
                                 Analiza el mercado de criptomonedas de una manera sencilla y rápida
                             </h1>
@@ -61,20 +60,19 @@ const Home = (props) => {
                 <CarouselSlider {...props} />
             </ContainerHome>
 
-            <ContainerSection matches={matchesMedium}>
-                <div data-aos="fade-up"
-                    data-aos-delay="60"
-                    data-aos-duration="1300"
-                    style={{ height: 'inherit' }}
-                >
-                    <section className={classes.sectionMobile} >
-                        <Container >
+            <Container>
+                <ContainerSection matches={matchesMedium}>
+                    <div data-aos="fade-up"
+                        data-aos-delay="60"
+                        data-aos-duration="1300"
+                        style={{ height: 'inherit' }}
+                    >
+                        <section className={classes.sectionMobile} >
                             <CarouselMobiles />
-                        </Container>
-                    </section>
-                </div>
-            </ContainerSection>
-
+                        </section>
+                    </div>
+                </ContainerSection>
+            </Container>
 
         </>
     )

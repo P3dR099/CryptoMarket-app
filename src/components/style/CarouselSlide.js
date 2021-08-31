@@ -8,12 +8,13 @@ const CarouselSlider = styled(Slider)`
     ${({ matchesMax2 }) => matchesMax2 ? `
 
     margin: 0px 22px 0px 64px;
-    -webkit-transform: translateX(-42px) translateY(600px);` :
+    -webkit-transform: translateX(-42px) translateY(580px);` :
         `margin:0px 50px 0px 75px;
     ` }
 
+
     ${({ matchesMin2 }) => matchesMin2 && `
-        -webkit-transform: translateX(-34px) translateY(353px);        
+        -webkit-transform: translateX(-34px) translateY(584px);
     `}
 
     ${({ matchesMin, matchesMin2 }) => matchesMin || matchesMin2 ? `
