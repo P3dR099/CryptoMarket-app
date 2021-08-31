@@ -1,0 +1,26 @@
+.slick-dots-carousel {
+
+    .slick-dots {
+        bottom: 0px;
+        display: flex;
+        transform: translateX(-134%) translateY(10%);
+        
+    }
+
+    .slick-dots.slick-thumb {
+        display: flex;
+    }
+
+    .slick-dots li {
+        width: 169px;
+        display: inline;
+    }
+
+    .slick-prev:before{
+        content: "";
+    }
+    
+    .slick-next:before{
+        content: "";
+    }
+}
