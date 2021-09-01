@@ -24,13 +24,13 @@ const CarouselSlider = styled(Slider)`
 
     ${({ matchesMedH, matchesMax2 }) => matchesMedH && matchesMax2 ? `
 
-     -webkit-transform: translateX(-40px) translateY(810px);` :
+     -webkit-transform: translateX(-40px) translateY(750px);` :
         `margin:0px 50px 0px 75px;
      ` }
 
          ${({ matchesMedH, matchesMin2 }) => matchesMedH && matchesMin2 ? `
 
-        -webkit-transform: translateX(-40px) translateY(670px);` :
+        -webkit-transform: translateX(-40px) translateY(680px);` :
         `margin:0px 50px 0px 75px;
      ` }
 
