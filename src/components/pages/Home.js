@@ -41,7 +41,7 @@ const Home = (props) => {
         <>
             <ContainerHome matches={matchesMin} matchesMax={matchesMax} >
                 <ContainerKid matches={matchesMin}>
-                    <Container style={{ height: '80%', padding: !matchesMedium ? '8% 8% 4% 8%' : '12% 3% 4% 3%', display: 'grid', alignItems: 'center', textAlign: '-webkit-left' }}>
+                    <Container style={{ height: '80%', padding: !matchesMedium ? '8% 8% 4% 8%' : '12% 3% 10% 3%', display: 'grid', alignItems: 'center', textAlign: '-webkit-left' }}>
                         <Container>
                             <h1 className="title">
                                 Analiza el mercado de criptomonedas de una manera sencilla y rápida

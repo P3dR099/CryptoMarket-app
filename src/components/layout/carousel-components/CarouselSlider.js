@@ -7,36 +7,9 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import CarouselSlider from "../../style/CarouselSlide";
+import { SampleNextArrow, SamplePrevArrow } from "./CarouselArrowCards";
 
-function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{
-                ...style, borderRadius: '50%', display: 'block',
-                background: 'cornflowerblue', right: -33, width: 23, height: 20, paddingTop: 2.5
-            }}
-            onClick={onClick}
 
-        />
-    );
-}
-
-function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{
-                ...style, left: -8, borderRadius: '50%', display: 'block',
-                background: 'cornflowerblue', right: -40, width: 23, height: 20, paddingTop: 2.5
-            }}
-            onClick={onClick}
-        >
-        </div>
-    );
-}
 
 const useStyles = makeStyles({
     root: {
@@ -67,23 +40,21 @@ const useStyles = makeStyles({
 export default function CustomArrows(props) {
 
     const classes = useStyles();
-
-    const matchesMin2 = useMediaQuery('(min-width:450px)');
+    const matchesMin2 = useMediaQuery('(min-width:550px)');
     const matchesMin = useMediaQuery('(min-width:700px)');
     const matchesMed = useMediaQuery('(min-width:950px)');
     const matchesMax2 = useMediaQuery('(max-width:1350px)');
 
     const matchesMedH = useMediaQuery('(min-height:880px)');
 
-
     const { data } = useSelector(state => state)
 
     const showSlides = () => {
 
-        if (!matchesMin) {
+        if (!matchesMin2) {
             return 1;
         }
-        if (!matchesMin2) {
+        if (!matchesMin) {
             return 2;
         }
         if (!matchesMed) {
@@ -105,25 +76,6 @@ export default function CustomArrows(props) {
         prevArrow: <SamplePrevArrow />
     };
 
-    const name = () => {
-
-        const slickTrack = document.querySelectorAll('.slick-track')[0];
-        if (!matchesMin) {
-            return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(0px, 0px, 0px); width: 60032px;" : undefined
-        }
-        if (!matchesMin) {
-            return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(0px, 0px, 0px); width: 37032px;" : undefined
-        }
-        if (!matchesMed) {
-            return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(10px, 0px, 0px); width: 37032px;" : undefined
-        }
-        else {
-            return slickTrack !== undefined ? document.querySelectorAll('.slick-track')[0].style = "transform: translate3d(7px, 0px, 0px); width: 67032px;" : undefined
-        }
-
-    }
-    name()
-
 
     return (
         <>
@@ -134,11 +86,12 @@ export default function CustomArrows(props) {
                             return (
                                 <Container key={index}>
                                     <Box boxShadow={4} className={matchesMin ? classes.cardCoin : classes.cardCoinMin}>
-                                        <Container style={{ display: 'flex', justifyContent: 'space-between', padding: matchesMin2 ? '3px 12px 0px 7px' : '12px 15px 0px 0px', alignItems: 'center' }}>
+                                        <Container style={{ display: 'flex', justifyContent: 'space-between', padding: matchesMin2 ? '6px 12px 0px 5px' : '12px 15px 0px 0px', alignItems: 'center' }}>
                                             <Container style={{
                                                 display: 'inline-grid',
                                                 textAlignLast: 'left',
-                                                paddingLeft: matchesMin && 10
+                                                paddingLeft: matchesMin && 10,
+                                                paddingRight: 0
                                             }}>
 
                                                 <h3 style={{ marginTop: '3px', marginLeft: 0, fontSize: 'initial', alignSelf: 'baseline', marginBottom: 'auto', textAlign: '-webkit-left' }}>{slide.name}</h3>

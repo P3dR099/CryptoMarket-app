@@ -33,12 +33,12 @@ const CarouselMobiles = () => {
 
         if (id == 1) {
             document.querySelectorAll('.container-slick-dots1')[0].style += "; text-align: -webkit-left; border: 1px solid rgb(96 79 182); border-radius: 0.8rem; height: 4.5rem; padding-top: 2%;"
-            event.target.style.color = '#2e8cee'
+            event.target.style.backgroundColor = '#2e8cee'
         }
 
         if (id == 2) {
             document.querySelectorAll('.container-slick-dots0')[0].style += "; text-align: -webkit-left; border: 1px solid rgb(96 79 182); border-radius: 0.8rem; height: 4.5rem; padding-top: 2%;"
-            event.target.style.color = '#2e8cee'
+            event.target.style.backgroundColor = '#2e8cee'
         }
     }
 
