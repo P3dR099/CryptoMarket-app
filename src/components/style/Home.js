@@ -35,7 +35,7 @@ export const ContainerSection = styled.div`
     background: dimgrey;
     border-radius: 63px;
     ${({ matches }) => matches && `margin: 7rem ​1rem 1rem 1rem;`}
-    height: 500px;
+    height: 420px;
     background-color: rgba(239, 236, 254, 0.5);
     transform: translateY(25%);
 `
