@@ -22,8 +22,7 @@ export const ContainerHome = styled.div`
 export const ContainerKid = styled.div`
     position: absolute;
     width: 100%;
-    ${({ matches }) => !matches ? `height: 101vh;` : `height: 100vh;`}
-    ${({ matchesMax }) => matchesMax && `height: 103vh;`}
+    ${({ matches }) => !matches ? `height: 100vh;` : `height: 80vh;`}
     background: -webkit-linear-gradient(to top, #1CB5E0, #000046);
     background: linear-gradient(to top, #1CB5E0, #000046);
     
@@ -35,10 +34,7 @@ export const ContainerSection = styled.div`
     height: 240px;
     background: dimgrey;
     border-radius: 63px;
-    ${({ matches }) => matches && `margin: 9rem 3rem 1rem 3rem;`}
-
-    // ${({ matches }) => matches && `margin: 1.2rem;`}
-
+    ${({ matches }) => matches && `margin: 7rem ​1rem 1rem 1rem;`}
     height: 500px;
     background-color: rgba(239, 236, 254, 0.5);
     transform: translateY(25%);

@@ -68,7 +68,7 @@ export default function CustomArrows(props) {
 
     const classes = useStyles();
 
-    const matchesMin2 = useMediaQuery('(min-width:460px)');
+    const matchesMin2 = useMediaQuery('(min-width:450px)');
     const matchesMin = useMediaQuery('(min-width:700px)');
     const matchesMed = useMediaQuery('(min-width:950px)');
     const matchesMax2 = useMediaQuery('(max-width:1350px)');
@@ -124,49 +124,50 @@ export default function CustomArrows(props) {
 
     return (
         <>
+            <Container style={{ padding: 1 }}>
+                {data !== undefined &&
+                    <CarouselSlider {...settings} matchesMin={!matchesMin} matchesMin2={!matchesMin2} matchesMax2={matchesMax2} >
+                        {data.map(function (slide, index) {
+                            return (
+                                <Container key={index}>
+                                    <Box boxShadow={4} className={matchesMin ? classes.cardCoin : classes.cardCoinMin}>
+                                        <Container style={{ display: 'flex', justifyContent: 'space-between', padding: matchesMin2 ? '3px 12px 0px 7px' : '12px 15px 0px 0px', alignItems: 'center' }}>
+                                            <Container style={{
+                                                display: 'inline-grid',
+                                                textAlignLast: 'left',
+                                                paddingLeft: matchesMin && 10
+                                            }}>
 
-            {data !== undefined &&
-                <CarouselSlider {...settings} matchesMin={!matchesMin} matchesMin2={!matchesMin2} matchesMax2={matchesMax2} >
-                    {data.map(function (slide, index) {
-                        return (
-                            <Container key={index}>
-                                <Box boxShadow={4} className={matchesMin ? classes.cardCoin : classes.cardCoinMin}>
-                                    <Container style={{ display: 'flex', justifyContent: 'space-between', padding: matchesMin2 ? '3px 12px 0px 7px' : '12px 15px 0px 0px', alignItems: 'center' }}>
-                                        <Container style={{
-                                            display: 'inline-grid',
-                                            textAlignLast: 'left',
-                                            paddingLeft: matchesMin && 10
-                                        }}>
+                                                <h3 style={{ marginTop: '3px', marginLeft: 0, fontSize: 'initial', alignSelf: 'baseline', marginBottom: 'auto', textAlign: '-webkit-left' }}>{slide.name}</h3>
+                                                <h3 style={{
+                                                    color: 'gray', fontSize: 13, opacity: 0.7, marginBlock: 'auto'
+                                                }}>{slide.symbol}</h3>
+                                            </Container>
 
-                                            <h3 style={{ marginTop: '3px', marginLeft: 0, fontSize: 'initial', alignSelf: 'baseline', marginBottom: 'auto', textAlign: '-webkit-left' }}>{slide.name}</h3>
-                                            <h3 style={{
-                                                color: 'gray', fontSize: 13, opacity: 0.7, marginBlock: 'auto'
-                                            }}>{slide.symbol}</h3>
+
+                                            <Link to={"/coin/" + slide.id} style={{ textDecoration: 'none', color: 'inherit' }} >
+                                                <img alt="coin" className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} style={{ padding: !matchesMin2 && 0 }} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
+                                            </Link>
                                         </Container>
-
-
-                                        <Link to={"/coin/" + slide.id} style={{ textDecoration: 'none', color: 'inherit' }} >
-                                            <img alt="coin" className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} style={{ padding: !matchesMin2 && 0 }} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
-                                        </Link>
-                                    </Container>
-                                    <Typography className={classes.priceCoin}>
-                                        {slide.price > 1 ? slide.price.toFixed(2) : slide.price.toFixed(4)}
-                                    </Typography>
-
-                                    {slide.change_1d > 0 ?
-                                        <Typography>
-                                            <ArrowUpwardIcon style={{ width: 15, verticalAlign: 'top', color: 'green' }} />{slide.change_1d.toFixed(2)}
-                                        </Typography> :
-                                        <Typography>
-                                            <ArrowDownwardIcon style={{ width: 15, verticalAlign: 'top', color: 'red' }} />{slide.change_1d.toFixed(2)}
+                                        <Typography className={classes.priceCoin}>
+                                            {slide.price > 1 ? slide.price.toFixed(2) : slide.price.toFixed(4)}
                                         </Typography>
-                                    }
-                                </Box>
-                            </Container>
-                        )
-                    })}
-                </CarouselSlider>
-            }
+
+                                        {slide.change_1d > 0 ?
+                                            <Typography>
+                                                <ArrowUpwardIcon style={{ width: 15, verticalAlign: 'top', color: 'green' }} />{slide.change_1d.toFixed(2)}
+                                            </Typography> :
+                                            <Typography>
+                                                <ArrowDownwardIcon style={{ width: 15, verticalAlign: 'top', color: 'red' }} />{slide.change_1d.toFixed(2)}
+                                            </Typography>
+                                        }
+                                    </Box>
+                                </Container>
+                            )
+                        })}
+                    </CarouselSlider>
+                }
+            </Container>
         </>
     );
 }

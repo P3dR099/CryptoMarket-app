@@ -3,18 +3,17 @@ import Slider from "react-slick";
 
 const CarouselSlider = styled(Slider)`
 
-    -webkit-transform: translateX(-34px) translateY(685px);
+    -webkit-transform: translateX(-34px) translateY(680px);
 
     ${({ matchesMax2 }) => matchesMax2 ? `
 
     margin: 0px 22px 0px 64px;
-    -webkit-transform: translateX(-42px) translateY(580px);` :
+    -webkit-transform: translateX(-42px) translateY(585px);` :
         `margin:0px 50px 0px 75px;
     ` }
 
-
     ${({ matchesMin2 }) => matchesMin2 && `
-        -webkit-transform: translateX(-34px) translateY(584px);
+        -webkit-transform: translateX(-34px) translateY(455px);
     `}
 
     ${({ matchesMin, matchesMin2 }) => matchesMin || matchesMin2 ? `
@@ -26,7 +25,6 @@ const CarouselSlider = styled(Slider)`
     .slick-track {
         transform: translate3d(-10px, 0px, 0px);
     }
-
 `
 
 export const CarouselMobile = styled(Slider)`

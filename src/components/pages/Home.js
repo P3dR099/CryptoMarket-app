@@ -16,6 +16,7 @@ AOS.init()
 const Home = (props) => {
 
     let history = useHistory();
+    const matchesMin = useMediaQuery('(max-width:450px)')
     const matchesMedium = useMediaQuery('(max-width:900px)')
     const matchesMax = useMediaQuery('(max-width:1350px)')
     const { getCoins } = props
@@ -38,8 +39,8 @@ const Home = (props) => {
 
     return (
         <>
-            <ContainerHome matches={matchesMedium} matchesMax={matchesMax} >
-                <ContainerKid matches={matchesMedium}>
+            <ContainerHome matches={matchesMin} matchesMax={matchesMax} >
+                <ContainerKid matches={matchesMin}>
                     <Container style={{ height: '80%', padding: !matchesMedium ? '8% 8% 4% 8%' : '12% 3% 4% 3%', display: 'grid', alignItems: 'center', textAlign: '-webkit-left' }}>
                         <Container>
                             <h1 className="title">
