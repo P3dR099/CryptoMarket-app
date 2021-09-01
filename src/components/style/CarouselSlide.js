@@ -30,7 +30,7 @@ const CarouselSlider = styled(Slider)`
 
          ${({ matchesMedH, matchesMin2 }) => matchesMedH && matchesMin2 ? `
 
-        -webkit-transform: translateX(-40px) translateY(730px);` :
+        -webkit-transform: translateX(-40px) translateY(670px);` :
         `margin:0px 50px 0px 75px;
      ` }
 
