@@ -35,7 +35,7 @@ const CarouselSlider = styled(Slider)`
      ` }
 
 
-         ${({ matchesMin2, matchesMedH }) => !matchesMedH && matchesMin2 ? `-webkit-transform: translateX(-40px) translateY(610px);` :
+         ${({ matchesMin2, matchesMedH }) => !matchesMedH && matchesMin2 ? `-webkit-transform: translateX(-40px) translateY(535px);` :
         `margin:0px 50px 0px 75px;
      ` }
     
