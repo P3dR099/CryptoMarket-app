@@ -45,7 +45,7 @@ export default function CustomArrows(props) {
     const matchesMed = useMediaQuery('(min-width:950px)');
     const matchesMax2 = useMediaQuery('(max-width:1350px)');
 
-    const matchesMin2H = useMediaQuery('(min-height:680px)');
+    const matchesMin2H = useMediaQuery('(min-height:710px)');
     const matchesMinH = useMediaQuery('(min-height:680px)');
     const matchesMedH = useMediaQuery('(min-height:880px)');
 

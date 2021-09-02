@@ -66,7 +66,7 @@ const Home = (props) => {
                     <div data-aos="fade-up"
                         data-aos-delay="60"
                         data-aos-duration="1300"
-                        style={{ height: 'inherit' }}
+                        style={{ height: 'inherit', marginTop: '2.5rem' }}
                     >
                         <section className={classes.sectionMobile} >
                             <CarouselMobiles />

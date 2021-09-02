@@ -15,9 +15,9 @@ const CarouselSlider = styled(Slider)`
         `margin:0px 50px 0px 75px;
     ` }
 
-        ${({ matchesMax2, matchesMinH, matchesMin2H }) => matchesMax2 && !matchesMin2H ? `
+        ${({ matchesMax2, matchesMin2H }) => (!matchesMax2 || matchesMax2) && !matchesMin2H ? `
     margin: 0px 22px 0px 64px;
-    -webkit-transform: translateX(-42px) translateY(580px);` :
+    -webkit-transform: translateX(-42px) translateY(560px);` :
         `margin:0px 50px 0px 75px;
     ` }
 

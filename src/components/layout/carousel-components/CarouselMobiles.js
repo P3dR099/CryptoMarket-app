@@ -1,5 +1,5 @@
 import { Container } from "@material-ui/core";
-import React, { useState } from "react";
+import React from "react";
 import CarouselMobile from "../../style/CarouselMobiles";
 import arrImages from '../../utils/arrImages'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
