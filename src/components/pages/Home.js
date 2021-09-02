@@ -9,6 +9,7 @@ import CarouselMobiles from '../layout/carousel-components/CarouselMobiles';
 import { makeStyles } from '@material-ui/core/styles';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ComponentStart from '../layout/ComponentStart';
 
 AOS.init()
 
@@ -61,7 +62,7 @@ const Home = (props) => {
                 <CarouselSlider {...props} />
             </ContainerHome>
 
-            <Container>
+            <Container style={{ marginTop: '6rem' }}>
                 <ContainerSection matches={matchesMedium}>
                     <div data-aos="fade-up"
                         data-aos-delay="60"
@@ -75,6 +76,7 @@ const Home = (props) => {
                 </ContainerSection>
             </Container>
 
+            {/* <ComponentStart /> */}
         </>
     )
 }

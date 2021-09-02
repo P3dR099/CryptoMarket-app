@@ -37,7 +37,6 @@ export const ContainerSection = styled.div`
     ${({ matches }) => matches && `margin: 7rem ​1rem 1rem 1rem;`}
     height: 420px;
     background-color: rgba(239, 236, 254, 0.5);
-    transform: translateY(25%);
 `
 
 export const ContainerParentSection = styled(Container)`
