@@ -53,7 +53,7 @@ const useStyles = makeStyles((width) => ({
         backgroundColor: 'transparent',
 
         [theme2.breakpoints.up('sm')]: {
-            marginLeft: 31,
+            marginLeft: 34,
             width: 550,
         },
         [theme2.breakpoints.down('xs')]: {
@@ -62,7 +62,7 @@ const useStyles = makeStyles((width) => ({
     },
     root2: {
         width: 680,
-        marginLeft: 10,
+        marginLeft: 40,
         [theme2.breakpoints.up('lg')]: {
             display: 'inline-table',
             marginLeft: 31

@@ -16,7 +16,7 @@ const GraphCoin = (props) => {
     const matchesMin = useMediaQuery('(max-width:500px)');
     const matches = useMediaQuery('(min-width:700px)');
     const matchesMedium = useMediaQuery('(max-width:700px)');
-    const matchesMax = useMediaQuery('(max-width:1256px)');
+    const matchesMax = useMediaQuery('(max-width:1290px)');
 
     const useStyles = makeStyles({
         graphCoin: {
@@ -82,10 +82,10 @@ const GraphCoin = (props) => {
 
     const scaleGraph = () => {
         if (!matchesMax) {
-            return 900
+            return 880
         }
         if (matches) {
-            return 650
+            return 680
         }
         if (matchesMedium && !matchesMin) {
             return 550
