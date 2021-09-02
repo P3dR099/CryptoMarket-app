@@ -3,11 +3,24 @@ import Slider from "react-slick";
 
 const CarouselSlider = styled(Slider)`
     -webkit-transform: translateX(-34px) translateY(678px);
-    ${({ matchesMax2, matchesMedH }) => matchesMax2 && !matchesMedH ? `
+    ${({ matchesMax2, matchesMedH, matchesMinH }) => matchesMax2 && !matchesMedH && matchesMinH ? `
     margin: 0px 22px 0px 64px;
     -webkit-transform: translateX(-42px) translateY(588px);` :
         `margin:0px 50px 0px 75px;
     ` }
+
+    ${({ matchesMax2, matchesMinH, matchesMin2H }) => matchesMax2 && !matchesMinH && matchesMin2H ? `
+    margin: 0px 22px 0px 64px;
+    -webkit-transform: translateX(-42px) translateY(530px);` :
+        `margin:0px 50px 0px 75px;
+    ` }
+
+        ${({ matchesMax2, matchesMinH, matchesMin2H }) => matchesMax2 && !matchesMin2H ? `
+    margin: 0px 22px 0px 64px;
+    -webkit-transform: translateX(-42px) translateY(580px);` :
+        `margin:0px 50px 0px 75px;
+    ` }
+
     ${({ matchesMin2 }) => matchesMin2 && `
         -webkit-transform: translateX(-34px) translateY(545px);
     `}
