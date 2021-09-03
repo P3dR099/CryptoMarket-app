@@ -30,12 +30,12 @@ const CarouselMobiles = () => {
         const id = event.target.id
 
         if (id == 1) {
-            document.querySelectorAll('.container-slick-dots1')[0].style += "; text-align: -webkit-left; border: 1px solid rgb(96 79 182); border-radius: 0.8rem; height: 4.5rem; padding-top: 2%;"
+            document.querySelectorAll('.container-slick-dots1')[0].style += "; text-align: -webkit-left; border: 1px solid rgb(96 79 182); border-radius: 0.8rem; height: 3.5rem; color: rgb(6 93 213); padding: 0.5rem 1rem"
             event.target.style.backgroundColor = 'rgb(216 230 243)'
         }
 
         if (id == 2) {
-            document.querySelectorAll('.container-slick-dots0')[0].style += "; text-align: -webkit-left; border: 1px solid rgb(96 79 182); border-radius: 0.8rem; height: 4.5rem; padding-top: 2%;"
+            document.querySelectorAll('.container-slick-dots0')[0].style += "; text-align: -webkit-left; border: 1px solid rgb(96 79 182); border-radius: 0.8rem; height: 3.5rem; color: rgb(6 93 213); padding: 0.5rem 1rem;"
             event.target.style.backgroundColor = 'rgb(216 230 243)'
         }
     }
@@ -44,7 +44,7 @@ const CarouselMobiles = () => {
         customPaging: function (i) {
             return (
                 <Container style={{ display: 'flex' }}>
-                    <Container className={`container-slick-dots${i}`} style={{ fontSize: !matchesMaxText && '0.8rem', width: '100%', textAlign: '-webkit-left', border: '1.5px solid rgb(15 62 110)', borderRadius: '0.8rem', height: '4.5rem', paddingTop: '2%' }} id={arrImages[i].id} onClick={handleClick}>
+                    <Container className={`container-slick-dots${i}`} style={{ fontSize: !matchesMaxText && '0.8rem', width: '100%', textAlign: '-webkit-left', border: '1.5px solid rgb(15 62 110)', borderRadius: '0.8rem', height: '3.5rem', color: 'rgb(6 93 213)', padding: '0.6rem 1rem' }} id={arrImages[i].id} onClick={handleClick}>
                         {arrImages[i].title}
                     </Container>
                 </Container>
@@ -64,7 +64,7 @@ const CarouselMobiles = () => {
         <>
             <div></div>
 
-            <CarouselMobile {...settigns} style={{ textAlignLast: 'left' }} className="slick-dots-carousel" >
+            <CarouselMobile {...settigns} className="slick-dots-carousel" >
                 {arrImages.map((slide, index) => {
                     return (
                         <div key={index}>
@@ -73,11 +73,11 @@ const CarouselMobiles = () => {
                                 justifyContent: 'center'
                             }} key={index}>
 
-                                <img style={{ width: matches ? 100 : 85, transform: 'skewX(12deg)', justifySelf: 'center' }} src={slide.src} alt="mobile" />
+                                <img style={{ width: matches ? slide.width : 85, transform: 'skewX(12deg)', justifySelf: 'center' }} src={slide.src} alt="mobile" />
 
                                 {!matchesMax &&
                                     <Container style={{ alignSelf: 'center', textAlign: '-webkit-left' }}>
-                                        <h2 style={{ fontFamily: 'sans-serif', fontWeight: 'normal', fontSize: matches ? '1.2rem' : '0.9rem', marginTop: !matches && '20%' }}>
+                                        <h2 style={{ fontFamily: 'sans-serif', fontWeight: 'normal', fontSize: matches ? '1.2rem' : '0.9rem', marginTop: !matches && '20%', color: 'rgb(12, 108, 242)' }}>
                                             {slide.title}
                                         </h2>
                                     </Container>

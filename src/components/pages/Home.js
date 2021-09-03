@@ -1,5 +1,5 @@
-import { Container } from '@material-ui/core';
 import React, { useEffect } from 'react';
+import { Container, Grid } from '@material-ui/core';
 import CarouselSlider from '../layout/carousel-components/CarouselSlider';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
@@ -27,7 +27,7 @@ const Home = (props) => {
             display: !matchesMedium && 'grid',
             gridTemplateColumns: '60% 40%',
             height: 'inherit',
-            alignItems: 'center'
+            alignItems: 'center',
         }
     })
 
@@ -61,22 +61,21 @@ const Home = (props) => {
                 </ContainerKid>
                 <CarouselSlider {...props} />
             </ContainerHome>
-
-            <Container style={{ marginTop: '6rem' }}>
+            <Grid item xs={12}>
                 <ContainerSection matches={matchesMedium}>
                     <div data-aos="fade-up"
                         data-aos-delay="60"
                         data-aos-duration="1300"
-                        style={{ height: 'inherit', marginTop: '2.5rem' }}
+                        style={{ height: 'inherit' }}
                     >
                         <section className={classes.sectionMobile} >
                             <CarouselMobiles />
                         </section>
                     </div>
                 </ContainerSection>
-            </Container>
+            </Grid>
 
-            {/* <ComponentStart /> */}
+            <ComponentStart />
         </>
     )
 }

@@ -10,7 +10,7 @@ const FooterContainer = styled.div`
             width: 100%;
             height: 30pz;
             box-shadow: 0px - 4px 5px 0px rgba(0, 0, 0, 0.75);
-            margin-top: 170px;
+            margin-top: 4rem;
 `
 
 export const Parraph = styled.p`
