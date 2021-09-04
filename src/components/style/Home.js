@@ -27,13 +27,13 @@ export const ContainerKid = styled.div`
     background: linear-gradient(to top, #1CB5E0, #000046);    
 `
 
-export const ContainerSection = styled.div`
-    
+export const ContainerSection = styled.div`   
     padding: 2rem 2rem;
     ${({ matches }) => matches && `padding: 3rem;`}
     background: dimgrey;
-    border-radius: 63px;
+    border-radius: 2.5rem;
     margin: 3rem 2rem;
+    ${({ matchesMin }) => !matchesMin && `margin: 3rem 0.5rem;`}
     ${({ matches }) => matches && `margin: 7rem ​1rem 1rem 1rem;`}
     height: 420px;
     background-color: rgba(239, 236, 254, 0.5);

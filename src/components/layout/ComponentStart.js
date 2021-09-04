@@ -36,7 +36,7 @@ const ComponentStart = () => {
     const matchesMin = useMediaQuery('(min-width:600px)');
 
     return (
-        <ContainerSection style={{ height: 'auto' }}>
+        <ContainerSection matchesMin={matchesMin} style={{ height: 'auto' }}>
             <ContainerGrid container spacing={3}>
 
                 {/* <Grid item xs={12}>

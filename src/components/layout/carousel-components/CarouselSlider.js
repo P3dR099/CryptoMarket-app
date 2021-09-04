@@ -48,7 +48,7 @@ export default function CustomArrows(props) {
     const matchesMin2H = useMediaQuery('(min-height:710px)');
     const matchesMinH = useMediaQuery('(min-height:680px)');
     const matchesMedH = useMediaQuery('(min-height:880px)');
-
+    const matchesMaxH = useMediaQuery('(min-height:1080px)');
     const { data } = useSelector(state => state)
 
     const showSlides = () => {
@@ -83,7 +83,7 @@ export default function CustomArrows(props) {
         <>
             <Container style={{ padding: 1 }}>
                 {data !== undefined &&
-                    <CarouselSlider {...settings} matchesMin2H={matchesMin2H} matchesMinH={matchesMinH} matchesMin={!matchesMin} matchesMedH={matchesMedH} matchesMin2={!matchesMin2} matchesMax2={matchesMax2} >
+                    <CarouselSlider {...settings} matchesMin2H={matchesMin2H} matchesMinH={matchesMinH} matchesMin={!matchesMin} matchesMedH={matchesMedH} matchesMin2={!matchesMin2} matchesMax2={matchesMax2} matchesMaxH={matchesMaxH}>
                         {data.map(function (slide, index) {
                             return (
                                 <Container key={index}>
