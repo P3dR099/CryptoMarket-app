@@ -21,23 +21,21 @@ const CarouselSlider = styled(Slider)`
     `}
 
     ${({ matchesMedH, matchesMax2 }) => matchesMedH && matchesMax2 && `
-     -webkit-transform: translateX(-25px) translateY(750px);` }
-     
+    -webkit-transform: translateX(-25px) translateY(750px);` }
     
      ${({ matchesMin2, matchesMax2, matchesMaxH }) => matchesMaxH && (matchesMax2 || !matchesMin2) && `
          -webkit-transform: translateX(-40px) translateY(980px);
-     `
-    }
+     `}
 
-     
     ${({ matchesMedH, matchesMin2 }) => matchesMedH && matchesMin2 && `
      -webkit-transform: translateX(-40px) translateY(680px);` }
      
-    ${({ matchesMin2, matchesMedH }) => !matchesMedH && matchesMin2 ? `-webkit-transform: translateX(-38px) translateY(535px);` :
+    ${({ matchesMin2, matchesMedH }) => !matchesMedH && matchesMin2 ?
+        `-webkit-transform: translateX(-38px) translateY(535px);` :
         `margin:0px 50px 0px 75px;
     `}
     
-    .slick - track {
+    .slick-track {
     transform: translate3d(-10px, 0px, 0px);
 }
 `

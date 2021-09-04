@@ -11,35 +11,10 @@ import { SampleNextArrow, SamplePrevArrow } from "./CarouselArrowCards";
 
 
 
-const useStyles = makeStyles({
-    root: {
-        minWidth: 27,
-        margin: 10
-    },
-    cardCoin: {
-        margin: '0px 0px 1px 0px', width: '100%', height: 170, borderRadius: 8, background: '#fff'
-    },
-    cardCoinMin: {
-        margin: '0px 0px 1px 0px', height: 170, borderRadius: 8, background: '#fff', width: '100%'
-    },
-    logoCoin: {
-        padding: 10,
-        width: 50,
-    },
-    logoCoinMin: {
-        padding: 10,
-        width: 40,
-    },
-    priceCoin: {
-        fontSize: '1.3rem',
-        fontWeight: 700
-    }
-});
 
 
 export default function CustomArrows(props) {
 
-    const classes = useStyles();
     const matchesMin2 = useMediaQuery('(min-width:550px)');
     const matchesMin = useMediaQuery('(min-width:700px)');
     const matchesMed = useMediaQuery('(min-width:950px)');
@@ -49,7 +24,72 @@ export default function CustomArrows(props) {
     const matchesMinH = useMediaQuery('(min-height:680px)');
     const matchesMedH = useMediaQuery('(min-height:880px)');
     const matchesMaxH = useMediaQuery('(min-height:1080px)');
+
     const { data } = useSelector(state => state)
+
+    const classCarouselSlide = makeStyles({
+        root: {
+            minWidth: 27,
+            margin: 10
+        },
+        cardCoin: {
+            margin: '0px 0px 1px 0px', width: '100%', height: 170, borderRadius: 8, background: '#fff'
+        },
+        cardCoinMin: {
+            margin: '0px 0px 1px 0px', height: 170, borderRadius: 8, background: '#fff', width: '100%'
+        },
+        logoCoin: {
+            padding: 10,
+            width: 50,
+        },
+        logoCoinMin: {
+            padding: 10,
+            width: 40,
+        },
+        priceCoin: {
+            fontSize: '1.3rem',
+            fontWeight: 700
+        },
+
+        contParentSlide: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: matchesMin2 ? '6px 12px 0px 5px' : '12px 15px 0px 0px',
+            alignItems: 'center'
+        },
+
+        contSecondSlide: {
+            display: 'inline-grid',
+            textAlignLast: 'left',
+            paddingLeft: matchesMin && 10,
+            paddingRight: 0
+        },
+
+        slideNameH3: {
+            marginTop: '3px', marginLeft: 0,
+            fontSize: 'initial', alignSelf: 'baseline',
+            marginBottom: 'auto', textAlign: '-webkit-left'
+        },
+
+        slideSymbolH3: {
+            color: 'gray', fontSize: 13,
+            opacity: 0.7, marginBlock: 'auto'
+        },
+
+        contLink: {
+            textDecoration: 'none', color: 'inherit'
+        },
+
+        arrowUp: {
+            width: 15, verticalAlign: 'top', color: 'green'
+        },
+
+        arrowDown: {
+            width: 15, verticalAlign: 'top', color: 'red'
+        }
+    });
+
+    const classes = classCarouselSlide();
 
     const showSlides = () => {
 
@@ -88,35 +128,24 @@ export default function CustomArrows(props) {
                             return (
                                 <Container key={index}>
                                     <Box boxShadow={4} className={matchesMin ? classes.cardCoin : classes.cardCoinMin}>
-                                        <Container style={{ display: 'flex', justifyContent: 'space-between', padding: matchesMin2 ? '6px 12px 0px 5px' : '12px 15px 0px 0px', alignItems: 'center' }}>
-                                            <Container style={{
-                                                display: 'inline-grid',
-                                                textAlignLast: 'left',
-                                                paddingLeft: matchesMin && 10,
-                                                paddingRight: 0
-                                            }}>
-
-                                                <h3 style={{ marginTop: '3px', marginLeft: 0, fontSize: 'initial', alignSelf: 'baseline', marginBottom: 'auto', textAlign: '-webkit-left' }}>{slide.name}</h3>
-                                                <h3 style={{
-                                                    color: 'gray', fontSize: 13, opacity: 0.7, marginBlock: 'auto'
-                                                }}>{slide.symbol}</h3>
+                                        <Container className={classes.contParentSlide} >
+                                            <Container className={classes.contSecondSlide} >
+                                                <h3 className={classes.slideNameH3}>{slide.name}</h3>
+                                                <h3 className={classes.slideSymbolH3} >{slide.symbol}</h3>
                                             </Container>
-
-
-                                            <Link to={"/coin/" + slide.id} style={{ textDecoration: 'none', color: 'inherit' }} >
+                                            <Link to={"/coin/" + slide.id} className={classes.contLink} >
                                                 <img alt="coin" className={!matchesMin ? classes.logoCoinMin : classes.logoCoin} style={{ padding: !matchesMin2 && 0 }} src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${slide.id}.png`} />
                                             </Link>
                                         </Container>
                                         <Typography className={classes.priceCoin}>
                                             {slide.price > 1 ? slide.price.toFixed(2) : slide.price.toFixed(4)}
                                         </Typography>
-
                                         {slide.change_1d > 0 ?
                                             <Typography>
-                                                <ArrowUpwardIcon style={{ width: 15, verticalAlign: 'top', color: 'green' }} />{slide.change_1d.toFixed(2)}
+                                                <ArrowUpwardIcon className={classes.arrowUp} />{slide.change_1d.toFixed(2)}
                                             </Typography> :
                                             <Typography>
-                                                <ArrowDownwardIcon style={{ width: 15, verticalAlign: 'top', color: 'red' }} />{slide.change_1d.toFixed(2)}
+                                                <ArrowDownwardIcon className={classes.arrowDown} />{slide.change_1d.toFixed(2)}
                                             </Typography>
                                         }
                                     </Box>

@@ -27,10 +27,6 @@ const TableStyle = makeStyles({
     }
 });
 
-export const ContainerTable = styled.div`
-        
-`
-
 export const ContainerLogo = styled.div`
     padding-left: 4px;
     padding: 5px;

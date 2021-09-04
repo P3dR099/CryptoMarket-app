@@ -120,8 +120,6 @@ const CardCrypto = (props) => {
         }
     }
 
-
-    // console.log('crypto data: ', data, allInfoCoins)
     return (
         <>
             <CustomizedBreadcrumbs />
@@ -149,7 +147,6 @@ const CardCrypto = (props) => {
                         </Container>}
 
                     <GridStatsCrypto info={info} coinInfo={coinInfo} />
-
                 </Grid>
             </BackgroundCripto>
         </>

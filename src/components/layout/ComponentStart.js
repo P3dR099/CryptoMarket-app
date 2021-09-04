@@ -19,6 +19,19 @@ const H2 = styled.h2`
     ${({ matchesMin }) => !matchesMin && `font-size: 1.3rem;`}
 `
 
+const H3 = styled.h3`
+    color: rgb(12, 108, 242); font-weight: 400
+`
+
+const ContainerH3 = styled(Container)`
+    color: rgb(12, 108, 242); border: 0.125rem solid rgb(222, 216, 253);
+    border-radius: 1rem; margin: 1rem 0rem;
+`
+
+const ContainerH2 = styled(Container)`
+    paddingLeft: '0.8rem', textAlign: 'start', padding: '2% 5%'
+`
+
 // const useStyles = makeStyles((theme) => ({
 //     root: {
 //         flexGrow: 1,
@@ -38,27 +51,23 @@ const ComponentStart = () => {
     return (
         <ContainerSection matchesMin={matchesMin} style={{ height: 'auto' }}>
             <ContainerGrid container spacing={3}>
-
-                {/* <Grid item xs={12}>
-                    <Paper className={classes.paper}>xs=12</Paper>
-                </Grid> */}
                 <Grid item xs={matchesMax ? 6 : 12}>
                     <img alt="mobile-transaction" style={{ width: matchesMax ? 'auto' : '13rem' }} src={mobileTransaction} />
                 </Grid>
                 <Grid item xs={matchesMax ? 6 : 12}>
-                    <Container style={{ paddingLeft: '0.8rem', textAlign: 'start', padding: '2% 5%' }}>
+                    <ContainerH2>
                         <H2 matchesMin={matchesMin}>Crea tu cuenta para personalizar aún más la experiencia</H2>
-                    </Container>
+                    </ContainerH2>
                     <Container>
-                        <Container style={{ color: 'rgb(12, 108, 242)', border: '1.5px solid rgb(15, 62, 110)', borderRadius: '1rem', margin: '1rem 0rem' }}>
-                            <h3 style={{ color: 'rgb(12, 108, 242)', fontWeight: 400 }}>Guarde las criptomonedas que quiera a favoritos</h3>
-                        </Container>
-                        <Container style={{ color: 'rgb(12, 108, 242)', border: '1.5px solid rgb(15, 62, 110)', borderRadius: '1rem', margin: '1rem 0rem' }}>
-                            <h3 style={{ color: 'rgb(12, 108, 242)', fontWeight: 400 }}>Próximamente, podrá hacer pagos de un forma segura</h3>
-                        </Container>
-                        <Container style={{ color: 'rgb(12, 108, 242)', border: '1.5px solid rgb(15, 62, 110)', borderRadius: '1rem', margin: '1rem 0rem' }}>
-                            <h3 style={{ color: 'rgb(12, 108, 242)', fontWeight: 400 }}>Aplicación centrada en la descentralización y en la seguridad hacia el usuario</h3>
-                        </Container>
+                        <ContainerH3>
+                            <H3>Guarde las criptomonedas que quiera a favoritos</H3>
+                        </ContainerH3>
+                        <ContainerH3>
+                            <H3>Próximamente, podrá hacer pagos de un forma segura</H3>
+                        </ContainerH3>
+                        <ContainerH3>
+                            <H3>Aplicación centrada en la descentralización y en la seguridad hacia el usuario</H3>
+                        </ContainerH3>
                     </Container>
                 </Grid>
             </ContainerGrid>

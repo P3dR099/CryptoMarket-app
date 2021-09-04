@@ -13,10 +13,9 @@ import { Link } from "react-router-dom";
 import Modal from './layout/Modal'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ModalCurrency from './layout/ModalCurrecy';
-import TableStyle, { ContainerLogo, ImageCoin } from './style/TableCriptos';
+import { ContainerLogo, ImageCoin } from './style/TableCriptos';
 import colChange_1h, { colChange_1d } from './utils/TableColumns';
-
-
+import { makeStyles } from '@material-ui/core/styles';
 
 function CustomToolbar() {
     return (
@@ -29,18 +28,41 @@ function CustomToolbar() {
 
 export default function DataTable(props) {
 
-    const classes = TableStyle();
     const matchesMin = useMediaQuery('(min-width:460px)');
-    const [stateCols, setStateCols] = useState({
-        change_1h: false,
-        change_1d: false
-    });
-
+    const [stateCols, setStateCols] = useState({ change_1h: false, change_1d: false });
     const [, setColumns] = React.useState([])
     const { data } = useSelector(state => state)
-    // const { allInfoCoins } = useSelector(state => state)
     const { getCoins } = props
     const rows = data
+
+    const classTableCriptos = makeStyles({
+        contModals: {
+            display: "flex", justifyContent: "flex-end",
+            transform: !matchesMin ? 'translateY(132px)' : 'translateY(82px)'
+        },
+
+        contLink: {
+            textDecoration: 'none', color: 'inherit'
+        },
+
+        table: {
+            '& .super-app-theme--cell': {
+                color: '#1a3e72',
+                fontWeight: '600',
+            },
+            '& .super-app.negative': {
+                color: '#ea3943',
+                fontWeight: '600',
+            },
+            '& .super-app.positive': {
+                color: '#5ced75',
+                fontWeight: '600',
+            },
+            height: '100vh', width: '99.5%', marginTop: !matchesMin ? 140 : 100
+        }
+    })
+
+    const classes = classTableCriptos(matchesMin)
 
     useEffect(() => {
         parseInt(localStorage.getItem('value')) === 1 ? getCoins('EUR') : getCoins('USD')
@@ -51,7 +73,7 @@ export default function DataTable(props) {
         {
             renderCell: (params) => (
                 <Container className="hidden">
-                    <Link to={"/coin/" + params.row.id} style={{ textDecoration: 'none', color: 'inherit' }} >
+                    <Link to={"/coin/" + params.row.id} className={classes.contLink} >
                         <ContainerLogo>
                             <ImageCoin alt="imageCrypto" src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${params.row.id}.png`} />
                             <p>{params.row.name} </p>
@@ -96,11 +118,11 @@ export default function DataTable(props) {
 
     return (
         <>
-            <Container style={{ display: "flex", justifyContent: "flex-end", transform: !matchesMin ? 'translateY(132px)' : 'translateY(82px)' }}>
+            <Container className={classes.contModals}>
                 <ModalCurrency {...props} />
                 <Modal allColumns={columns} setColumns={setColumns} handleRows={handleRows} stateCols={stateCols} setStateCols={setStateCols} {...props} />
             </Container>
-            <div style={{ height: '100vh', width: '99.5%', marginTop: !matchesMin ? 140 : 100 }} className={classes.table} >
+            <div className={classes.table} >
                 {data.length !== 0 ? <DataGrid components={{ Toolbar: CustomToolbar }} loading={data.length === 0 && true} rows={rows} columns={columns} disableSelectionOnClick={false} rowsCount={101} pageSize={50} rowsPerPageOptions={[5, 10, 50, 100]} /> : <CircularProgress />}
             </div>
         </>
