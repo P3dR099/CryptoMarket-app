@@ -30,33 +30,31 @@ export default function FormDialog(props) {
     };
 
     return (
-        <div>
+        <>
             {!props.loggedInUser && <>
-                <Button variant="outlined" onClick={handleClickOpen}>Regístrate</Button>
-                {matchesMin && <Button variant="outlined" onClick={handleClickOpen2}>Inicia Sesión</Button>}
+                <Button variant="outlined" color="primary" onClick={handleClickOpen}>Regístrate</Button>
+                {matchesMin && <Button variant="outlined" color="primary" onClick={handleClickOpen2}>Inicia Sesión</Button>}
             </>
             }
             <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title-login">
                 <DialogTitle>Iniciar Sesión</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally.
+                        Inicia sesión sesión con tu email y contraseña
                     </DialogContentText>
                     <Login {...props} open={open2} setOpen={setOpen2} />
                 </DialogContent>
             </Dialog>
 
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title-signup">
                 <DialogTitle id="form-dialog-title">Registrarse</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally.
+                        Para suscribirse a este sitio web, ingrese su dirección de correo electrónico aquí.
                     </DialogContentText>
                     <SignUp {...props} open={open} setOpen={setOpen} />
                 </DialogContent>
             </Dialog>
-        </div>
+        </>
     );
 }

@@ -90,7 +90,7 @@ const Home = (props) => {
                 </ContainerSection>
             </Grid>
             <Grid item xs={12}>
-                <ComponentStart />
+                <ComponentStart setTheUser={props.setTheUser} />
             </Grid>
         </>
     )

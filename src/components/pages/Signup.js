@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Container } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
@@ -17,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(1),
         width: '25ch',
     },
+
+    contSignUp: {
+        padding: '2rem 2rem 2rem 0rem',
+        width: 775,
+        alignSelf: 'center'
+    }
 }));
 
 export default function SignUpForm(props) {
@@ -37,13 +44,13 @@ export default function SignUpForm(props) {
 
     return (
         <div className={classes.root}>
-            <div>
+            <Container className={classes.contSignUp}>
                 <TextField
                     id="1"
                     label="Email"
                     style={{ margin: 8 }}
                     placeholder="Introduce tu email"
-                    helperText="Full width!"
+                    // helperText="Full width!"
                     fullWidth
                     margin="normal"
                     InputLabelProps={{
@@ -58,7 +65,7 @@ export default function SignUpForm(props) {
                     label="Contraseña"
                     style={{ margin: 8 }}
                     placeholder="Introduce tu contraseña"
-                    helperText="Full width!"
+                    // helperText="Full width!"
                     fullWidth
                     margin="normal"
                     InputLabelProps={{
@@ -72,12 +79,12 @@ export default function SignUpForm(props) {
                 <DialogActions>
                     <Button onClick={() => props.setOpen(false)} color="primary">
                         Cancel
-                        </Button>
+                    </Button>
                     <Button color="primary" onClick={handleSign}>
                         SignUp
-                        </Button>
+                    </Button>
                 </DialogActions>
-            </div>
+            </Container>
         </div>
     );
 }

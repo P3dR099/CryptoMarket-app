@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { Container } from '@material-ui/core';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import Trade from '../../services/trade.service';
@@ -16,6 +17,14 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(1),
         width: '25ch',
     },
+
+    contLogin: {
+        alignSelf: 'center',
+        padding: '2rem 2rem 2rem 0rem',
+        width: 775,
+        alignSelf: 'center'
+    },
+
 }));
 
 export default function LoginForm(props) {
@@ -28,6 +37,7 @@ export default function LoginForm(props) {
             .then(res => {
                 props.setTheUser(res.data)
                 localStorage.setItem('login', JSON.stringify({ username, password }))
+                console.log(res)
 
             })
             .then(() => props.setOpen(false))
@@ -37,7 +47,7 @@ export default function LoginForm(props) {
 
     return (
         <div className={classes.root}>
-            <div>
+            <Container className={classes.contLogin}>
                 <TextField
                     id="form-login1"
                     label="Email"
@@ -56,11 +66,11 @@ export default function LoginForm(props) {
                 <TextField
                     id="form-login2"
                     label="Contraseña"
-                    style={{ margin: 8 }}
                     placeholder="Introduce tu contraseña"
                     helperText="Introduce tu contraseña para iniciar sesión"
                     fullWidth
                     margin="normal"
+                    style={{ margin: 8 }}
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -70,14 +80,14 @@ export default function LoginForm(props) {
                     type="password"
                 />
                 <DialogActions>
-                    <Button onClick={() => props.setOpen(false)} color="primary">
+                    <Button onClick={() => props.setOpen && props.setOpen(false)} color="primary">
                         Cancel
-                        </Button>
+                    </Button>
                     <Button color="primary" onClick={handleSign}>
                         Login
-                        </Button>
+                    </Button>
                 </DialogActions>
-            </div>
+            </Container>
         </div>
     );
 }

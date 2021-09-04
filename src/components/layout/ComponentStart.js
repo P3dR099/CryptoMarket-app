@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import mobileTransaction from '../../logos/app-screenshots/wallet-buy.png';
 import { ContainerSection } from "../style/Home";
 import ContainerGrid from "../style/ComponentStart";
+import FormDialog from '../layout/ModalAuth';
+
 
 const H2 = styled.h2`
     font-size: 2.5rem;
@@ -29,27 +31,17 @@ const ContainerH3 = styled(Container)`
 `
 
 const ContainerH2 = styled(Container)`
-    paddingLeft: '0.8rem', textAlign: 'start', padding: '2% 5%'
+    paddingLeft: 0.8rem; textAlign: start; padding: 2% 5%;
 `
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         flexGrow: 1,
-//     },
-//     paper: {
-//         padding: theme.spacing(2),
-//         textAlign: 'center',
-//         color: theme.palette.text.secondary,
-//     },
-// }));
+const ComponentStart = (props) => {
 
-const ComponentStart = () => {
-
-    const matchesMax = useMediaQuery('(min-width:900px)');
     const matchesMin = useMediaQuery('(min-width:600px)');
+    const matchesMax = useMediaQuery('(min-width:900px)');
 
     return (
         <ContainerSection matchesMin={matchesMin} style={{ height: 'auto' }}>
+            <FormDialog setTheUser={props.setTheUser} />
             <ContainerGrid container spacing={3}>
                 <Grid item xs={matchesMax ? 6 : 12}>
                     <img alt="mobile-transaction" style={{ width: matchesMax ? 'auto' : '13rem' }} src={mobileTransaction} />

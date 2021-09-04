@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useDispatch } from 'react-redux'
 import './App.scss';
 import './index.css';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -8,13 +9,13 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import NavBar from './components/pages/NavBar'
 import Trade from './services/trade.service';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Home from './components/pages/Home';
-import Footer from './components/pages/Footer';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Home from './components/pages/Home';
+import Footer from './components/pages/Footer';
 import AppContainer from './components/style/App';
-import { useDispatch } from 'react-redux'
 import { getData, getAllinfoCoin } from './actions/actions';
+import Login from './components/pages/Login';
 const tradeService = new Trade();
 
 function App() {
@@ -88,8 +89,6 @@ function App() {
         setTheUser(login)
     }, [])
 
-    // console.log(Data)
-
     return (
         <>
             <AppContainer matches={matches}>
@@ -99,7 +98,8 @@ function App() {
                     <main>
                         <Route path="/coin" render={(props) => <Crypto Currency={Currency} setCurrency={setCurrency} {...props} />} />
                         <Route exact path="/table" render={(props) => <TableCriptos allInfoCoin={allInfoCoin} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
-                        <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
+                        <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} setTheUser={setTheUser} {...props} />} />
+                        <Route exact path="/login" render={(props) => <Login  {...props} />} />
                     </main>
                     <Footer />
                 </BrowserRouter>
