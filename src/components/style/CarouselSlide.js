@@ -17,7 +17,7 @@ const CarouselSlider = styled(Slider)`
     
     ${({ matchesMax2, matchesMin2H }) => (!matchesMax2 || matchesMax2) && !matchesMin2H ? `
     margin: 0px 22px 0px 64px; -webkit-transform: translateX(-17px) translateY(560px);` :
-        `margin:0px 50px 0px 75px;
+        `margin: 0rem 2rem 0rem 6rem;
     `}
 
     ${({ matchesMedH, matchesMax2 }) => matchesMedH && matchesMax2 && `
@@ -33,14 +33,9 @@ const CarouselSlider = styled(Slider)`
     ${({ matchesMedH, matchesMin2 }) => matchesMedH && matchesMin2 && `
      -webkit-transform: translateX(-40px) translateY(680px);` }
      
-    ${({ matchesMin2, matchesMedH }) => !matchesMedH && matchesMin2 ? `-webkit-transform: translateX(-30px) translateY(535px);` :
+    ${({ matchesMin2, matchesMedH }) => !matchesMedH && matchesMin2 ? `-webkit-transform: translateX(-38px) translateY(535px);` :
         `margin:0px 50px 0px 75px;
     `}
-
-    ${({ matchesMin2, matchesMedH }) => !matchesMedH && matchesMin2 ? `-webkit-transform: translateX(-30px) translateY(535px);` :
-        `margin:0px 50px 0px 75px;
-    `}
-
     
     .slick - track {
     transform: translate3d(-10px, 0px, 0px);
