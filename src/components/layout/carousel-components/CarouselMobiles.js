@@ -76,7 +76,7 @@ const CarouselMobiles = () => {
 
                                 {!matchesMax &&
                                     <Container style={{ alignSelf: 'center', textAlign: '-webkit-left' }}>
-                                        <h2 style={{ fontFamily: 'sans-serif', fontWeight: 'normal', fontSize: matches ? '1.2rem' : '0.9rem', marginTop: !matches && '20%', color: 'rgb(12, 108, 242)' }}>
+                                        <h2 style={{ fontFamily: 'sans-serif', fontWeight: 'normal', fontSize: matches ? '1.2rem' : '0.9rem', marginTop: !matches && '30%', color: 'rgb(12, 108, 242)' }}>
                                             {slide.title}
                                         </h2>
                                     </Container>

@@ -44,7 +44,7 @@ const Home = (props) => {
         },
 
         contSectionTitles: {
-            padding: !matchesMedium ? '10.5rem 2.5rem' : '7.5rem 1.5rem'
+            padding: !matchesMedium ? '10.5rem 2.5rem' : '7.5rem 0rem'
         },
 
 
