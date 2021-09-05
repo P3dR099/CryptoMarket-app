@@ -10,6 +10,7 @@ Application created to analyze the cryptocurrency market, developed with React, 
 
 - Get the change in 1 hour, 24 hours and 7 days of the cryptocurrencies in the market.
 - Show graphs of the price of each cryptocurrency
+- Price table in which you can sort from highest to lowest the coins that have increased or decreased the most
 
 ## Tech
 
@@ -19,6 +20,7 @@ These are the main technologies used:
 - [Material-UI](https://material-ui.com/)
 - [Express](https://expressjs.com/es/)
 - [Node js](http://nodejs.org/)
+- [Redux](https://redux.js.org/)
 
 ## Installation
 

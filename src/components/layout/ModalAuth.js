@@ -31,7 +31,7 @@ export default function FormDialog(props) {
 
     return (
         <>
-            {!props.loggedInUser && <>
+            {props.setTheUser === null && <>
                 <Button variant="outlined" color="primary" onClick={handleClickOpen}>Regístrate</Button>
                 {matchesMin && <Button variant="outlined" color="primary" onClick={handleClickOpen2}>Inicia Sesión</Button>}
             </>

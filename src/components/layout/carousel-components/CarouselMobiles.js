@@ -63,7 +63,6 @@ const CarouselMobiles = () => {
     return (
         <>
             <div></div>
-
             <CarouselMobile {...settigns} className="slick-dots-carousel" >
                 {arrImages.map((slide, index) => {
                     return (
@@ -86,7 +85,6 @@ const CarouselMobiles = () => {
                         </div>
                     )
                 })}
-
             </CarouselMobile>
         </>
     )

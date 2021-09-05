@@ -4,7 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import { Container } from '@material-ui/core';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
+import { useDispatch } from 'react-redux'
+import { setUser } from '../../actions/actions';
 import Trade from '../../services/trade.service';
+
 const tradeService = new Trade()
 
 const useStyles = makeStyles((theme) => ({
@@ -21,24 +24,24 @@ const useStyles = makeStyles((theme) => ({
     contLogin: {
         alignSelf: 'center',
         padding: '2rem 2rem 2rem 0rem',
-        width: 775,
-        alignSelf: 'center'
+        width: 775
     },
 
 }));
 
 export default function LoginForm(props) {
+
     const classes = useStyles();
     const [username, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch()
 
     const handleSign = () => {
         tradeService.login({ username, password })
             .then(res => {
-                props.setTheUser(res.data)
+                // props.setTheUser(res.data)
+                dispatch(setUser(res.data))
                 localStorage.setItem('login', JSON.stringify({ username, password }))
-                console.log(res)
-
             })
             .then(() => props.setOpen(false))
             .catch(err => console.log(err))

@@ -14,7 +14,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Home from './components/pages/Home';
 import Footer from './components/pages/Footer';
 import AppContainer from './components/style/App';
-import { getData, getAllinfoCoin } from './actions/actions';
+import { getData, getAllinfoCoin, setUser } from './actions/actions';
 import Login from './components/pages/Login';
 const tradeService = new Trade();
 
@@ -31,7 +31,8 @@ function App() {
     const handleLogOut = () => {
         tradeService.logout()
             .then(res => {
-                setTheUser(null)
+                // setTheUser(null)
+                dispatch(setUser(null))
                 localStorage.setItem('login', null)
             })
             .catch(err => console.log(err))
@@ -56,7 +57,6 @@ function App() {
                 const getAllInfo = (arrSymbols, Currency) => {
                     tradeService.getAllCoinsInfo(arrSymbols.toString(), Currency)
                         .then(res => {
-                            console.log(res)
                             for (let key in res.data.RAW) {
                                 if (res.data.RAW[key].USD) {
 
@@ -87,18 +87,19 @@ function App() {
 
         const login = JSON.parse(localStorage.getItem('login'))
         setTheUser(login)
-    }, [])
+        dispatch(setUser(login))
+    }, [dispatch])
 
     return (
         <>
             <AppContainer matches={matches}>
                 <BrowserRouter>
-                    <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} setTheUser={setTheUser} data={data} setData={setData} Currency={Currency} setCurrency={setCurrency} />
+                    <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} data={data} setData={setData} Currency={Currency} setCurrency={setCurrency} />
                     {!data ? <LinearProgress /> : ''}
                     <main>
                         <Route path="/coin" render={(props) => <Crypto Currency={Currency} setCurrency={setCurrency} {...props} />} />
                         <Route exact path="/table" render={(props) => <TableCriptos allInfoCoin={allInfoCoin} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
-                        <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} setTheUser={setTheUser} {...props} />} />
+                        <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
                         <Route exact path="/login" render={(props) => <Login  {...props} />} />
                     </main>
                     <Footer />

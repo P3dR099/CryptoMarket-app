@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-    border-radius: 14px;
+    border-radius: 0.8rem;
     border: 1.5px solid #324f66;
-    width: 100px;
+    width: 9rem;
     color: white;
-    height: 35px;
+    height: 2.8rem;
     background: steelblue;
-    margin: 25px;
-    padding: 2px 0px 0px 3px;
+    margin: 0.5rem;
 `
 
 export const ContainerHome = styled.div`

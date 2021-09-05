@@ -59,7 +59,7 @@ export default function MenuAccountBar(props) {
                         open={open}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={(event) => handleClose(event)}>{history.location.pathname === '/user/' ? 'Market' : 'Profile'}</MenuItem>
+                        <MenuItem onClick={(event) => handleClose(event)}>{history.location.pathname === '/user/' && 'Market'}</MenuItem>
                         <MenuItem onClick={() => props.handleLogOut()}>Logout</MenuItem>
                     </Menu>
                 </div>

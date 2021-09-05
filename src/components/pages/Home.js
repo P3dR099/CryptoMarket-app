@@ -1,16 +1,17 @@
+import 'aos/dist/aos.css';
 import React, { useEffect } from 'react';
 import { Container, Grid } from '@material-ui/core';
 import CarouselSlider from '../layout/carousel-components/CarouselSlider';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
-import '../../scss/Home.scss';
-import Button, { ContainerHome, ContainerKid, ContainerSection } from '../style/Home';
 import CarouselMobiles from '../layout/carousel-components/CarouselMobiles';
 import { makeStyles } from '@material-ui/core/styles';
 import AOS from 'aos';
-import 'aos/dist/aos.css';
+import '../../scss/Home.scss';
+import Button, { ContainerHome, ContainerKid, ContainerSection } from '../style/Home';
 import ComponentStart from '../layout/ComponentStart';
-// import { gridResizingColumnFieldSelector } from '@material-ui/data-grid';
+import { useSelector } from 'react-redux';
+
 
 AOS.init()
 
@@ -21,6 +22,7 @@ const Home = (props) => {
     const matchesMin = useMediaQuery('(max-width:600px)')
     const matchesMedium = useMediaQuery('(max-width:900px)')
     const matchesMax = useMediaQuery('(max-width:1350px)')
+    const { setUser } = useSelector(state => state)
     const { getCoins } = props
 
     const classHome = makeStyles({
@@ -37,12 +39,17 @@ const Home = (props) => {
         },
 
         contTitleParent: {
-            height: '80%', padding: !matchesMedium ? '8% 8% 4% 8%' : '12% 3% 10% 3%',
-            display: 'grid', alignItems: 'center', textAlign: '-webkit-left'
+            height: '100%',
+            display: 'grid', textAlign: '-webkit-left'
         },
 
+        contSectionTitles: {
+            padding: !matchesMedium ? '10.5rem 2.5rem' : '7.5rem 1.5rem'
+        },
+
+
         contBottom: {
-            display: 'flex', justifyContent: 'center'
+            display: 'flex', justifyContent: 'center', paddingTop: '5rem'
         }
     })
 
@@ -52,13 +59,12 @@ const Home = (props) => {
         parseInt(localStorage.getItem('value')) === 1 ? getCoins('EUR') : getCoins('USD')
     }, [getCoins])
 
-
     return (
         <>
             <ContainerHome matches={matchesMin} matchesMax={matchesMax} >
                 <ContainerKid matches={matchesMin}>
                     <Container className={classes.contTitleParent}>
-                        <Container>
+                        <Container className={classes.contSectionTitles} >
                             <h1 className="title">
                                 Analiza el mercado de criptomonedas de una manera sencilla y rápida
                             </h1>
@@ -66,12 +72,15 @@ const Home = (props) => {
                                 Recogemos datos de las apis más confiables del mercado
                                 y los mostramos de una forma eficiente para agilizar su análisis
                             </Container>
+
+                            <Container className={classes.contBottom}>
+                                <Button onClick={() => history.push('/table')}>
+                                    Ir a tabla de precios
+                                </Button>
+                            </Container>
                         </Container>
-                        <Container className={classes.contBottom}>
-                            <Button onClick={() => history.push('/table')}>
-                                Go to table
-                            </Button>
-                        </Container>
+
+
                     </Container>
                 </ContainerKid>
                 <CarouselSlider {...props} />
@@ -90,7 +99,7 @@ const Home = (props) => {
                 </ContainerSection>
             </Grid>
             <Grid item xs={12}>
-                <ComponentStart setTheUser={props.setTheUser} />
+                <ComponentStart setTheUser={setUser} />
             </Grid>
         </>
     )

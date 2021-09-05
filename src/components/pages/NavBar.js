@@ -9,19 +9,23 @@ import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
 // import ModalAuth from '../pages/ModalAuth.js'
+import { useSelector } from 'react-redux';
 import AccountCircle from '../layout/AccountCircle.js';
 import logoCripto from '../../logos/default.png';
 import Navbar from '../style/Navbar';
 
+
 export default function SearchAppBar(props) {
 
-    const classes = Navbar();
-    const { data } = props
-    let history = useHistory();
 
+    const { setUser } = useSelector(state => state)
+    const classes = Navbar();
+    let history = useHistory();
     const matchesMin = useMediaQuery('(min-width:350px)');
     const matches = useMediaQuery('(min-width:600px)');
     const matchesMedium = useMediaQuery('(min-width:750px)');
+    const { data } = props;
+
 
     const handleClick = (event) => {
         data.map(el => {
@@ -30,16 +34,18 @@ export default function SearchAppBar(props) {
             }
             return 0
         })
-
     };
 
 
     return (
         <AppBar position="static" className={classes.navbar}>
             <Toolbar style={{ justifyContent: 'space-between' }}>
-                {props.loggedInUser && <AccountCircle {...props} />}
+                {setUser !== null && <AccountCircle {...props} />}
                 {/* <ModalAuth {...props} /> */}
-                <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} onClick={() => history.push('/')} className={classes.logoCripto} src={logoCripto} alt="cripto" />
+                {setUser === null &&
+                    <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} onClick={() => history.push('/')}
+                        className={classes.logoCripto} src={logoCripto} alt="cripto" />
+                }
                 <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
                     CryptoMarket
                 </Typography>

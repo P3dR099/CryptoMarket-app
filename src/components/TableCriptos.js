@@ -4,7 +4,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import {
     DataGrid,
     GridToolbarContainer,
@@ -32,6 +32,7 @@ export default function DataTable(props) {
     const [stateCols, setStateCols] = useState({ change_1h: false, change_1d: false });
     const [, setColumns] = React.useState([])
     const { data } = useSelector(state => state)
+
     const { getCoins } = props
     const rows = data
 

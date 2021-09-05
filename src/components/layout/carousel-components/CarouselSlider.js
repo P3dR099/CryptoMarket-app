@@ -10,9 +10,6 @@ import CarouselSlider from "../../style/CarouselSlide";
 import { SampleNextArrow, SamplePrevArrow } from "./CarouselArrowCards";
 
 
-
-
-
 export default function CustomArrows(props) {
 
     const matchesMin2 = useMediaQuery('(min-width:550px)');
@@ -33,7 +30,7 @@ export default function CustomArrows(props) {
             margin: 10
         },
         cardCoin: {
-            margin: '0px 0px 1px 0px', width: '100%', height: 170, borderRadius: 8, background: '#fff'
+            margin: '0px 0px 1px -13px', width: '115%', height: 170, borderRadius: 8, background: '#fff'
         },
         cardCoinMin: {
             margin: '0px 0px 1px 0px', height: 170, borderRadius: 8, background: '#fff', width: '100%'
@@ -121,7 +118,7 @@ export default function CustomArrows(props) {
 
     return (
         <>
-            <Container style={{ padding: 1 }}>
+            <Container style={{ padding: matchesMin2 ? '0rem 2.3rem' : '0rem 1rem' }}>
                 {data !== undefined &&
                     <CarouselSlider {...settings} matchesMin2H={matchesMin2H} matchesMinH={matchesMinH} matchesMin={!matchesMin} matchesMedH={matchesMedH} matchesMin2={!matchesMin2} matchesMax2={matchesMax2} matchesMaxH={matchesMaxH}>
                         {data.map(function (slide, index) {

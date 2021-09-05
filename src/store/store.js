@@ -1,7 +1,6 @@
 import { createStore } from 'redux';
 // import thunk from 'redux-thunk';
 import Reducers from './index';
-// import InfoCoinsReducer from '../reducers/InfoCoinsReducer';
 import { persistStore } from 'redux-persist';
 
 // const initialState = {};
