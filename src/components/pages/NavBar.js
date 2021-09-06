@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useHistory } from "react-router-dom";
-// import ModalAuth from '../pages/ModalAuth.js'
+import FormDialog from '../layout/ModalAuth';
 import { useSelector } from 'react-redux';
 import AccountCircle from '../layout/AccountCircle.js';
 import logoCripto from '../../logos/default.png';
@@ -41,14 +41,12 @@ export default function SearchAppBar(props) {
         <AppBar position="static" className={classes.navbar}>
             <Toolbar style={{ justifyContent: 'space-between' }}>
                 {setUser !== null && <AccountCircle {...props} />}
-                {/* <ModalAuth {...props} /> */}
                 {setUser === null &&
-                    <img style={{ width: !matches ? 60 : 70, height: !matches && 60 }} onClick={() => history.push('/')}
-                        className={classes.logoCripto} src={logoCripto} alt="cripto" />
+                    <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
+                        CryptoMarket
+                    </Typography>
+
                 }
-                <Typography onClick={() => history.push('/')} className={classes.title} variant="h6" noWrap>
-                    CryptoMarket
-                </Typography>
                 <div className={classes.search} style={{ backgroundColor: !matches && 'whitesmoke', width: !matchesMin && 160, flexBasis: !matchesMedium && '31%' }}>
                     <Autocomplete
                         freeSolo
@@ -73,6 +71,8 @@ export default function SearchAppBar(props) {
                         )}
                     />
                 </div>
+
+                <FormDialog {...props} />
             </Toolbar>
         </AppBar>
     );

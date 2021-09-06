@@ -3,22 +3,20 @@ import React, { useEffect } from 'react';
 import { Container, Grid } from '@material-ui/core';
 import CarouselSlider from '../layout/carousel-components/CarouselSlider';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useHistory } from "react-router-dom";
 import CarouselMobiles from '../layout/carousel-components/CarouselMobiles';
 import { makeStyles } from '@material-ui/core/styles';
 import AOS from 'aos';
 import '../../scss/Home.scss';
-import Button, { ContainerHome, ContainerKid, ContainerSection } from '../style/Home';
+import { ContainerHome, ContainerKid, ContainerSection } from '../style/Home';
 import ComponentStart from '../layout/ComponentStart';
 import { useSelector } from 'react-redux';
-
+import Button from '../layout/Button';
 
 AOS.init()
 
 
 const Home = (props) => {
 
-    let history = useHistory();
     const matchesMin = useMediaQuery('(max-width:600px)')
     const matchesMedium = useMediaQuery('(max-width:900px)')
     const matchesMax = useMediaQuery('(max-width:1350px)')
@@ -31,6 +29,8 @@ const Home = (props) => {
             gridTemplateColumns: '60% 40%',
             height: 'inherit',
             alignItems: 'center',
+            gridAutoRows: 'max-content',
+            paddingTop: '2rem'
         },
 
         contSubTitle: {
@@ -74,13 +74,9 @@ const Home = (props) => {
                             </Container>
 
                             <Container className={classes.contBottom}>
-                                <Button onClick={() => history.push('/table')}>
-                                    Ir a tabla de precios
-                                </Button>
+                                <Button text="Ir a tabla de precios" route="/table" />
                             </Container>
                         </Container>
-
-
                     </Container>
                 </ContainerKid>
                 <CarouselSlider {...props} />

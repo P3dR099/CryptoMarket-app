@@ -7,6 +7,7 @@ import ArrowForward from '@material-ui/icons/ArrowForward';
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import SamplePrevArrow, { SampleNextArrow } from "./CarouselArrowMobile";
 import '../../../scss/CarouselMobile.scss';
+import Button from '../../layout/Button';
 
 
 const CarouselMobiles = () => {
@@ -72,7 +73,7 @@ const CarouselMobiles = () => {
                                 justifyContent: 'center'
                             }} key={index}>
 
-                                <img style={{ width: matches ? slide.width : 85, transform: 'skewX(12deg)', justifySelf: 'center' }} src={slide.src} alt="mobile" />
+                                <img style={{ width: matches ? slide.width : '8.5rem', transform: 'skewX(12deg)', justifySelf: 'center' }} src={slide.src} alt="mobile" />
 
                                 {!matchesMax &&
                                     <Container style={{ alignSelf: 'center', textAlign: '-webkit-left' }}>
@@ -86,6 +87,10 @@ const CarouselMobiles = () => {
                     )
                 })}
             </CarouselMobile>
+
+            {matches && <Container style={{ marginRight: '5rem' }}>
+                <Button text="Empezar" route="/table" />
+            </Container>}
         </>
     )
 

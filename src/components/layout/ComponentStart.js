@@ -41,7 +41,6 @@ const ComponentStart = (props) => {
 
     return (
         <ContainerSection matchesMin={matchesMin} style={{ height: 'auto' }}>
-            <FormDialog setTheUser={props.setTheUser} />
             <ContainerGrid container spacing={3}>
                 <Grid item xs={matchesMax ? 6 : 12}>
                     <img alt="mobile-transaction" style={{ width: matchesMax ? 'auto' : '13rem' }} src={mobileTransaction} />

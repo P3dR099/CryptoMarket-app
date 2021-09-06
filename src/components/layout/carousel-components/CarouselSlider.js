@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import CarouselSlider from "../../style/CarouselSlide";
 import { SampleNextArrow, SamplePrevArrow } from "./CarouselArrowCards";
-
+import Button from '../../layout/Button';
 
 export default function CustomArrows(props) {
 
@@ -115,10 +115,10 @@ export default function CustomArrows(props) {
         prevArrow: <SamplePrevArrow />
     };
 
-
     return (
         <>
             <Container style={{ padding: matchesMin2 ? '0rem 2.3rem' : '0rem 1rem' }}>
+
                 {data !== undefined &&
                     <CarouselSlider {...settings} matchesMin2H={matchesMin2H} matchesMinH={matchesMinH} matchesMin={!matchesMin} matchesMedH={matchesMedH} matchesMin2={!matchesMin2} matchesMax2={matchesMax2} matchesMaxH={matchesMaxH}>
                         {data.map(function (slide, index) {

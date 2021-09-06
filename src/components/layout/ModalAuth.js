@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -7,11 +7,17 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import SignUp from '../pages/Signup'
 import Login from '../pages/Login'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Button from './Button';
+import { useSelector } from 'react-redux';
+
 
 export default function FormDialog(props) {
     const matchesMin = useMediaQuery('(min-width:350px)');
+    const matchesMed = useMediaQuery('(min-width:750px)');
+
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
+    const { setUser } = useSelector(state => state)
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -31,9 +37,9 @@ export default function FormDialog(props) {
 
     return (
         <>
-            {props.setTheUser === null && <>
-                <Button variant="outlined" color="primary" onClick={handleClickOpen}>Regístrate</Button>
-                {matchesMin && <Button variant="outlined" color="primary" onClick={handleClickOpen2}>Inicia Sesión</Button>}
+            {setUser === null && matchesMed && <>
+                <Button text="Reístrate" variant="outlined" color="primary" handleModal={handleClickOpen}></Button>
+                {matchesMin && <Button text="Inicia Sesión" variant="outlined" color="primary" handleModal={handleClickOpen2}>Inicia Sesión</Button>}
             </>
             }
             <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title-login">

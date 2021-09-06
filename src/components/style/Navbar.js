@@ -15,10 +15,10 @@ const Navbar = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
-        display: 'none',
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
+        textAlignLast: 'start'
     },
     search: {
         webkitTextFillColor: 'whitesmoke',
@@ -31,6 +31,7 @@ const Navbar = makeStyles((theme) => ({
         },
         justifyContent: 'flex-end',
         marginLeft: 0,
+        marginRight: 8,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(1),

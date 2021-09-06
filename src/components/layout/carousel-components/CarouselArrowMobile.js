@@ -17,8 +17,8 @@ const SamplePrevArrow = (props) => {
                 style={{
                     ...style, borderRadius: '15%',
                     display: 'flex', justifyContent: 'center',
-                    background: 'transparent', right: -40, top: matches ? '20rem' : '25rem',
-                    left: '0rem', width: matches ? 50 : 40,
+                    background: 'transparent', right: -40, top: matches ? '20rem' : '20rem',
+                    left: '-2rem', width: matches ? 50 : 40,
                     height: matches ? 30 : 28, paddingTop: 2.5,
                     border: '1px solid #1cb5e0'
                 }}
@@ -41,8 +41,8 @@ export function SampleNextArrow(props) {
             style={{
                 ...style, borderRadius: '15%', display: 'flex', justifyContent: 'center',
                 background: 'transparent', right: -33, width: matches ? 50 : 40,
-                height: matches ? 30 : 28, paddingTop: 2.5, top: matches ? '20rem' : '25rem',
-                left: matches ? '4rem' : '3rem', border: '1px solid #1cb5e0'
+                height: matches ? 30 : 28, paddingTop: 2.5, top: matches ? '20rem' : '20rem',
+                left: matches ? '4rem' : '1rem', border: '1px solid #1cb5e0'
             }}
             onClick={onClick}
 
