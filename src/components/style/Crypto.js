@@ -82,6 +82,7 @@ export const Red = styled.div`
         padding: 0px 5px 2px 0px;
         font-size: 10px;
     `}
+
         margin-top: 0;
         -webkit-align-items: center;
         place-content: center;

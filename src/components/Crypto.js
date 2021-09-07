@@ -79,7 +79,7 @@ const CardCrypto = (props) => {
                     <h1 style={{ fontSize: !matches ? 20 : 30, marginRight: 3 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
                     <span>
                         {coinInfo.CHANGEPCT24HOUR < 0 ?
-                            <Red>
+                            <Red matches={matches} >
                                 <ArrowDropDownIcon />
                                 {coinInfo.CHANGEPCT24HOUR !== undefined && coinInfo.CHANGEPCT24HOUR.toFixed(2)}
                             </Red> :
@@ -120,7 +120,7 @@ const CardCrypto = (props) => {
         <>
             <CustomizedBreadcrumbs />
             <BackgroundCripto>
-                <Grid style={{ width: '98%', display: 'flex', justifyContent: 'space-between' }} container spacing={2}>
+                <Grid style={{ width: '99%', display: 'flex', justifyContent: 'space-between' }} container spacing={2}>
                     <Grid item xs={matchesDown ? 12 : 8} >
                         <ContainerPaperCrypto matches={matches ? 'width: 95%;' : 'width: 100%;'} elevation={3}>
                             <Container style={{ padding: !matches ? 18 : undefined }}>

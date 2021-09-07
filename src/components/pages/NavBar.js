@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 import FormDialog from '../layout/ModalAuth';
 import { useSelector } from 'react-redux';
 import AccountCircle from '../layout/AccountCircle.js';
-import logoCripto from '../../logos/default.png';
+// import logoCripto from '../../logos/default.png';
 import Navbar from '../style/Navbar';
 
 
@@ -47,6 +47,7 @@ export default function SearchAppBar(props) {
                     </Typography>
 
                 }
+                {matches && <FormDialog {...props} />}
                 <div className={classes.search} style={{ backgroundColor: !matches && 'whitesmoke', width: !matchesMin && 160, flexBasis: !matchesMedium && '31%' }}>
                     <Autocomplete
                         freeSolo
@@ -72,7 +73,6 @@ export default function SearchAppBar(props) {
                     />
                 </div>
 
-                <FormDialog {...props} />
             </Toolbar>
         </AppBar>
     );

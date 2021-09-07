@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import CarouselSlider from "../../style/CarouselSlide";
 import { SampleNextArrow, SamplePrevArrow } from "./CarouselArrowCards";
-import Button from '../../layout/Button';
 
 export default function CustomArrows(props) {
 

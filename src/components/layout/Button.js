@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { green, purple } from '@material-ui/core/colors';
+import { purple } from '@material-ui/core/colors';
 import { useHistory } from "react-router-dom";
 
 const ColorButton = withStyles((theme) => ({

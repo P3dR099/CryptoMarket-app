@@ -14,6 +14,7 @@ import ListStatsCoin, { ValueStatsCoin, ContainerPaperList } from '../style/Cryp
 const GridStatsCrypto = (props) => {
 
     const theme = useTheme();
+    const matches = useMediaQuery('(min-width:600px)');
     const matchesDown = useMediaQuery(theme.breakpoints.down('sm'));
     const { coinInfo, info } = props;
     let Price;
@@ -22,7 +23,7 @@ const GridStatsCrypto = (props) => {
 
     return (
 
-        <Grid item xs={matchesDown ? 12 : 4} style={{ paddingLeft: matchesDown ? 40 : 54, alignSelf: 'center' }} >
+        <Grid item xs={matchesDown ? 12 : 4} style={{ display: 'flex', justifyContent: 'center', padding: !matches && '0rem 0rem 0rem 1.5rem', marginTop: !matches && '0.5rem', alignSelf: matches && 'center', paddingLeft: matches && '2.8rem' }} >
             <ContainerPaperList elevation={3} style={{ borderRadius: 20 }} >
                 <Container style={{ padding: 2 }}>
                     <h2>{info && info.name} Price Today</h2>
