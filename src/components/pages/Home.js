@@ -72,7 +72,6 @@ const Home = (props) => {
                                 Recogemos datos de las apis más confiables del mercado
                                 y los mostramos de una forma eficiente para agilizar su análisis
                             </Container>
-
                             <Container className={classes.contBottom}>
                                 <Button text="Ir a tabla de precios" route="/table" />
                             </Container>

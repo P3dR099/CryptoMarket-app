@@ -7,8 +7,7 @@ import SetUserReducer from '../reducers/SetUserReducer';
 
 const persistConfig = {
     key: 'root',
-    storage: storage,
-    whitelist: ['allInfoCoins', 'data', 'setUser']
+    storage: storage
 };
 
 

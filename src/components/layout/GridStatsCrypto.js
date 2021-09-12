@@ -16,10 +16,7 @@ const GridStatsCrypto = (props) => {
     const theme = useTheme();
     const matches = useMediaQuery('(min-width:600px)');
     const matchesDown = useMediaQuery(theme.breakpoints.down('sm'));
-    const { coinInfo, info } = props;
-    let Price;
-
-    Price > 2 ? Price = parseFloat(localStorage.getItem('price')).toFixed(4) : Price = parseFloat(localStorage.getItem('price')).toFixed(2)
+    const { coinInfo, info, price } = props;
 
     return (
 
@@ -39,9 +36,11 @@ const GridStatsCrypto = (props) => {
                                     </ListStatsCoin>
                                 </TableCell>
                                 <TableCell>
-                                    <ValueStatsCoin>
-                                        {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price}
-                                    </ValueStatsCoin>
+                                    {!price ? '' :
+                                        <ValueStatsCoin>
+                                            {parseInt(localStorage.getItem('value')) === 2 ? '$' + price : '€' + price}
+                                        </ValueStatsCoin>
+                                    }
                                 </TableCell>
                             </TableRow>
                         </TableBody>
@@ -53,9 +52,11 @@ const GridStatsCrypto = (props) => {
                                     </ListStatsCoin>
                                 </TableCell>
                                 <TableCell>
-                                    <ValueStatsCoin>
-                                        {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.LOW24HOUR + ' / ' + coinInfo.HIGH24HOUR : '€' + coinInfo.LOW24HOUR + ' / ' + coinInfo.HIGH24HOUR}
-                                    </ValueStatsCoin>
+                                    {!price ? '' :
+                                        <ValueStatsCoin>
+                                            {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.LOW24HOUR + ' / ' + coinInfo.HIGH24HOUR : '€' + coinInfo.LOW24HOUR + ' / ' + coinInfo.HIGH24HOUR}
+                                        </ValueStatsCoin>
+                                    }
                                 </TableCell>
                             </TableRow>
                         </TableBody>
@@ -67,9 +68,11 @@ const GridStatsCrypto = (props) => {
                                     </ListStatsCoin>
                                 </TableCell>
                                 <TableCell>
-                                    <ValueStatsCoin>
-                                        {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.MKTCAP : '€' + coinInfo.MKTCAP}
-                                    </ValueStatsCoin>
+                                    {!price ? '' :
+                                        <ValueStatsCoin>
+                                            {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.MKTCAP : '€' + coinInfo.MKTCAP}
+                                        </ValueStatsCoin>
+                                    }
                                 </TableCell>
                             </TableRow>
                         </TableBody>
@@ -95,9 +98,11 @@ const GridStatsCrypto = (props) => {
                                     </ListStatsCoin>
                                 </TableCell>
                                 <TableCell>
-                                    <ValueStatsCoin>
-                                        {coinInfo.TOTALVOLUME24H !== undefined && parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.TOTALVOLUME24H : '€' + coinInfo.TOTALVOLUME24H}
-                                    </ValueStatsCoin>
+                                    {!price ? '' :
+                                        <ValueStatsCoin>
+                                            {coinInfo.TOTALVOLUME24H !== undefined && parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.TOTALVOLUME24H : '€' + coinInfo.TOTALVOLUME24H}
+                                        </ValueStatsCoin>
+                                    }
                                 </TableCell>
                             </TableRow>
                         </TableBody>

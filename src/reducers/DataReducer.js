@@ -2,8 +2,8 @@ const DataReducer = (state = [], action) => {
 
     switch (action.type) {
         case "DATA": {
-            state = action.payload
-            return state
+
+            return action.payload
         }
 
         default:

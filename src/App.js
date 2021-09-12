@@ -14,7 +14,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Home from './components/pages/Home';
 import Footer from './components/pages/Footer';
 import AppContainer from './components/style/App';
-import { getData, getAllinfoCoin, setUser } from './actions/actions';
+import { getData, getAllInfoCoin, setUser } from './actions/actions';
 import Login from './components/pages/Login';
 const tradeService = new Trade();
 
@@ -31,7 +31,6 @@ function App() {
     const handleLogOut = () => {
         tradeService.logout()
             .then(res => {
-                // setTheUser(null)
                 dispatch(setUser(null))
                 localStorage.setItem('login', null)
             })
@@ -44,6 +43,7 @@ function App() {
                 let arrSymbols = []
                 let arrInfo = []
                 let firstCriptos = response.data
+                let arrInfoCriptos
 
                 let arrCripts = firstCriptos.map(element => {
                     if (element.quote.USD) {
@@ -59,13 +59,15 @@ function App() {
                         .then(res => {
                             for (let key in res.data.RAW) {
                                 if (res.data.RAW[key].USD) {
-
                                     arrInfo.push(res.data.RAW[key].USD)
                                 }
                                 if (res.data.RAW[key].EUR) {
                                     arrInfo.push(res.data.RAW[key].EUR)
                                 }
                             }
+                            setAllInfoCoin(arrInfoCriptos)
+                            arrInfoCriptos = arrInfo.map(el => { return el })
+                            dispatch(getAllInfoCoin(arrInfoCriptos))
                         })
                         .catch(err => {
                             console.log(err)
@@ -73,18 +75,13 @@ function App() {
                 }
                 setData(arrCripts)
                 getAllInfo(arrSymbols, Currency)
-                setAllInfoCoin(arrInfo)
-
                 dispatch(getData(arrCripts))
-                dispatch(getAllinfoCoin(arrInfo))
             })
             .catch(err => console.log(err))
     }, [dispatch])
 
 
-
     useEffect(() => {
-
         const login = JSON.parse(localStorage.getItem('login'))
         setTheUser(login)
         dispatch(setUser(login))
@@ -92,24 +89,21 @@ function App() {
 
     return (
         <>
-            <AppContainer matches={matches}>
-                <BrowserRouter>
+            <BrowserRouter>
+                <AppContainer matches={matches}>
                     <NavBar handleLogOut={handleLogOut} loggedInUser={loggedInUser} data={data} setData={setData} Currency={Currency} setCurrency={setCurrency} />
                     {!data ? <LinearProgress /> : ''}
                     <main>
                         <Route path="/coin" render={(props) => <Crypto Currency={Currency} setCurrency={setCurrency} {...props} />} />
-                        <Route exact path="/table" render={(props) => <TableCriptos allInfoCoin={allInfoCoin} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
+                        <Route exact path="/table" render={(props) => <TableCriptos getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
                         <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
                         <Route exact path="/login" render={(props) => <Login  {...props} />} />
                     </main>
                     <Footer />
-                </BrowserRouter>
-            </AppContainer>
-
+                </AppContainer>
+            </BrowserRouter>
         </>
-
     );
-
 }
 
 export default App;

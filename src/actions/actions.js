@@ -3,7 +3,7 @@ export const getData = content => ({
     payload: content
 });
 
-export const getAllinfoCoin = content => ({
+export const getAllInfoCoin = content => ({
     type: "INFO_COINS",
     payload: content
 })

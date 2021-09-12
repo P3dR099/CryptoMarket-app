@@ -2,8 +2,8 @@ const InfoCoinsReducer = (state = [], action) => {
 
     switch (action.type) {
         case "INFO_COINS": {
-            state = action.payload;
-            return state
+
+            return action.payload
         }
 
         default:

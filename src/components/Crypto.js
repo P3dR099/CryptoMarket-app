@@ -16,7 +16,6 @@ import GridStatsCrypto from './layout/GridStatsCrypto';
 
 const tradeService = new Trade()
 
-
 const CardCrypto = (props) => {
 
     const [info, setInfo] = useState([])
@@ -24,32 +23,26 @@ const CardCrypto = (props) => {
     const [coinSymbol, setCoinSymbol] = useState([])
     const [histoHour, setHistoHour] = useState([])
     const [histoMinute, sethistoMinute] = useState([])
+    const [Price, SetPrice] = useState()
     const theme = useTheme();
     const matchesDown = useMediaQuery(theme.breakpoints.down('sm'));
     const matches = useMediaQuery('(min-width:470px)');
-    let lastSlash = props.location.pathname.lastIndexOf('/')
-    let id = props.location.pathname.slice(lastSlash + 1, props.location.pathname.length)
     const { Currency } = props
     const { data } = useSelector(state => state)
     const { allInfoCoins } = useSelector(state => state)
+    let lastSlash = props.location.pathname.lastIndexOf('/')
+    let id = props.location.pathname.slice(lastSlash + 1, props.location.pathname.length)
 
-    allInfoCoins.length !== 0 && localStorage.setItem('info', JSON.stringify(allInfoCoins))
 
     useEffect(() => {
-
-        const localInfoCoin = JSON.parse(localStorage.getItem('info'))
 
         tradeService.getCoin(id)
             .then(res => {
 
                 setCoinSymbol(res.data[0].symbol)
-
                 tradeService.getCoinInfo(`id=${id}`).then(res => setInfo(res.data[id])).catch(err => console.log(err))
-
-                localInfoCoin.filter((item) => (item.FROMSYMBOL === res.data[0].symbol) && setCoinInfo(item))
-
-                data && data.map(el => el.symbol === res.data[0].symbol && localStorage.setItem('price', el.price))
-
+                allInfoCoins.filter((item) => (item.FROMSYMBOL === res.data[0].symbol) && setCoinInfo(item))
+                data && data.map(el => el.symbol === res.data[0].symbol && SetPrice(el.price.toFixed(2)))
                 tradeService.getHistoByMin(res.data[0].symbol, Currency, 1440)
                     .then(res => {
                         res.data.Data.Data.map(element => {
@@ -62,21 +55,19 @@ const CardCrypto = (props) => {
             })
             .catch(error => console.log(error))
 
-    }, [id, Currency, data])
+    }, [id, Currency, data, allInfoCoins])
 
-
-
-    let Price;
     let arrTimes, arrTimesMinutes = []
     histoHour.Data !== undefined && histoHour.Data.map(el => { return arrTimes.push(el.high) })
     histoMinute.Data !== undefined && histoMinute.Data.map(el => { return arrTimesMinutes.push(el.high) })
-    Price > 2 ? Price = parseFloat(localStorage.getItem('price')).toFixed(4) : Price = parseFloat(localStorage.getItem('price')).toFixed(2)
 
     const showPrices = () => {
         if (!matchesDown) {
             return (
                 <Grid container spacing={3} style={{ margin: 'auto', display: 'contents', whiteSpace: 'pre' }}>
-                    <h1 style={{ fontSize: !matches ? 20 : 30, marginRight: 3 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
+                    {!Price ? '' :
+                        <h1 style={{ fontSize: !matches ? 20 : 30, marginRight: 3 }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
+                    }
                     <span>
                         {coinInfo.CHANGEPCT24HOUR < 0 ?
                             <Red matches={matches} >
@@ -110,7 +101,7 @@ const CardCrypto = (props) => {
                             </Green>
                         }
                     </span>
-                    <h1 style={{ fontSize: !matches ? 19 : 30, margin: matches ? '12px 10px 10px 11px' : undefined }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + Price : '€' + Price} </h1>
+                    <h1 style={{ fontSize: !matches ? 19 : 30, margin: matches ? '12px 10px 10px 11px' : undefined }}> {parseInt(localStorage.getItem('value')) === 2 ? '$' + coinInfo.PRICE : '€' + coinInfo.PRICE} </h1>
                 </Grid >
             )
         }
@@ -136,13 +127,12 @@ const CardCrypto = (props) => {
                             </Container>
                         </ContainerPaperCrypto>
                     </Grid>
-
                     {histoMinute.Data !== undefined ? <TabPanel coinSymbol={coinSymbol} arrTimesMinutes={arrTimesMinutes} setHistoHour={setHistoHour} histoHour={histoHour} histoMinute={histoMinute} {...props} /> :
                         <Container style={{ textAlign: 'justify' }}>
                             <CircularProgress style={{ marginLeft: matchesDown ? '50%' : '30%' }} />
                         </Container>}
 
-                    <GridStatsCrypto info={info} coinInfo={coinInfo} />
+                    <GridStatsCrypto info={info} price={Price} coinInfo={coinInfo} />
                 </Grid>
             </BackgroundCripto>
         </>
