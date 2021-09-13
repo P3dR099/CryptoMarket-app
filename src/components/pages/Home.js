@@ -30,7 +30,7 @@ const Home = (props) => {
             height: 'inherit',
             alignItems: 'center',
             gridAutoRows: 'max-content',
-            paddingTop: '2rem'
+            padding: '3rem 2rem'
         },
 
         contSubTitle: {

@@ -1,5 +1,5 @@
 import { Container } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import CarouselMobile from "../../style/CarouselMobiles";
 import arrImages from '../../utils/arrImages'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -15,6 +15,7 @@ const CarouselMobiles = () => {
     const matches = useMediaQuery('(min-width:700px)');
     const matchesMax = useMediaQuery('(min-width:900px)');
     const matchesMaxText = useMediaQuery('(min-width:1030px)');
+    // const [backGroundColor, setBackGroundColor] = useState('white')
 
     const settingsNormal = {
         dots: false,
@@ -87,10 +88,11 @@ const CarouselMobiles = () => {
                     )
                 })}
             </CarouselMobile>
-
-            {matches && <Container style={{ marginRight: '5rem' }}>
-                <Button text="Empezar" route="/table" />
-            </Container>}
+            {matches &&
+                <Container>
+                    <Button text="Empezar" route="/table" marginTop={matchesMax && true} />
+                </Container>
+            }
         </>
     )
 

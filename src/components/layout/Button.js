@@ -32,10 +32,9 @@ export default function MaterialButton(props) {
     let history = useHistory();
 
     return (
-        <div>
-            <ColorButton variant="contained" color="primary" onClick={props.route ? () => history.push(props.route) : props.handleModal} className={classes.margin}>
-                {props.text}
-            </ColorButton>
-        </div>
+        <ColorButton variant="contained" color="primary" style={{ bottom: props.marginTop && '2.5rem' }} onClick={props.route ? () => history.push(props.route) : props.handleModal} className={classes.margin}>
+            {props.text}
+        </ColorButton>
+
     );
 }
