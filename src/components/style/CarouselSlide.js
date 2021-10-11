@@ -6,12 +6,12 @@ const CarouselSlider = styled(Slider)`
     
     ${({ matchesMax2, matchesMedH, matchesMinH }) => matchesMax2 && !matchesMedH && matchesMinH ? `
         margin: 0px 22px 0px 64px; -webkit-transform: translateX(-42px) translateY(588px);` :
-        `margin:0px 50px 0px 75px;
+        `margin:0px 1.3rem 0px 4rem;
     `}
 
     ${({ matchesMax2, matchesMinH, matchesMin2H }) => matchesMax2 && !matchesMinH && matchesMin2H ? `
     margin: 0px 22px 0px 64px; -webkit-transform: translateX(-42px) translateY(530px);` :
-        `margin:0px 50px 0px 75px;
+        `margin:0px 1.3rem 0px 4rem;
     `}
 
     
@@ -32,7 +32,7 @@ const CarouselSlider = styled(Slider)`
      
     ${({ matchesMin2, matchesMedH }) => !matchesMedH && matchesMin2 ?
         `-webkit-transform: translateX(-38px) translateY(535px);` :
-        `margin:0px 50px 0px 75px;
+        `margin:0px 1.3rem 0px 5.5rem;
     `}
     
     .slick-track {
@@ -41,7 +41,7 @@ const CarouselSlider = styled(Slider)`
 `
 
 export const CarouselMobile = styled(Slider)`
-    - webkit - transform: translateX(-228px) translateY(245px);
+    -webkit-transform: translateX(-228px) translateY(245px);
 `
 
 export default CarouselSlider;

@@ -16,7 +16,6 @@ export default React.forwardRef((props, ref) => {
 
     const matches = useMediaQuery('(max-width:450px)');
 
-
     function getModalStyle() {
         const top = 50 + rand();
         const left = 50 + rand();

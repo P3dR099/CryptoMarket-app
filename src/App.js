@@ -16,6 +16,10 @@ import Footer from './components/pages/Footer';
 import AppContainer from './components/style/App';
 import { getData, getAllInfoCoin, setUser } from './actions/actions';
 import Login from './components/pages/Login';
+// import HelloWorld from './contracts/HelloWorld.json';
+// import { ConnectWalletToEther } from './connectorScript.js';
+// import { createWallet } from './crypto-store/createWallet';
+import Profile from './components/pages/Profile';
 const tradeService = new Trade();
 
 function App() {
@@ -85,6 +89,7 @@ function App() {
         const login = JSON.parse(localStorage.getItem('login'))
         setTheUser(login)
         dispatch(setUser(login))
+
     }, [dispatch])
 
     return (
@@ -98,6 +103,7 @@ function App() {
                         <Route exact path="/table" render={(props) => <TableCriptos getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
                         <Route exact path="/" render={(props) => <Home data={data} allInfoCoin={allInfoCoin} setData={setData} getCoins={getCoins} Currency={Currency} setCurrency={setCurrency} {...props} />} />
                         <Route exact path="/login" render={(props) => <Login  {...props} />} />
+                        <Route exact path="/profile" render={(props) => <Profile  {...props} />} />
                     </main>
                     <Footer />
                 </AppContainer>
