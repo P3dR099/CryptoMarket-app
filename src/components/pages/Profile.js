@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { ethers } from 'ethers';
+// import { ethers } from 'ethers';
 import styled from 'styled-components';
-import { Provider } from '../../connectorScript';
-import ButtonMenu from '../layout/ButtonMenu';
+// import { Provider } from '../../connectorScript';
+// import ButtonMenu from '../layout/ButtonMenu';
 
 const DivAccount = styled.div`
     -webkit-box-align: center;
@@ -20,18 +20,18 @@ const TitleAccount = styled.div`
 const Profile = () => {
 
     const [title, setTitle] = useState('Connect wallet with Metamask')
-    const [provider, setProvider] = useState('')
-    const [addressWallet, setAddressWallet] = useState('')
+    // const [provider, setProvider] = useState('')
+    // const [addressWallet, setAddressWallet] = useState('')
 
-    const connectWallet = async () => {
-        const provider = Provider()
-        if (provider) {
-            const addressWallet = await window.ethereum.selectedAddress
-            setAddressWallet(addressWallet)
-            setProvider(provider)
-            setTitle(addressWallet)
-        }
-    }
+    // const connectWallet = async () => {
+    //     const provider = Provider()
+    //     if (provider) {
+    //         const addressWallet = await window.ethereum.selectedAddress
+    //         setAddressWallet(addressWallet)
+    //         setProvider(provider)
+    //         setTitle(addressWallet)
+    //     }
+    // }
 
     return (
         <div style={{ minHeight: '90vh' }}>
@@ -42,13 +42,7 @@ const Profile = () => {
                     height: title.startsWith("0x") ? 'inherit' : '3rem',
                     paddingBottom: title.startsWith("0x") && '0.3rem'
                 }}>
-                    {!title.startsWith("0x") ?
-                        <TitleAccount title={title} onClick={() => connectWallet()}>
-                            {title}
-                        </TitleAccount>
-                        :
-                        <ButtonMenu title={title} provider={provider} addressWallet={addressWallet} />
-                    }
+
                 </div>
             </DivAccount>
         </div>
